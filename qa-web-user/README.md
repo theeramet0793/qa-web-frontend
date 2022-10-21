@@ -1,14 +1,14 @@
 # Getting Started with My Project Folder Structure
 
-assets = keeping image, picture, svg, etc.
-components = keeping my react component.
-data = global const variable.
-feature = similar to pages but grouping by feature.
-hooks = keeping my react hooks such as Debounce.
-layouts = keeping my base layout.
-lib = keeping my various different library such as Axios.
-services = keeping my external APIs.
-utils = keeping my utility function sach as formatter.
+assets = keeping image, picture, svg, etc.\
+components = keeping my react component.\
+data = global const variable.\
+feature = similar to pages but grouping by feature.\
+hooks = keeping my react hooks such as Debounce.\
+layouts = keeping my base layout.\
+lib = keeping my various different library such as Axios.\
+services = keeping my external APIs.\
+utils = keeping my utility function sach as formatter.\
 
 # Getting Started with Create React App
 
