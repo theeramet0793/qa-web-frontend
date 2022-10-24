@@ -8,7 +8,7 @@ hooks = keeping my react hooks such as Debounce.\
 layouts = keeping my base layout.\
 lib = keeping my various different library such as Axios.\
 services = keeping my external APIs.\
-utils = keeping my utility function sach as formatter.\
+utils = keeping my utility function sach as formatter.
 
 # Getting Started with Create React App
 
