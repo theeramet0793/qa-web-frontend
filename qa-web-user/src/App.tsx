@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import './data/mainStyle/mainStyle.scss'
 import { useTranslation } from "react-i18next";
+import Test from './components/test';
 
 const App = () => {
   
@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div className="App">
       {t('welcome')}
+      <Test/>
     </div>
   );
 }

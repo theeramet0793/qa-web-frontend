@@ -1,0 +1,56 @@
+
+@font-face {
+  font-family: 'Lato-Black';
+  src: url(../../assets/fonts/lato/Lato-Black.ttf) ;
+}
+
+@font-face {
+  font-family: 'Lato-Black';
+  src: url(../../assets/fonts/lato/Lato-Bold.ttf) ;
+}
+
+@font-face {
+  font-family: 'Lato-Light';
+  src: url(../../assets/fonts/lato/Lato-Light.ttf) ;
+}
+
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url(../../assets/fonts/lato/Lato-Regular.ttf) ;
+}
+
+@font-face {
+  font-family: 'Lato-Thin';
+  src: url(../../assets/fonts/lato/Lato-Thin.ttf) ;
+}
+
+@font-face {
+  font-family: 'NotoSansThai-Black';
+  src: url(../../assets/fonts/notoSansThai/NotoSansThai-Black.ttf) ;
+}
+
+@font-face {
+  font-family: 'NotoSansThai-Bold';
+  src: url(../../assets/fonts/notoSansThai/NotoSansThai-Bold.ttf) ;
+}
+
+@font-face {
+  font-family: 'NotoSansThai-Light';
+  src: url(../../assets/fonts/notoSansThai/NotoSansThai-Light.ttf) ;
+}
+
+@font-face {
+  font-family: 'NotoSansThai-Regular';
+  src: url(../../assets/fonts/notoSansThai/NotoSansThai-Regular.ttf) ;
+}
+
+@font-face {
+  font-family: 'NotoSansThai-Thin';
+  src: url(../../assets/fonts/notoSansThai/NotoSansThai-Thin.ttf) ;
+}
+
+.text-title{
+  font-family: Lato-Bold, NotoSansThai-Bold;
+  font-size: 32px;
+}
+
