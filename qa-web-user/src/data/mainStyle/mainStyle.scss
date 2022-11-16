@@ -1,4 +1,6 @@
 
+@import "~bootstrap/scss/bootstrap";
+
 @font-face {
   font-family: 'Lato-Black';
   src: url(../../assets/fonts/lato/Lato-Black.ttf) ;
@@ -49,8 +51,32 @@
   src: url(../../assets/fonts/notoSansThai/NotoSansThai-Thin.ttf) ;
 }
 
+:root{
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-text: #494955;
+  --color-normal-bg: #F0F0F8;
+  --color-main-bg: #F1F0F6;
+  --color-text-placeholder: #727276;
+  font-size: 16px;
+}
+
 .text-title{
   font-family: Lato-Bold, NotoSansThai-Bold;
   font-size: 32px;
 }
 
+.text-button{
+  font-family: Lato-Regular, NotoSansThai-Regular;
+  font-size: 20px;
+}
+
+.text-placeholder{
+  font-family: Lato-Regular, NotoSansThai-Regular;
+  font-size: 20px;
+  color: var(--color-text-placeholder);
+}
+
+.text-color-default{
+  color: var(--color-text);
+}

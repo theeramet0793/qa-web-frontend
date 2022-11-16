@@ -1,0 +1,32 @@
+
+.filter-post{
+  width: 100%;
+  height: auto;
+  background-color: var(--color-main-bg);
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+
+  .filter-container{
+    width: 934px;
+    height: 390px;
+
+    .search-bar-container{
+      width: 850px;
+      height: 51px;
+    }
+
+    .checkboxes-container{
+      padding: 2rem 13px;
+
+      .checkbox-container{
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .dropdown-container{
+      width: 227px;
+      height: 58px;
+    }
+  }
+}

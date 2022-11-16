@@ -1,5 +1,8 @@
 {
   "translation":{
-    "welcome":"Welcome en ns1"
+    "welcome":"Welcome en ns1",
+    "REGISTER":"REGISTER",
+    "SIGNIN":"SIGN IN",
+    "SEARCH_POST":"Search post"
   }
 }

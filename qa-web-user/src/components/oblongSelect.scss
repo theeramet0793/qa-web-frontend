@@ -1,0 +1,31 @@
+
+.dropdown{
+  width: 100%;
+  height: 100%;
+
+  .dropdown-button{
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-normal-bg);
+    border: 2px solid #FFFFFF;
+    box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 10px 5px #FFFFFF;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    .Chevron-down-icon{
+      margin-left: 80%;
+    }
+  }
+
+  .dropdown-menu{
+    width: 100%;
+    position: relative;
+    top:50px;
+    background-color: var(--color-normal-bg);
+  }
+}

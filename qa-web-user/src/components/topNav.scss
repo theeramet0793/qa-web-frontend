@@ -1,0 +1,61 @@
+
+  .top-nav{
+    background-color: var(--color-main-bg);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .logo-container{
+      width: 207px;
+      margin-left: 2rem;
+
+      /* iphone se vertical <=600px */
+      @media only screen and (max-width: 600px) { 
+        margin-left: 1rem;
+      }
+
+      /* notebook, pc screen >1200px */
+      @media only screen and (min-width: 1200px) { 
+        margin-left: 4rem;
+      }
+    }
+
+    .register-btn-container{
+      width:  207px;
+      height: 68px;
+    }
+
+    .register-row{
+      /* ipad  vertical 768-992px */
+      @media only screen and (max-width: 915px) { 
+        display: none;
+      }
+    }
+
+  }
+
+
+/* iphone se vertical <=600px */
+@media only screen and (max-width: 600px) { 
+
+ }
+
+/* iphone se horizontal 600-768px */
+@media only screen and (min-width: 600px) { 
+
+}
+
+/* ipad  vertical 768-992px */
+@media only screen and (min-width: 768px) { 
+
+ }
+
+/* ipad  horizontal 992-1200 px */
+@media only screen and (min-width: 992px) { 
+
+ }
+
+/* notebook, pc screen >1200px */
+@media only screen and (min-width: 1200px) { 
+
+ }
+
