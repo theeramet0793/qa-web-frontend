@@ -10,17 +10,21 @@ options: IOption[] | undefined;
 
 const OblongSelect: React.FC<OblongDropdownProps> = ({options}) => {
 
-  const renderOption = () => {
-    return <></>;
-  }
-
-  const renderMenu = () => {
-    return <></>
+  const renderOption = () =>{
+    if(options!==undefined && options.length > 0){
+      return(
+        options.map((option)=>{
+          return <option value={option.value}>{option.label}</option>
+        })
+      )
+    }
   }
 
   return(
-    <div className='dropdown'>
-      
+    <div className='dropdown text-normal'>
+      <select name="selection" className="dropdown-button">
+        {renderOption()}
+      </select>
     </div>
   )
 }

@@ -12,9 +12,19 @@
     border-radius: 999px;
     display: flex;
     align-items: center;
+    appearance: none;
+    padding: 9px 26px;
+    background: url(../assets/svg/chevron-down.svg) ;
+    background-repeat: no-repeat;
+    background-position-x: 90%;
+    background-position-y: 50%;
 
     &:hover{
       cursor: pointer;
+    }
+
+    &:focus{
+      outline: none;
     }
 
     .Chevron-down-icon{
@@ -22,10 +32,9 @@
     }
   }
 
-  .dropdown-menu{
-    width: 100%;
-    position: relative;
-    top:50px;
+  select option{
     background-color: var(--color-normal-bg);
   }
+
+  
 }

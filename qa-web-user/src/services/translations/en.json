@@ -3,6 +3,10 @@
     "welcome":"Welcome en ns1",
     "REGISTER":"REGISTER",
     "SIGNIN":"SIGN IN",
-    "SEARCH_POST":"Search post"
+    "SEARCH_POST":"Search post",
+    "ALL":"All",
+    "SOLVED_POST":"Solved post",
+    "UNSOLVED_POST":"Unsolved post",
+    "ONLY_FOLLOWING_POST":"Only following post"
   }
 }

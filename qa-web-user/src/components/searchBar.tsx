@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = () =>{
   return(
     <div className='search-bar'>
       <ReactSVG src={SearchIcon} className='search-icon'/>
-      <input type='text' onChange={(e)=>handleOnChange(e.currentTarget.value)} className={classNames(`search-box`, inputCount>0 ? `text-button`:`text-placeholder`)} placeholder={t('SEARCH_POST')}/>
+      <input type='text' onChange={(e)=>handleOnChange(e.currentTarget.value)} className={classNames(`search-box`, inputCount>0 ? `text-normal`:`text-placeholder`)} placeholder={t('SEARCH_POST')}/>
     </div>
   )
 }
