@@ -7,6 +7,8 @@
     "ALL":"All",
     "SOLVED_POST":"Solved post",
     "UNSOLVED_POST":"Unsolved post",
-    "ONLY_FOLLOWING_POST":"Only following post"
+    "ONLY_FOLLOWING_POST":"Only following post",
+    "FOLLOW":"Follow",
+    "TYPE_ANSWER":"Type your answer..."
   }
 }

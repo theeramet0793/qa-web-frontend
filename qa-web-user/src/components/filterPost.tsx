@@ -1,5 +1,4 @@
 
-import RectangleCard from "./rectangleCard";
 import './filterPost.scss'
 import SearchBar from "./searchBar";
 import Checkbox from "./checkbox";

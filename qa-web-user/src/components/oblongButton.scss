@@ -7,8 +7,15 @@
   box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 5px #FFFFFF;
   padding: 14px 41px;
   border: 2px solid var(--color-white);
+  color: var(--color-text);
 
   &:hover{
     cursor: pointer;
+    background-color: #5383ff;
+    color: var(--color-white) ;
+  }
+
+  &:active{
+    opacity: 0.8;
   }
 }
