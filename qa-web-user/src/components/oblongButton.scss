@@ -11,7 +11,7 @@
 
   &:hover{
     cursor: pointer;
-    background-color: #5383ff;
+    background-color: var(--color-primary-button);
     color: var(--color-white) ;
   }
 

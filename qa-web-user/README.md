@@ -10,6 +10,22 @@ lib = keeping my various different library such as Axios.\
 services = keeping my external APIs.\
 utils = keeping my utility function sach as formatter.
 
+# Deploy via terminal
+ครั้งถัดไปที่ไม่ใช่ครั้งแรก ทำแค่ npm run build กับ firebase deploy
+1.npm install -g firebase-tools
+2.firebase login
+3.firebase init
+-are you ready to proceed : Yes
+-hosting: configure and deploy firebase hosting site (หรืออันที่คล้ายกับอันนี้ที่สุด)
+-use an existing project
+-select project
+-public directory: พิมพ์ build หรือชื่ออื่นที่ต้องการ
+-rewrite all rul to index.html: Yes
+-setup auto to gitHub: No
+-Overwrite: Yes
+4. npm run build (build is your folder name in 3.)
+5. firebase deploy
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

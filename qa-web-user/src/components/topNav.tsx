@@ -7,10 +7,11 @@ import { ReactSVG } from 'react-svg';
 import OblongButton from './oblongButton';
 
 export interface TopNavProps{
-
+  onClickReg: () => void;
+  onClickSign: () => void;
 }
 
-const TopNav: React.FC <TopNavProps> = () => {
+const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign}) => {
 
   const { t } = useTranslation();
   return(
@@ -30,14 +31,18 @@ const TopNav: React.FC <TopNavProps> = () => {
             <Col className='d-flex align-items-center justify-content-end'>
               <div className='register-btn-container'> 
                 <OblongButton>
-                  <div className='text-button'>{t('REGISTER')}</div>
+                  <div className='text-button' onClick={onClickReg}>
+                    {t('REGISTER')}
+                  </div>
                 </OblongButton>
               </div> 
             </Col>
             <Col className='d-flex align-items-center justify-content-center'>
               <div className='register-btn-container'> 
                 <OblongButton>
-                  <div className='text-button'>{t('SIGNIN')}</div>
+                  <div className='text-button' onClick={onClickSign}>
+                    {t('SIGNIN')}
+                  </div>
                 </OblongButton>
               </div>
             </Col>

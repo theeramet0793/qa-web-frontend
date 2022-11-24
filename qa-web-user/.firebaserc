@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "qa-web-user",
+    "no": "qa-web-user",
+    "qa-web-user-alias": "qa-web-user"
+  },
+  "targets": {},
+  "etags": {}
+}

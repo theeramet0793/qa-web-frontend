@@ -9,8 +9,9 @@
   justify-content: center;
   align-items: center;
   
-  :hover{
+  &:hover{
     cursor: pointer;
+    background-color: var(--color-primary-button);
   }
 }
 
