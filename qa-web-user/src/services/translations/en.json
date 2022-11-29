@@ -9,6 +9,7 @@
     "UNSOLVED_POST":"Unsolved post",
     "ONLY_FOLLOWING_POST":"Only following post",
     "FOLLOW":"Follow",
-    "TYPE_ANSWER":"Type your answer..."
+    "TYPE_ANSWER":"Type your answer...",
+    "CREATE_ACCOUNT_SUCCESS":"Create account success"
   }
 }

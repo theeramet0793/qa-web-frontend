@@ -56,7 +56,7 @@
   --color-black: #000000;
   --color-text: #494955;
   --color-normal-bg: #F0F0F8;
-  --color-main-bg: #f1eef5;// #F1F0F6;
+  --color-main-bg: #F1F0F6;
   --color-text-placeholder: #727276;
   --color-primary-button: #5383ff;
   font-size: 16px;
@@ -68,15 +68,20 @@
   color: var(--color-text);
 }
 
-.text-button{
-  font-family: Lato-Regular, NotoSansThai-Regular;
-  font-size: 20px;
-}
-
 .text-normal{
   font-family: Lato-Regular, NotoSansThai-Regular;
   font-size: 16px;
   color: var(--color-text);
+}
+
+.text-medium{
+  font-family: Lato-Regular, NotoSansThai-Regular;
+  font-size: 20px;
+}
+
+.text-large{
+  font-family: Lato-Regular, NotoSansThai-Regular;
+  font-size: 24px;
 }
 
 .text-normal-bold{
@@ -85,10 +90,14 @@
   color: var(--color-text);
 }
 
+.text-medium-bold{
+  font-family: Lato-Bold, NotoSansThai-Bold;
+  font-size: 20px;
+}
+
 .text-large-bold{
   font-family: Lato-Bold, NotoSansThai-Bold;
   font-size: 24px;
-  color: var(--color-text);
 }
 
 .text-placeholder{
@@ -153,11 +162,4 @@
   box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
 }
 
-.border-radius-50px{
-  border-radius: 50px;
-}
-
-.border-radius-30px{
-  border-radius: 30px;
-}
 

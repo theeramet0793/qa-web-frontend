@@ -34,6 +34,7 @@
               justify-content: center;
               align-items: center;
               padding: 1rem 4rem;
+              color: var(--color-text);
             }
   
             .x-button-container{
@@ -41,6 +42,24 @@
               height: 43px;
               position: absolute;
               right: 0;
+
+              .x-icon{
+                width: 100%;
+                height: 100%;
+                background-color: var(--color-normal-bg);
+                border-radius: 999px;
+                border: 2px solid #FFFFFF;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-shadow: 10px 5px 30px #D1D2E7, -1px -3px 6px 1px #FFFFFF;
+                
+                &:hover{
+                  cursor: pointer;
+                  background-color: var(--color-primary-button);
+                }
+              }
+
 
               svg{
                 fill: var(--color-text)

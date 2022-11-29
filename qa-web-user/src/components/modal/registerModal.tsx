@@ -1,12 +1,12 @@
 
 import { Modal, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
-import RoundButton from '../roundButton';
 import './registerModal.scss'
 import XIcon from '../../assets/svg/x.svg'
 import { useEffect, useState } from 'react';
 import Client from '../../lib/axios/axios';
 import { IUser } from '../../data/interface/IUser';
+import { useTranslation } from "react-i18next";
 
 export interface RegisterModalProps{
   show: boolean;
@@ -15,6 +15,7 @@ export interface RegisterModalProps{
 
 const RegisterModal: React.FC<RegisterModalProps> = ({show, onClose}) => {
 
+  const {t} = useTranslation();
   const [isShow, setIsShow] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
@@ -42,7 +43,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({show, onClose}) => {
   const renderSuccess = () =>{
     return (
       <Row>
-        สร้างบัญชีสำเร็จแล้ว
+        {t("CREATE_ACCOUNT_SUCCESS")}
       </Row>
     )
   }
@@ -56,9 +57,9 @@ const RegisterModal: React.FC<RegisterModalProps> = ({show, onClose}) => {
               สมัครสมาชิก
             </div>
             <div className='x-button-container'>
-              <RoundButton boxShadowSize='small' onClick={()=>{onClose(); setIsSuccess(false)}}>
+              <div className='x-icon' onClick={()=>{onClose(); setIsSuccess(false)}}>
                 <ReactSVG src={XIcon}/>
-              </RoundButton>
+              </div>
             </div>
           </div>
           <div className='body-container'>

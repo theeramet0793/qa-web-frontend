@@ -1,7 +1,7 @@
 {
   "translation":{
     "welcome":"ยินดีต้อนรับ",
-    "REGISTER":"สมัครใช้งาน",
+    "REGISTER":"สมัครสมาชิก",
     "SIGNIN":"ลงชื่อเข้าใช้",
     "SEARCH_POST":"ค้นหาโพสต์...",
     "ALL":"ทั้งหมด",
@@ -9,7 +9,8 @@
     "UNSOLVED_POST":"โพสต์ที่ยังไม่พบชื่อภาพยนตร์",
     "ONLY_FOLLOWING_POST":"เฉพาะโพสต์ที่ติดตาม",
     "FOLLOW":"ติดตาม",
-    "TYPE_ANSWER":"เขียนคำตอบ..."
+    "TYPE_ANSWER":"เขียนคำตอบ...",
+    "CREATE_ACCOUNT_SUCCESS":"สร้างบัญชีสำเร็จแล้ว"
   }
   
 }

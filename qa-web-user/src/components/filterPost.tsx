@@ -24,7 +24,7 @@ const FilterPost: React.FC<FilterPostProps> = () => {
   return(
     <div className="filter-post d-flex justify-content-center align-items-center">
       <div className="filter-container">
-          <div className="large-card border-radius-50px">
+          <div className="filter-card border-radius-50px">
             <div className="search-bar-container">
               <SearchBar/>
             </div>
@@ -72,7 +72,7 @@ const FilterPost: React.FC<FilterPostProps> = () => {
                 </div>
               </Col>
               <Col>
-                <div className="something-container medium-card border-radius-30px">
+                <div className="something-container border-radius-30px">
 
                 </div>
               </Col>
@@ -80,7 +80,7 @@ const FilterPost: React.FC<FilterPostProps> = () => {
                 <div className="dropdown-container">
                   <OblongSelect options={testOptions}/>
                 </div>
-                <div className="switch-container text-normal small-card border-radius-30px">
+                <div className="switch-container text-normal border-radius-30px">
                   <Row className="d-flex justify-content-center ">{t('ONLY_FOLLOWING_POST')}</Row>
                   <Row className="d-flex justify-content-center ">
                     <ToggleSwitch/>

@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Modal, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
-import RoundButton from '../roundButton';
 import './signInModal.scss'
 import XIcon from '../../assets/svg/x.svg'
 import Client from '../../lib/axios/axios';
@@ -53,9 +52,9 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose}) => {
               ลงชื่อเข้าใช้
             </div>
             <div className='x-button-container'>
-              <RoundButton boxShadowSize='small' onClick={()=>{onClose(); setIsSuccess(false)}} >
+              <div className='x-icon' onClick={()=>{onClose(); setIsSuccess(false)}} >
                 <ReactSVG src={XIcon}/>
-              </RoundButton>
+              </div>
             </div>
           </div>
           <div className='body-container'>
