@@ -9,17 +9,19 @@ const HomePage: React.FC = () =>{
 
   const [showRegModal, setShowRegModal] = useState<boolean>(false);
   const [showSigModal, setShowSigModal] = useState<boolean>(false);
+  const [isSignInComplete, setIsSignInComplete] = useState<boolean>(false);
 
   return(
     <>
       <TopNav 
         onClickReg={()=> setShowRegModal(true)}
         onClickSign={()=> setShowSigModal(true)}
+        isSignInSuccess={isSignInComplete}
       />
       <FilterPost/>
       <FeedPost/>
       <RegisterModal show={showRegModal} onClose={()=> setShowRegModal(false)} />
-      <SignInModal show={showSigModal} onClose={()=> setShowSigModal(false)} />
+      <SignInModal show={showSigModal} onClose={()=> setShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true)}}/>
     </>
   )
 }

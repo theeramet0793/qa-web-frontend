@@ -6,7 +6,6 @@
 
     .logo-container{
       width: 207px;
-      margin-left: 2rem;
 
       .logo-oblong{
         width: 100%;
@@ -23,12 +22,12 @@
       }
 
       /* notebook, pc screen >1200px */
-      @media only screen and (min-width: 1200px) { 
+      @media only screen and (min-width: 1400px) { 
         margin-left: 4rem;
       }
 
       /* extra screen >1400px */
-      @media only screen and (min-width: 1200px) { 
+      @media only screen and (min-width: 1600px) { 
         margin-left: 20rem;
       }
     }

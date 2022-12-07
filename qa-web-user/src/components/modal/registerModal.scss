@@ -78,7 +78,8 @@
 
             .row{
               height: 41px;
-              margin: 2rem 2.5rem;
+              padding: 1rem 1.25rem;
+              height: fit-content;
 
               input, .button-create{
                 width: 100%;
@@ -91,7 +92,6 @@
               }
 
               .button-create{
-                margin-top: 1rem;
                 background-color: var(--color-primary-button);
                 color: var(--color-white);
                 display: flex;
@@ -108,6 +108,24 @@
                   opacity: 0.8;
                 }
               }
+
+              .invalid{
+                border: solid 2px #d85e7f;
+              }
+            }
+
+            .invalid-message{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #d85e7f;
+            }
+
+            .success-message{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #3ab58e;
             }
           }
         }

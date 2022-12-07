@@ -78,6 +78,13 @@
             width: 594px;
             padding-top: 1rem;
 
+            .message-login-fail{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #d85e7f;
+            }
+
             .row{
               height: 41px;
               margin: 2rem 2.5rem;
