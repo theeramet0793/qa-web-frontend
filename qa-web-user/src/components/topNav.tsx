@@ -13,17 +13,23 @@ export interface TopNavProps{
   onClickReg: () => void;
   onClickSign: () => void;
   isSignInSuccess: boolean;
+  onSignOut: ()=> void;
+  onSignInSuccess: ()=>void;
+  onChangeProfile: ()=>void;
 }
 
-const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess}) => {
+const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess, onSignOut, onSignInSuccess, onChangeProfile}) => {
 
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
 
   useEffect(()=>{
     const accToken = localStorage.getItem('qa_access_token');
-    if(accToken)
-    setUserProfile( jwt_decode(accToken))
-  },[isSignInSuccess])
+    if(accToken){
+      setUserProfile( jwt_decode(accToken));
+      onSignInSuccess();
+    }
+    
+  },[isSignInSuccess, onSignInSuccess])
   
   const { t } = useTranslation();
   return(
@@ -69,7 +75,9 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                 <Notification/>
               </Col>
               <Col>
-                <Profile/>
+                <div className='top-nav-profile-container'>
+                  <Profile onSignOut={()=>onSignOut()} enableDropdown={true} onChangeProfile={()=>onChangeProfile()}/> 
+                </div>
               </Col>
             </Row>
           </Col>

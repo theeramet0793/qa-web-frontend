@@ -3,4 +3,13 @@
   background-color: var(--color-main-bg);
   padding-top: 3rem;
   padding-bottom: 3rem;
+  width: 100vw;
+
+  .posts-container{
+    display: flexbox;
+
+    .post-container{
+      padding: 2rem 0rem;
+    }
+  }
 }

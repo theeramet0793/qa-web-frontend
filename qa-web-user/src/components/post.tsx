@@ -9,17 +9,62 @@ import CommentIcon from '../assets/svg/chat-text.svg'
 import FollowIcon from '../assets/svg/bookmark-frame.svg'
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
+import { IPost } from '../data/interface/IPost';
+import TextareaAutosize from 'react-textarea-autosize';
+import { GetUserData } from './userData/userData';
+import { useState } from 'react';
+import { IUser } from '../data/interface/IUser';
+import Client from '../lib/axios/axios';
+import { IOption } from '../data/interface/IOption';
+import EditPostModal from './modal/editPostModal';
 
 export interface PostProps{
-
+  post: IPost;
 }
 
-const Post: React.FC<PostProps> = () => {
+const Post: React.FC<PostProps> = ({post}) => {
 
   const { t } = useTranslation();
+  const [ userProfile ] = useState<IUser|undefined>(GetUserData());
+  const [isShowEditPostModal, setIsShowEditPostModal] = useState<boolean>(false);
+  
+  const ownerUserOptions = [
+    {label:'แก้ไขโพสต์', value:'editPost'},
+    {label:'ลบโพสต์', value:'deletePost'},
+  ]
+  const otherUserOptions = [
+    {label:'รายงานโพสต์', value:'report'},
+  ]
+
+  const handleMenuOption = () =>{
+    return (userProfile?.userId === post.userId)? ownerUserOptions:otherUserOptions;
+  }
+
+  const handleSelectOption = (selectedOpt:IOption) =>{
+    if(selectedOpt.value === 'deletePost'){
+      deletePost();
+    }else if(selectedOpt.value === 'editPost'){
+      setIsShowEditPostModal(true);
+    }
+  }
+
+  const deletePost = () =>{
+    var now = new Date();
+    Client.patch('/deletepost',{
+      deletedBy: userProfile?.userId,
+      postId: post.postId,
+      deletedDate: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
+      deletedTime: now.getHours()+':'+now.getMinutes(),
+    }).then( (res) =>{
+      console.log(res);
+    }).catch( (err) => {
+      console.log(err.response);
+    }
+    )
+  }
 
   return(
-    <div className="post-card large-card border-radius-50px">
+    <div className="post-card">
       <Row>
         <Col sm='auto'>
           <div className='profile-container'>
@@ -30,20 +75,20 @@ const Post: React.FC<PostProps> = () => {
         </Col>
         <Col className='d-flex flex-column justify-content-center mx-2'>
           <Row className='text-normal-bold'>
-            Theeramet Metha
+            {post.username}
           </Row>
           <Row className='text-normal'>
-            23 กันยายน 2565 เวลา 20.20 น.
+            {post.createdDate+' เวลา '+post.createdTime}
           </Row>
         </Col>
         <Col className='d-flex justify-content-end'>
-          <MoreMenu/>
+          <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
         </Col>
       </Row>
       <Row>
         <div className='post-content-container'>
           <div className='text-box text-normal'>
-          หาหนังที่ผู้หญิงกำลังจะกลายเป็นซอมบี้หรืออะไรสักอย่างนางกำลังคลานมาแล้วก็ลูบหน้าผู้ชายตอนแรกผู้ชายก็กลัวแต่มานึกได้ว่าเป็นแฟนตัวเองเพราะทั้งสองคนเคยหยอกกันแบบนั้นพอดีเลื่อนreelsแล้วเจอคนตัดมาใส่เพลงประกอบซึ้งๆอะค่ะ แต่เค้าปิดเม้น
+            <TextareaAutosize disabled={true} className='post-detail' value={post.postDetail}/>
           </div>
         </div>
 
@@ -100,6 +145,7 @@ const Post: React.FC<PostProps> = () => {
           </Row>
         </div>
       </Row>
+      {<EditPostModal show={isShowEditPostModal} onClose={()=>{setIsShowEditPostModal(false)}} originalPostDetail={post.postDetail}/>}
     </div>
   )
 }

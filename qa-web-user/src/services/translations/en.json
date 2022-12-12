@@ -10,6 +10,11 @@
     "ONLY_FOLLOWING_POST":"Only following post",
     "FOLLOW":"Follow",
     "TYPE_ANSWER":"Type your answer...",
-    "CREATE_ACCOUNT_SUCCESS":"Create account success"
+    "CREATE_ACCOUNT_SUCCESS":"Create account success",
+    "CHANGE_PROFILE":"Change profile",
+    "SIGN_OUT":"Sign out",
+    "DESCRIBE_YOUR_MOVIE":"Describe your finding movie...",
+    "CREATE_POST":"Create post",
+    "EDIT_POST":"Create post"
   }
 }

@@ -7,10 +7,10 @@ import classNames from 'classnames';
 import { useState } from 'react';
 
 export interface SearchBarProps{
-
+  placeholder?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = () =>{
+const SearchBar: React.FC<SearchBarProps> = ({placeholder}) =>{
 
   const { t } = useTranslation();
   const [inputCount, setInputCount] = useState<number>(0)
@@ -22,7 +22,12 @@ const SearchBar: React.FC<SearchBarProps> = () =>{
   return(
     <div className='search-bar'>
       <ReactSVG src={SearchIcon} className='search-icon'/>
-      <input type='text' onChange={(e)=>handleOnChange(e.currentTarget.value)} className={classNames(`search-box`, inputCount>0 ? `text-normal`:`text-placeholder`)} placeholder={t('SEARCH_POST')}/>
+      <input 
+        type='text' 
+        onChange={(e)=>handleOnChange(e.currentTarget.value)} 
+        className={classNames(`search-box`, inputCount>0 ? `text-normal`:`text-placeholder`)} 
+        placeholder={placeholder? placeholder:t('SEARCH_POST')}
+      />
     </div>
   )
 }
