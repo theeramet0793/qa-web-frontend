@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IPost } from '../data/interface/IPost';
+import { IPostsFeed } from '../data/interface/IPost';
 import Client from '../lib/axios/axios';
 import './feedPost.scss'
 import Post from './post';
@@ -10,12 +10,11 @@ export interface FeedPostProps{
 
 const FeedPost: React.FC<FeedPostProps> = () => {
 
-  const [posts, setPosts] = useState<IPost[]|undefined>(undefined);
+  const [posts, setPosts] = useState<IPostsFeed[]|undefined>(undefined);
 
   useEffect(()=>{
-      Client.get<IPost[]>('/posts')
+      Client.get<IPostsFeed[]>('/posts')
       .then((res)=>{
-        console.log(res);
         setPosts(res.data);
       }).catch((err)=>{
         console.log(err);
@@ -29,7 +28,7 @@ const FeedPost: React.FC<FeedPostProps> = () => {
           posts?.map((post)=>{
             return(
               <div key={post.postId} className='post-container'>
-                <Post post={post}/>
+                <Post postId={post.postId}/>
               </div>
             )
           })

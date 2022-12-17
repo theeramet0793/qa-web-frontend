@@ -3,12 +3,12 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCdbtLYhH6LcjZtSQ5vXT4kMopBrcyPrGw",
-  authDomain: "qa-web-storage-2c296.firebaseapp.com",
-  projectId: "qa-web-storage-2c296",
-  storageBucket: "qa-web-storage-2c296.appspot.com",
-  messagingSenderId: "131747183004",
-  appId: "1:131747183004:web:7167faed76d69d619ef059"
+  apiKey: "AIzaSyCt2pPDeqZ0_NP82kDl4b1fEiiFQPdeGiA",
+  authDomain: "qa-web-user.firebaseapp.com",
+  projectId: "qa-web-user",
+  storageBucket: "qa-web-user.appspot.com",
+  messagingSenderId: "911992988511",
+  appId: "1:911992988511:web:f29529c0e7b51a66d78cea"
 };
 
  export const app = initializeApp(firebaseConfig);

@@ -12,21 +12,45 @@ import RoundLabel from './roundLabel';
 import { IPost } from '../data/interface/IPost';
 import TextareaAutosize from 'react-textarea-autosize';
 import { GetUserData } from './userData/userData';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IUser } from '../data/interface/IUser';
 import Client from '../lib/axios/axios';
 import { IOption } from '../data/interface/IOption';
 import EditPostModal from './modal/editPostModal';
+import { IProfileImage } from '../data/interface/IProfileImage';
+import Profile from './profile';
 
 export interface PostProps{
-  post: IPost;
+  postId: number;
 }
 
-const Post: React.FC<PostProps> = ({post}) => {
+const Post: React.FC<PostProps> = ({postId}) => {
 
   const { t } = useTranslation();
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
-  const [isShowEditPostModal, setIsShowEditPostModal] = useState<boolean>(false);
+  const [ isShowEditPostModal, setIsShowEditPostModal ] = useState<boolean>(false);
+  const [ posts, setPosts ] = useState<IPost|undefined>(undefined);
+  const [ isDataUpdate, setIsDataUpdate] = useState<boolean>(false);
+  const [ posterProfileUrl, setPosterProfileUrl ] = useState<IProfileImage|undefined>(undefined);
+
+  useEffect(()=>{
+    Client.get<IPost>('/post/'+postId,
+    ).then((res)=>{
+      setPosts(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[postId,isDataUpdate])
+
+  useEffect(()=>{
+    if(posts)
+    Client.get<IProfileImage>('/profileUrl/'+posts.userId)
+    .then((res)=>{
+      setPosterProfileUrl(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[posts])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -37,7 +61,7 @@ const Post: React.FC<PostProps> = ({post}) => {
   ]
 
   const handleMenuOption = () =>{
-    return (userProfile?.userId === post.userId)? ownerUserOptions:otherUserOptions;
+    return (userProfile?.userId === posts?.userId)? ownerUserOptions:otherUserOptions;
   }
 
   const handleSelectOption = (selectedOpt:IOption) =>{
@@ -52,7 +76,7 @@ const Post: React.FC<PostProps> = ({post}) => {
     var now = new Date();
     Client.patch('/deletepost',{
       deletedBy: userProfile?.userId,
-      postId: post.postId,
+      postId: posts?.postId,
       deletedDate: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
       deletedTime: now.getHours()+':'+now.getMinutes(),
     }).then( (res) =>{
@@ -69,16 +93,18 @@ const Post: React.FC<PostProps> = ({post}) => {
         <Col sm='auto'>
           <div className='profile-container'>
             <RoundButton boxShadowSize='large'>
-              <ReactSVG src={ProfileIcon}/>
+              { posterProfileUrl && <img src={posterProfileUrl.urlPath} alt='profile'/>}
+              { !posterProfileUrl && <ReactSVG src={ProfileIcon}/>}
             </RoundButton>
           </div>
         </Col>
         <Col className='d-flex flex-column justify-content-center mx-2'>
           <Row className='text-normal-bold'>
-            {post.username}
+            {posts?.username}
           </Row>
           <Row className='text-normal'>
-            {post.createdDate+' เวลา '+post.createdTime}
+            { posts?.lastUpdateDate? ('แก้ไขล่าสุดเมื่อ '+posts.lastUpdateDate+' เวลา '+posts?.lastUpdateTime)
+              : (posts?.createdDate+' เวลา '+posts?.createdTime) }
           </Row>
         </Col>
         <Col className='d-flex justify-content-end'>
@@ -88,7 +114,7 @@ const Post: React.FC<PostProps> = ({post}) => {
       <Row>
         <div className='post-content-container'>
           <div className='text-box text-normal'>
-            <TextareaAutosize disabled={true} className='post-detail' value={post.postDetail}/>
+            <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
           </div>
         </div>
 
@@ -131,7 +157,7 @@ const Post: React.FC<PostProps> = ({post}) => {
                 <Col sm='auto'>
                   <div className='commenter-profile'>
                     <RoundLabel >
-                      <ReactSVG src={ProfileIcon}/>
+                      <Profile enableDropdown={false} disableClick={true}/>
                     </RoundLabel>
                   </div>
                 </Col>
@@ -145,7 +171,13 @@ const Post: React.FC<PostProps> = ({post}) => {
           </Row>
         </div>
       </Row>
-      {<EditPostModal show={isShowEditPostModal} onClose={()=>{setIsShowEditPostModal(false)}} originalPostDetail={post.postDetail}/>}
+      {posts &&<EditPostModal 
+        show={isShowEditPostModal} 
+        onClose={()=>{setIsShowEditPostModal(false)}} 
+        postId={posts?.postId} 
+        originalPostDetail={posts?.postDetail}
+        onDataUpdate={(updateData)=>{setIsDataUpdate(!isDataUpdate)}}
+      />}
     </div>
   )
 }

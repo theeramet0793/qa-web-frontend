@@ -5,19 +5,25 @@ import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
 import { IUser } from '../data/interface/IUser';
 import { useTranslation } from 'react-i18next';
+import Client from '../lib/axios/axios';
+import { IProfileImage } from '../data/interface/IProfileImage';
+import classNames from 'classnames'
+
 
 export interface ProfileProps{
   onSignOut?: ()=> void;
   onChangeProfile?: ()=> void;
   enableDropdown: boolean;
+  disableClick?: boolean;
 }
 
-const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangeProfile}) =>{
+const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangeProfile, disableClick}) =>{
 
   const { t } = useTranslation();
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
-  const [testOptions,setTetsOptions] = useState<{label:string|undefined,value:string}[]>()
+  const [testOptions,setTetsOptions] = useState<{label:string|undefined,value:string}[]>();
+  const [profileUrl, setProfileUrl] = useState<IProfileImage|undefined>(undefined);
 
   useEffect(()=>{
     const accessToken = localStorage.getItem('qa_access_token');
@@ -37,8 +43,18 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
     )
   },[userProfile,t])
 
+  useEffect(()=>{
+    if(userProfile)
+    Client.get<IProfileImage>('/profileUrl/'+userProfile?.userId)
+    .then((res)=>{
+      setProfileUrl(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+},[userProfile])
+
   const delayedCloseMenu = () => {
-    setTimeout(()=>setIsShowDropdown(false), 100);
+    setTimeout(()=>setIsShowDropdown(false), 1000);
   }
 
   const handleOnClickOption = (option:string) => {
@@ -51,8 +67,13 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
 
   return(
     <div className='user-profile-main-container'>
-      <button className='user-profile-container' onClick={()=>{setIsShowDropdown(!isShowDropdown)}} onBlur={()=>{delayedCloseMenu()}}>
-        <ReactSVG src={ProfileIcon}/>
+      <button 
+        className={classNames(disableClick? 'disable':'user-profile-container')} 
+        onClick={()=>{setIsShowDropdown(!isShowDropdown)}} 
+        onBlur={()=>{delayedCloseMenu()}}
+      >
+        {profileUrl && <img src={profileUrl.urlPath} alt='profile'/>}
+        {!profileUrl && <ReactSVG src={ProfileIcon}/>}
       </button>
       {isShowDropdown && enableDropdown &&
         <div className='expand-profile-menu'>  

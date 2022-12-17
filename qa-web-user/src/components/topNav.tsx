@@ -76,7 +76,11 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
               </Col>
               <Col>
                 <div className='top-nav-profile-container'>
-                  <Profile onSignOut={()=>onSignOut()} enableDropdown={true} onChangeProfile={()=>onChangeProfile()}/> 
+                  <Profile 
+                    onSignOut={()=>onSignOut()} 
+                    enableDropdown={true} 
+                    onChangeProfile={()=>onChangeProfile()}
+                  /> 
                 </div>
               </Col>
             </Row>

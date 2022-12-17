@@ -69,7 +69,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose}) =>{
             <Row>
               <Col sm='auto'>
                 <div className='create-post-profile-container'>
-                  <Profile enableDropdown={true}/> 
+                  <Profile enableDropdown={false}/> 
                 </div>
               </Col>
               <Col>

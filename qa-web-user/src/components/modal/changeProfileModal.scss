@@ -84,15 +84,19 @@
               justify-content: center;
               align-items: center;
 
-              .picture{
-                width: 316px;
-                height: 261px;
+              img{
+                max-width: 300px;
+                max-height: 250px;
               }
+            }
+
+            .input-image-container{
+              padding: 1rem 0rem;
             }
 
             .button-upload-picture{
               width: 561px;
-              margin-top: 2rem;
+              margin-top: 0rem;
               background-color: var(--color-primary-button);
               color: var(--color-white);
               display: flex;

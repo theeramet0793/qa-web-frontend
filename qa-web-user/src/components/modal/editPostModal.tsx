@@ -10,18 +10,21 @@ import Client from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
 import { GetUserData } from "../userData/userData";
+import { IPost } from "../../data/interface/IPost";
 
 export interface EditPostModalProps{
   show: boolean;
   onClose: () => void;
   originalPostDetail: string;
+  postId: number;
+  onDataUpdate?: (updateData: IPost)=>void;
 }
 
-const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPostDetail}) =>{
+const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPostDetail, postId, onDataUpdate}) =>{
 
   const { t } = useTranslation();
-  const [isShow, setIsShow] = useState<boolean>(false);
-  const [postDetail, setPostdetail] = useState<string>('');
+  const [ isShow, setIsShow ] = useState<boolean>(false);
+  const [ postDetail, setPostdetail ] = useState<string>(originalPostDetail);
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
 
   useEffect(()=>{
@@ -30,13 +33,15 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
 
   const handleSubmit = () =>{
     var now = new Date();
-    Client.patch<IUser>('/updatepost',{
-      userId: userProfile?.userId,
+    Client.patch<IPost>('/updatepost',{
+      postId: postId,
       postDetail: postDetail,
       date: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
       time: now.getHours()+':'+now.getMinutes(), 
     }).then( (res) =>{
-      console.log(res);
+      if(res && res.data){
+        onDataUpdate && onDataUpdate(res.data)
+      } 
       onClose();
     }).catch( (err) => {
       console.log(err.response);
