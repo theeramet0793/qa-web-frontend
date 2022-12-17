@@ -19,6 +19,8 @@ import { IOption } from '../data/interface/IOption';
 import EditPostModal from './modal/editPostModal';
 import { IProfileImage } from '../data/interface/IProfileImage';
 import Profile from './profile';
+import DeletePostModal from './modal/deletePostModal';
+import LabelAfterDeletePost from './labelAfterDeletePost';
 
 export interface PostProps{
   postId: number;
@@ -32,6 +34,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ posts, setPosts ] = useState<IPost|undefined>(undefined);
   const [ isDataUpdate, setIsDataUpdate] = useState<boolean>(false);
   const [ posterProfileUrl, setPosterProfileUrl ] = useState<IProfileImage|undefined>(undefined);
+  const [ isDeletedPost, setIsDeletedPost ] = useState<boolean>(false);
+  const [ isShowDeletePostModal, setIsShowDeletePostModal] = useState<boolean>(false);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -66,7 +70,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
   const handleSelectOption = (selectedOpt:IOption) =>{
     if(selectedOpt.value === 'deletePost'){
-      deletePost();
+      //deletePost();
+      setIsShowDeletePostModal(true);
     }else if(selectedOpt.value === 'editPost'){
       setIsShowEditPostModal(true);
     }
@@ -80,10 +85,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
       deletedDate: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
       deletedTime: now.getHours()+':'+now.getMinutes(),
     }).then( (res) =>{
-      console.log(res);
+      setIsDeletedPost(true);
     }).catch( (err) => {
       console.log(err.response);
     }
+    )
+  }
+
+  if(isDeletedPost){
+    return(
+      <LabelAfterDeletePost/>
     )
   }
 
@@ -99,10 +110,10 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </div>
         </Col>
         <Col className='d-flex flex-column justify-content-center mx-2'>
-          <Row className='text-normal-bold'>
+          <Row className='text-normal-bold text-color'>
             {posts?.username}
           </Row>
-          <Row className='text-normal'>
+          <Row className='text-normal text-color'>
             { posts?.lastUpdateDate? ('แก้ไขล่าสุดเมื่อ '+posts.lastUpdateDate+' เวลา '+posts?.lastUpdateTime)
               : (posts?.createdDate+' เวลา '+posts?.createdTime) }
           </Row>
@@ -177,6 +188,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
         postId={posts?.postId} 
         originalPostDetail={posts?.postDetail}
         onDataUpdate={(updateData)=>{setIsDataUpdate(!isDataUpdate)}}
+      />}
+      {<DeletePostModal 
+        onClose={()=>{setIsShowDeletePostModal(false)}}
+        show={isShowDeletePostModal}
+        onConfirm={()=>{deletePost();}}
       />}
     </div>
   )

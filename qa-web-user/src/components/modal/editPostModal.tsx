@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
 import { GetUserData } from "../userData/userData";
 import { IPost } from "../../data/interface/IPost";
+import { nowDate, nowTime } from "../../utils/dateAndTime";
 
 export interface EditPostModalProps{
   show: boolean;
@@ -32,12 +33,11 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
   },[show])
 
   const handleSubmit = () =>{
-    var now = new Date();
     Client.patch<IPost>('/updatepost',{
       postId: postId,
       postDetail: postDetail,
-      date: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
-      time: now.getHours()+':'+now.getMinutes(), 
+      date: nowDate(),
+      time: nowTime(), 
     }).then( (res) =>{
       if(res && res.data){
         onDataUpdate && onDataUpdate(res.data)

@@ -15,6 +15,7 @@
     "SIGN_OUT":"Sign out",
     "DESCRIBE_YOUR_MOVIE":"Describe your finding movie...",
     "CREATE_POST":"Create post",
-    "EDIT_POST":"Create post"
+    "EDIT_POST":"Create post",
+    "DELETE_POST":"Delete post"
   }
 }

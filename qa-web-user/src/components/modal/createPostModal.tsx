@@ -10,6 +10,7 @@ import SearchBar from "../searchBar";
 import Client from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
+import { nowDate, nowTime } from "../../utils/dateAndTime";
 
 export interface CreatePostModalProps{
   show: boolean;
@@ -36,12 +37,11 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose}) =>{
   },[show])
 
   const handleSubmit = () =>{
-    var now = new Date();
     Client.post<IUser>('/post',{
       userId: userProfile?.userId,
       postDetail: postDetail,
-      date: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
-      time: now.getHours()+':'+now.getMinutes(), 
+      date: nowDate(),
+      time: nowTime(), 
     }).then( (res) =>{
       console.log(res);
       onClose();
