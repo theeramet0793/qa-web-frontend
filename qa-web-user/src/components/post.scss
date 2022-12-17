@@ -95,3 +95,11 @@
     }
   }
 }
+
+.fade-out-post {
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 1000ms;
+  transition-timing-function: linear;
+  transition-delay: 200ms; 
+}

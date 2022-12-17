@@ -35,7 +35,7 @@ const DeletePostModal: React.FC<deletePostModalProps> = ({onClose, onConfirm, sh
               </div>
             </div>
           </div>
-          <div className='body-container'>
+          <div className='body-container-delete-post-modal'>
             <Row>
               <div className='d-flex justify-content-center align-items-center text-normal pt-2'>
                 คุณแน่ใจหรือไม่ที่จะลบโพสต์นี้ ?
@@ -48,7 +48,7 @@ const DeletePostModal: React.FC<deletePostModalProps> = ({onClose, onConfirm, sh
                 </div>
               </Col>
               <Col>
-                <div className='button-confirm text-normal-bold' onClick={()=>{onConfirm()}}>
+                <div className='button-confirm text-normal-bold' onClick={()=>{onConfirm(); onClose();}}>
                   ยืนยัน
                 </div>
               </Col>

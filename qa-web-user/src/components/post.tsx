@@ -21,6 +21,7 @@ import { IProfileImage } from '../data/interface/IProfileImage';
 import Profile from './profile';
 import DeletePostModal from './modal/deletePostModal';
 import LabelAfterDeletePost from './labelAfterDeletePost';
+import classNames from 'classnames';
 
 export interface PostProps{
   postId: number;
@@ -36,6 +37,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ posterProfileUrl, setPosterProfileUrl ] = useState<IProfileImage|undefined>(undefined);
   const [ isDeletedPost, setIsDeletedPost ] = useState<boolean>(false);
   const [ isShowDeletePostModal, setIsShowDeletePostModal] = useState<boolean>(false);
+  const [ isFadeOutFinish, setIsFadeOutFinish] = useState<boolean>(false);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -55,6 +57,14 @@ const Post: React.FC<PostProps> = ({postId}) => {
       console.log(err);
     })
   },[posts])
+
+  useEffect(()=>{
+    if(isDeletedPost){
+      setTimeout(() => {
+        setIsFadeOutFinish(true);
+      }, 1500);
+    }
+  },[isDeletedPost])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -92,14 +102,22 @@ const Post: React.FC<PostProps> = ({postId}) => {
     )
   }
 
-  if(isDeletedPost){
+  const renderTime = () =>{
+    if(posts?.createdDate === posts?.lastUpdateDate && posts?.createdTime === posts?.lastUpdateTime){
+      return (posts?.createdDate+' เวลา '+posts?.createdTime);
+    }
+    return ('แก้ไขล่าสุดเมื่อ '+posts?.lastUpdateDate+' เวลา '+posts?.lastUpdateTime)
+  }
+
+
+  if(isFadeOutFinish){
     return(
       <LabelAfterDeletePost/>
     )
   }
 
   return(
-    <div className="post-card">
+    <div className={classNames("post-card", isDeletedPost? 'fade-out-post':'')} >
       <Row>
         <Col sm='auto'>
           <div className='profile-container'>
@@ -114,8 +132,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             {posts?.username}
           </Row>
           <Row className='text-normal text-color'>
-            { posts?.lastUpdateDate? ('แก้ไขล่าสุดเมื่อ '+posts.lastUpdateDate+' เวลา '+posts?.lastUpdateTime)
-              : (posts?.createdDate+' เวลา '+posts?.createdTime) }
+            { renderTime() }
           </Row>
         </Col>
         <Col className='d-flex justify-content-end'>

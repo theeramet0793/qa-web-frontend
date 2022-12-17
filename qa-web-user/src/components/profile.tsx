@@ -54,7 +54,7 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
 },[userProfile])
 
   const delayedCloseMenu = () => {
-    setTimeout(()=>setIsShowDropdown(false), 1000);
+    setTimeout(()=>setIsShowDropdown(false), 200);
   }
 
   const handleOnClickOption = (option:string) => {

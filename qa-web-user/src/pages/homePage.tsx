@@ -6,6 +6,7 @@ import ChangeProfileModal from "../components/modal/changeProfileModal";
 import CreatePostModal from "../components/modal/createPostModal";
 import RegisterModal from "../components/modal/registerModal";
 import SignInModal from "../components/modal/signInModal";
+import OwnerNewPost from "../components/ownerNewPost";
 import TopNav from "../components/topNav";
 
 const HomePage: React.FC = () =>{
@@ -16,6 +17,7 @@ const HomePage: React.FC = () =>{
   const [isShowCreatePostCard, setIsShowCreatePostCard] = useState<boolean>(false);
   const [isShowCreatePostModal, setIsShowCreatePostModal] = useState<boolean>(false);
   const [isShowChangeProfileModal, setIsShowChangeProfileModal] = useState<boolean>(false);
+  const [newPostId, setNewPostId] = useState<number|undefined>(undefined);
 
   return(
     <>
@@ -29,10 +31,11 @@ const HomePage: React.FC = () =>{
       />
       {isShowCreatePostCard && <CreatePost onClickCreate={()=>{setIsShowCreatePostModal(true)}}/>}
       <FilterPost/>
+      <OwnerNewPost newPostId={newPostId}/>
       <FeedPost/>
       <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} />
       <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true)}}/>
-      <CreatePostModal show={isShowCreatePostModal} onClose={()=> setIsShowCreatePostModal(false)}/>
+      <CreatePostModal show={isShowCreatePostModal} onClose={()=> setIsShowCreatePostModal(false)} onCreateNewPostSuccess={(postId)=>{setNewPostId(postId)}}/>
       <ChangeProfileModal show={isShowChangeProfileModal} onClose={()=>{setIsShowChangeProfileModal(false)}}/>
     </>
   )

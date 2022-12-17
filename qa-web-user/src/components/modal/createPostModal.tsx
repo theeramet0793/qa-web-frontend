@@ -15,9 +15,10 @@ import { nowDate, nowTime } from "../../utils/dateAndTime";
 export interface CreatePostModalProps{
   show: boolean;
   onClose: () => void;
+  onCreateNewPostSuccess: (postId:number) => void;
 }
 
-const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose}) =>{
+const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreateNewPostSuccess}) =>{
 
   const { t } = useTranslation();
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -37,14 +38,15 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose}) =>{
   },[show])
 
   const handleSubmit = () =>{
-    Client.post<IUser>('/post',{
+    Client.post<{postId:number}>('/post',{
       userId: userProfile?.userId,
       postDetail: postDetail,
       date: nowDate(),
       time: nowTime(), 
     }).then( (res) =>{
-      console.log(res);
+      console.log('++',res.data.postId);
       onClose();
+      onCreateNewPostSuccess && onCreateNewPostSuccess(res.data.postId);
     }).catch( (err) => {
       console.log(err.response);
     }
