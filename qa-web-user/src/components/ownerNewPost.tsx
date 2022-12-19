@@ -12,8 +12,12 @@ const OwnerNewPost:React.FC<OwnerNewPostProps> = ({newPostId}) => {
   const [newPostIdArray, setNewPostIdArray] = useState<(number)[]>([]);
 
   useEffect(()=>{
-    if(newPostId)
-    setNewPostIdArray(newPostIdArray=>[...newPostIdArray, newPostId]);
+    if(newPostId){
+      var temp = newPostIdArray.slice(0);
+      temp.splice(0,0,newPostId);
+      setNewPostIdArray(temp);
+    }
+    // eslint-disable-next-line 
   },[newPostId])
 
   return(

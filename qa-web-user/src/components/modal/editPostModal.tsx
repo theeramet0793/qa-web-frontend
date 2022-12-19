@@ -18,7 +18,7 @@ export interface EditPostModalProps{
   onClose: () => void;
   originalPostDetail: string;
   postId: number;
-  onDataUpdate?: (updateData: IPost)=>void;
+  onDataUpdate?: ()=>void;
 }
 
 const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPostDetail, postId, onDataUpdate}) =>{
@@ -40,7 +40,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
       time: nowTime(), 
     }).then( (res) =>{
       if(res && res.data){
-        onDataUpdate && onDataUpdate(res.data)
+        onDataUpdate && onDataUpdate()
       } 
       onClose();
     }).catch( (err) => {

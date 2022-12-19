@@ -22,6 +22,11 @@ import Profile from './profile';
 import DeletePostModal from './modal/deletePostModal';
 import LabelAfterDeletePost from './labelAfterDeletePost';
 import classNames from 'classnames';
+import SendIcon from '../assets/svg/send.svg';
+import { nowDate, nowTime } from '../utils/dateAndTime';
+import FeedComment from './feedComment';
+import { ICommentsFeed } from '../data/interface/IComment';
+import OwnerNewComment from './ownerNewComment';
 
 export interface PostProps{
   postId: number;
@@ -38,6 +43,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ isDeletedPost, setIsDeletedPost ] = useState<boolean>(false);
   const [ isShowDeletePostModal, setIsShowDeletePostModal] = useState<boolean>(false);
   const [ isFadeOutFinish, setIsFadeOutFinish] = useState<boolean>(false);
+  const [ comment, setComment] = useState<string>('');
+  const [ returnCommentId, setReturnCommentId] = useState<number|undefined>(undefined);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -46,7 +53,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }).catch((err)=>{
       console.log(err);
     })
-  },[postId,isDataUpdate])
+  },[postId, isDataUpdate])
 
   useEffect(()=>{
     if(posts)
@@ -88,14 +95,29 @@ const Post: React.FC<PostProps> = ({postId}) => {
   }
 
   const deletePost = () =>{
-    var now = new Date();
     Client.patch('/deletepost',{
       deletedBy: userProfile?.userId,
       postId: posts?.postId,
-      deletedDate: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
-      deletedTime: now.getHours()+':'+now.getMinutes(),
+      deletedDate: nowDate(),
+      deletedTime: nowTime(),
     }).then( (res) =>{
       setIsDeletedPost(true);
+    }).catch( (err) => {
+      console.log(err.response);
+    }
+    )
+  }
+
+  const sendComment = () =>{
+    Client.post<ICommentsFeed>('/comment',{
+      postId: posts?.postId,
+      userId: userProfile?.userId,
+      commentDetail: comment,
+      date: nowDate(),
+      time: nowTime(),
+    }).then( (res) =>{
+      setReturnCommentId(res.data.commentId);
+      setComment('');
     }).catch( (err) => {
       console.log(err.response);
     }
@@ -191,12 +213,28 @@ const Post: React.FC<PostProps> = ({postId}) => {
                 </Col>
                 <Col className='d-flex justify-content-center align-items-center'>
                   <div className='comment-input'>
-                    <input type={'text'} className='comment-box text-normal' placeholder={t('TYPE_ANSWER')}/>
+                    <TextareaAutosize className='comment-box text-normal' placeholder={t('TYPE_ANSWER')} value={comment} onChange={(e)=>{setComment(e.currentTarget.value)}}/>
                   </div>
                 </Col>
               </Row>
+              { comment &&
+                  <Row sm='auto' className='d-flex justify-content-center align-items-center pt-2'>
+                    <div className='send-icon' onClick={()=>{sendComment();}}>
+                      <Row>
+                        <Col sm='auto' className='pe-0'><ReactSVG src={SendIcon}/></Col>
+                        <Col className='pe-2 text-normal'>{'แสดงความคิดเห็น'}</Col>
+                      </Row>
+                    </div> 
+                  </Row>
+              }
             </div>
           </Row>
+        </div>
+      </Row>
+      <Row>
+        <div className='feed-comments-container'>
+          <OwnerNewComment newCommentId={returnCommentId}/>
+          { posts?.postId && <FeedComment postId={posts?.postId}/> }
         </div>
       </Row>
       {posts &&<EditPostModal 
@@ -204,7 +242,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         onClose={()=>{setIsShowEditPostModal(false)}} 
         postId={posts?.postId} 
         originalPostDetail={posts?.postDetail}
-        onDataUpdate={(updateData)=>{setIsDataUpdate(!isDataUpdate)}}
+        onDataUpdate={()=>{setIsDataUpdate(!isDataUpdate)}}
       />}
       {<DeletePostModal 
         onClose={()=>{setIsShowDeletePostModal(false)}}
