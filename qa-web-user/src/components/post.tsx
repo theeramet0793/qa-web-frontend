@@ -219,7 +219,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               </Row>
               { comment &&
                   <Row sm='auto' className='d-flex justify-content-center align-items-center pt-2'>
-                    <div className='send-icon' onClick={()=>{sendComment();}}>
+                    <div className='send-button' onClick={()=>{sendComment();}}>
                       <Row>
                         <Col sm='auto' className='pe-0'><ReactSVG src={SendIcon}/></Col>
                         <Col className='pe-2 text-normal'>{'แสดงความคิดเห็น'}</Col>

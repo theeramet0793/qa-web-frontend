@@ -12,6 +12,8 @@ import RoundButton from './roundButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import { ReactSVG } from 'react-svg';
 import { IProfileImage } from '../data/interface/IProfileImage';
+import { nowDate, nowTime } from '../utils/dateAndTime';
+import classNames from 'classnames';
 
 export interface CommentProps{
   commentId: number;
@@ -22,6 +24,12 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
   const [comment, setComment] = useState<IComment|undefined>(undefined);
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
   const [ commenterProfileUrl, setCommenterProfileUrl ] = useState<IProfileImage|undefined>(undefined);
+  const [ isCommentDeleted, setIsCommentDeleted] = useState<boolean>(false);
+  const [ isFadeOutFinish, setIsFadeOutFinish] = useState<boolean>(false);
+  const [ disableTextArea, setDisableTextArea] = useState<boolean>(true);
+  const [ editComment, setEditComment] = useState<string|undefined>(comment?.commentDetail);
+  const [ isUpdateSuccess, setIsUpdateSuccess] = useState<boolean>(false);
+
   const ownerUserOptions = [
     {label:'แก้ไขความคิดเห็น', value:'editComment'},
     {label:'ลบความคิดเห็น', value:'deleteComment'},
@@ -36,10 +44,39 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
   
   const handleSelectOption = (selectedOpt:IOption) =>{
     if(selectedOpt.value === 'deleteComment'){
-      //do sth
+      deletedComment();
     }else if(selectedOpt.value === 'editComment'){
-      //do sth
+      setDisableTextArea(false);
     }
+  }
+
+  const deletedComment = () =>{
+    Client.patch<string>('/delete/comment',{
+      deletedBy: userProfile?.userId,
+      commentId: comment?.commentId,
+      date: nowDate(),
+      time: nowTime(),
+    })
+    .then((res)=>{
+      setIsCommentDeleted(true);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
+  const updateComment = () =>{
+    Client.patch<string>('/update/comment',{
+      commentDetail: editComment,
+      commentId: comment?.commentId,
+      date: nowDate(),
+      time: nowTime(),
+    })
+    .then((res)=>{
+      setDisableTextArea(true);
+      setIsUpdateSuccess(true);
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   const renderTime = () =>{
@@ -57,7 +94,7 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
     }).catch((err)=>{
       console.log(err);
     })
-  },[commentId])
+  },[commentId,isUpdateSuccess])
 
   useEffect(()=>{
     if(comment)
@@ -69,8 +106,22 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
     })
   },[comment])
 
+  useEffect(()=>{
+    if(isCommentDeleted){
+      setTimeout(() => {
+        setIsFadeOutFinish(true);
+      }, 1500);
+    }
+  },[isCommentDeleted])
+
+  if(isFadeOutFinish){
+    return(
+      <></>
+    )
+  }
+
   return(
-    <div className='comment-main-container'>
+    <div className={classNames('comment-main-container', isCommentDeleted? 'fade-out-comment':'')}>
       <Row>
         <Col sm='auto' className='px-3'>
           <div className='profile-commenter-container'>
@@ -92,8 +143,23 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
                 </Col>
               </Row>
               <Row className='pb-2'>
-                <TextareaAutosize disabled={true} defaultValue={comment?.commentDetail} className='comment-detail text-normal'/>
+                <TextareaAutosize 
+                  disabled={disableTextArea} 
+                  defaultValue={comment?.commentDetail} 
+                  value={editComment}
+                  className={classNames('comment-detail text-normal', disableTextArea? '':'editable')}
+                  onChange={(e)=>{setEditComment(e.currentTarget.value)}}
+                />
               </Row>
+              { !disableTextArea &&
+                <Row className='d-flex justify-content-center align-items-center'>
+                  <div className='button-save-comment-container'>
+                    <div className='button-save-comment text-normal' onClick={()=>{updateComment()}}>
+                      บันทึก
+                    </div>
+                  </div>
+                </Row>
+              }
             </div>
             <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
               <Col sm='auto' className='text-small text-color'>{'ถูกใจ'}</Col>

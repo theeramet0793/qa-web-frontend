@@ -1,7 +1,7 @@
 
 export const nowDate = () =>{
   var now = new Date();
-  return now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate();
+  return now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
 }
 
 export const nowTime = () =>{
