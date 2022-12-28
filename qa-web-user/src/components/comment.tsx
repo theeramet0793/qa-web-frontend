@@ -17,9 +17,10 @@ import classNames from 'classnames';
 
 export interface CommentProps{
   commentId: number;
+  onCommentDeleted: () => void;
 }
 
-const Comment:React.FC<CommentProps> = ({commentId}) =>{
+const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
 
   const [comment, setComment] = useState<IComment|undefined>(undefined);
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
@@ -28,7 +29,7 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
   const [ isFadeOutFinish, setIsFadeOutFinish] = useState<boolean>(false);
   const [ disableTextArea, setDisableTextArea] = useState<boolean>(true);
   const [ editComment, setEditComment] = useState<string|undefined>(comment?.commentDetail);
-  const [ isUpdateSuccess, setIsUpdateSuccess] = useState<boolean>(false);
+  const [ triggerUpdateSuccess, setTriggerUpdateSuccess] = useState<boolean>(false);
 
   const ownerUserOptions = [
     {label:'แก้ไขความคิดเห็น', value:'editComment'},
@@ -59,6 +60,7 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
     })
     .then((res)=>{
       setIsCommentDeleted(true);
+      onCommentDeleted && onCommentDeleted();
     }).catch((err)=>{
       console.log(err);
     })
@@ -73,7 +75,7 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
     })
     .then((res)=>{
       setDisableTextArea(true);
-      setIsUpdateSuccess(true);
+      setTriggerUpdateSuccess(!triggerUpdateSuccess);
     }).catch((err)=>{
       console.log(err);
     })
@@ -94,7 +96,7 @@ const Comment:React.FC<CommentProps> = ({commentId}) =>{
     }).catch((err)=>{
       console.log(err);
     })
-  },[commentId,isUpdateSuccess])
+  },[commentId,triggerUpdateSuccess])
 
   useEffect(()=>{
     if(comment)

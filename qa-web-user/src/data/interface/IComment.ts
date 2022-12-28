@@ -13,3 +13,8 @@ export interface IComment{
 export interface ICommentsFeed{
   commentId: number;
 }
+
+export interface ICountComment{
+  postId: number;
+  comments: number;
+}

@@ -22,7 +22,7 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
   const { t } = useTranslation();
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
-  const [testOptions,setTetsOptions] = useState<{label:string|undefined,value:string}[]>();
+  const [testOptions,setTestOptions] = useState<{label:string|undefined,value:string}[]>();
   const [profileUrl, setProfileUrl] = useState<IProfileImage|undefined>(undefined);
 
   useEffect(()=>{
@@ -33,7 +33,7 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
   },[])
 
   useEffect(()=>{
-    setTetsOptions(
+    setTestOptions(
       [
         {label:userProfile?.username, value:'1'},
         {label:userProfile?.email, value:'2'},

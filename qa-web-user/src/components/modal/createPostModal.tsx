@@ -6,11 +6,15 @@ import { IUser } from "../../data/interface/IUser";
 import Profile from "../profile";
 import './createPostModal.scss'
 import jwt_decode from "jwt-decode";
-import SearchBar from "../searchBar";
 import Client from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
 import { nowDate, nowTime } from "../../utils/dateAndTime";
+import { ITag } from "../../data/interface/ITag";
+import { IOption } from "../../data/interface/IOption";
+import { convertTagsToOptions } from "../../utils/convert";
+import SearchBar from "../searchBar";
+import Tag from "../tag";
 
 export interface CreatePostModalProps{
   show: boolean;
@@ -24,6 +28,8 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
   const [isShow, setIsShow] = useState<boolean>(false);
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
   const [postDetail, setPostdetail] = useState<string>('');
+  const [tagOptions, setTagOptions] = useState<IOption[]>([]);
+  const [selectedTags, setSelectedTags] = useState<IOption[]>([]);
 
   //should get user from one location
   useEffect(()=>{
@@ -43,14 +49,68 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
       postDetail: postDetail,
       date: nowDate(),
       time: nowTime(), 
+      tagList: getTagList(),
     }).then( (res) =>{
-      console.log('++',res.data.postId);
       onClose();
       onCreateNewPostSuccess && onCreateNewPostSuccess(res.data.postId);
     }).catch( (err) => {
       console.log(err.response);
     }
     )
+  }
+
+  const searchTag = (searchStr: string) =>{
+    if(searchStr){
+      Client.get<ITag[]>('/searchtags/'+searchStr)
+      .then( (res) =>{
+        setTagOptions(convertTagsToOptions(res.data));
+      }).catch( (err) => {
+        console.log(err.response);
+      })
+    }else{
+      setTagOptions([]);
+    }
+  }
+
+  const addTag4Post = (selectedOption: IOption) =>{
+    if(selectedOption){
+      if(selectedTags.find( element => element.value === selectedOption.value) === undefined){
+        var temp = selectedTags.slice(0);
+        temp.splice(selectedTags.length,0,selectedOption);
+        setSelectedTags(temp);
+      }
+    }
+  }
+
+  const renderShowtags = () =>{
+    return(
+      <Row className="pt-3">
+        {
+          selectedTags.map((tag)=>{
+            return(
+            <Col sm='auto'>
+              <Tag tagName={tag.label} tagId={tag.value} removable={true} onRemoveTag={(tagId)=>{removeTagFromList(tagId)}}/>
+            </Col>)
+          })
+        }
+      </Row>
+    )
+  }
+
+  const getTagList = () =>{
+    var tagList: number[] = [];
+    selectedTags.forEach((tag)=>{
+      tagList.push(parseInt(tag.value))
+    })
+    return tagList;
+  }
+
+  const removeTagFromList = (tagId:string) =>{
+    if(tagId){
+      var temp = selectedTags.slice(0);
+      temp = temp.filter( element => {return element.value !== tagId})
+      setSelectedTags(temp);
+    }
   }
   
   return(
@@ -62,7 +122,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
               {t('CREATE_POST')}
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose();}} >
+              <div className='x-icon' onClick={()=>{onClose(); setSelectedTags([]);}} >
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
@@ -90,9 +150,15 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
             </Row>
             <Row>
               <div className="search-bar-container">
-                <SearchBar placeholder="เพิ่มแท็ก..."/>
+                <SearchBar 
+                  placeholder="เพิ่มแท็ก..." 
+                  onInputchange={(input)=>{searchTag(input)}} 
+                  menuOptions={tagOptions} 
+                  onSelectOption={(selectedOption)=>{addTag4Post(selectedOption)}}
+                />
               </div>
             </Row>
+            { selectedTags && renderShowtags()}
             <Row>
               <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
                 โพสต์

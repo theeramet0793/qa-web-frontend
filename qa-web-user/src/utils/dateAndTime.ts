@@ -6,7 +6,7 @@ export const nowDate = () =>{
 
 export const nowTime = () =>{
   var now = new Date();
-  return now.getHours()+':'+((now.getMinutes()<10? '0':'')+now.getMinutes());
+  return now.getHours()+':'+((now.getMinutes()<10? '0':'')+now.getMinutes())+':'+now.getSeconds();
 }
 
 export const nowDateTime = () =>{

@@ -25,8 +25,10 @@ import classNames from 'classnames';
 import SendIcon from '../assets/svg/send.svg';
 import { nowDate, nowTime } from '../utils/dateAndTime';
 import FeedComment from './feedComment';
-import { ICommentsFeed } from '../data/interface/IComment';
+import { ICommentsFeed, ICountComment } from '../data/interface/IComment';
 import OwnerNewComment from './ownerNewComment';
+import Tag from './tag';
+import { convertTagsToOptions } from '../utils/convert';
 
 export interface PostProps{
   postId: number;
@@ -45,6 +47,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ isFadeOutFinish, setIsFadeOutFinish] = useState<boolean>(false);
   const [ comment, setComment] = useState<string>('');
   const [ returnCommentId, setReturnCommentId] = useState<number|undefined>(undefined);
+  const [ countComment, setCountComment] = useState<number>(0);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -72,6 +75,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
       }, 1500);
     }
   },[isDeletedPost])
+
+  useEffect(()=>{
+    if(posts) refreshCountComment();
+    // eslint-disable-next-line 
+  },[posts])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -118,10 +126,22 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }).then( (res) =>{
       setReturnCommentId(res.data.commentId);
       setComment('');
+      refreshCountComment();
     }).catch( (err) => {
       console.log(err.response);
     }
     )
+  }
+
+  const refreshCountComment = () =>{
+    if(posts){
+      Client.get<ICountComment>('/countcomment/'+posts.postId)
+      .then((res)=>{
+        setCountComment(res.data.comments);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
   }
 
   const renderTime = () =>{
@@ -129,6 +149,22 @@ const Post: React.FC<PostProps> = ({postId}) => {
       return (posts?.createdDate+' เวลา '+posts?.createdTime);
     }
     return ('แก้ไขล่าสุดเมื่อ '+posts?.lastUpdateDate+' เวลา '+posts?.lastUpdateTime)
+  }
+
+  const renderShowtags = (selectedTags:IOption[]) =>{
+    
+    return selectedTags.length > 0? (
+      <Row className="pb-4">
+        {
+          selectedTags.map((tag)=>{
+            return(
+            <Col sm='auto'>
+              <Tag tagName={tag.label} tagId={tag.value} removable={false} />
+            </Col>)
+          })
+        }
+      </Row>
+    ): <></>
   }
 
 
@@ -167,8 +203,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
             <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
           </div>
         </div>
-
       </Row>
+      {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
       <Row>
         <div className='option-container'>
           <Row>
@@ -180,10 +216,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
               </div>
             </Col>
             <Col>
-              <div className='comment-button-container'>
-                <RoundButton boxShadowSize='small'>
-                  <ReactSVG src={CommentIcon}/>
-                </RoundButton>
+              <div className='comment-button-container d-flex justify-content-center align-items-center'>
+                <Row>
+                  <Col sm='auto' className='pe-0'>
+                    <ReactSVG src={CommentIcon}/>
+                  </Col>
+                  <Col sm='auto' className='text-normal'>
+                    {countComment+' ความคิดเห็น'}
+                  </Col>
+                </Row>
+                  
               </div>
             </Col>
             <Col className='d-flex justify-content-end'>
@@ -233,8 +275,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
       </Row>
       <Row>
         <div className='feed-comments-container'>
-          <OwnerNewComment newCommentId={returnCommentId}/>
-          { posts?.postId && <FeedComment postId={posts?.postId}/> }
+          <OwnerNewComment newCommentId={returnCommentId} onCommentDeleted={()=>{refreshCountComment()}}/>
+          { posts?.postId && <FeedComment postId={posts?.postId} onCommentDeleted={()=>{refreshCountComment()}}/> }
         </div>
       </Row>
       {posts &&<EditPostModal 
@@ -242,6 +284,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         onClose={()=>{setIsShowEditPostModal(false)}} 
         postId={posts?.postId} 
         originalPostDetail={posts?.postDetail}
+        originalTags={posts.tagList}
         onDataUpdate={()=>{setIsDataUpdate(!isDataUpdate)}}
       />}
       {<DeletePostModal 

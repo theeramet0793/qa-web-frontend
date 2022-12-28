@@ -1,33 +1,55 @@
 
-import './searchBar.scss'
-import { ReactSVG } from 'react-svg';
-import SearchIcon from '../assets/svg/search.svg'
-import { useTranslation } from 'react-i18next';
-import classNames from 'classnames';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { ReactSVG } from 'react-svg';
+import { IOption } from '../data/interface/IOption';
+import './searchBar.scss';
+import SearchIcon from '../assets/svg/search.svg';
+import classNames from 'classnames';
 
 export interface SearchBarProps{
+  menuOptions: IOption[];
+  onSelectOption: (onSelectOption: IOption) => void; 
   placeholder?: string;
+  onInputchange: (input: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({placeholder}) =>{
-
+const SearchBar: React.FC<SearchBarProps> = ({menuOptions, onSelectOption, placeholder, onInputchange}) =>{
+  
   const { t } = useTranslation();
-  const [inputCount, setInputCount] = useState<number>(0)
-
-  const handleOnChange = (text: string) =>{
-    setInputCount(text.length);
-  }
-
+  const [value, setValue] = useState<string>('');
+  
   return(
-    <div className='search-bar'>
-      <ReactSVG src={SearchIcon} className='search-icon'/>
-      <input 
-        type='text' 
-        onChange={(e)=>handleOnChange(e.currentTarget.value)} 
-        className={classNames(`search-box`, inputCount>0 ? `text-normal`:`text-placeholder`)} 
-        placeholder={placeholder? placeholder:t('SEARCH_POST')}
-      />
+    <div className='search-bar-container'>
+      <div className='search-box-container'>
+        <div className='search-box-container'>
+        <ReactSVG src={SearchIcon} className='search-icon'/>
+        <input 
+          type='text' 
+          onChange={(e)=>{setValue(e.currentTarget.value); onInputchange(e.currentTarget.value)}} 
+          value={value}
+          className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
+          placeholder={placeholder? placeholder:t('SEARCH_POST')}
+        />
+      </div>
+      </div>
+      {(menuOptions.length!==0) &&
+        <div className='menu-list'>
+          { 
+            menuOptions.map((option, index)=>{
+              return (
+                <div 
+                  key={index} 
+                  className='option-row text-normal' 
+                  onClick={()=>{onSelectOption(option); setValue(''); onInputchange(''); }}
+                >
+                  {option.label}
+                </div>
+              )
+            })
+          }
+        </div>
+      }
     </div>
   )
 }

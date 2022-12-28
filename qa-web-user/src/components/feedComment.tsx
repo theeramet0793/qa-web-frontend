@@ -6,9 +6,10 @@ import Client from '../lib/axios/axios';
 
 export interface FeedCommentProps{
   postId: number;
+  onCommentDeleted: () => void;
 }
 
-const FeedComment: React.FC<FeedCommentProps> = ({postId}) =>{
+const FeedComment: React.FC<FeedCommentProps> = ({postId, onCommentDeleted}) =>{
 
   const [comments, setComments] = useState<ICommentsFeed[]|undefined>(undefined);
 
@@ -29,7 +30,7 @@ const FeedComment: React.FC<FeedCommentProps> = ({postId}) =>{
           comments?.map((comment)=>{
             return(
               <div key={comment.commentId} className='comment-container'>
-                <Comment commentId={comment.commentId}/>
+                <Comment commentId={comment.commentId} onCommentDeleted={()=>{onCommentDeleted()}}/>
               </div>
             )
           })

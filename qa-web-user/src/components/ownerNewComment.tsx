@@ -4,9 +4,10 @@ import Comment from './comment';
 
 export interface OwnerNewCommentProps{
   newCommentId: number|undefined;
+  onCommentDeleted: () => void;
 }
 
-const OwnerNewComment:React.FC<OwnerNewCommentProps> = ({newCommentId}) =>{
+const OwnerNewComment:React.FC<OwnerNewCommentProps> = ({newCommentId, onCommentDeleted}) =>{
 
   const [newCommentIdArray, setNewCommentIdArray] = useState<(number)[]>([]);
 
@@ -26,7 +27,7 @@ const OwnerNewComment:React.FC<OwnerNewCommentProps> = ({newCommentId}) =>{
           newCommentIdArray?.map((commentId)=>{
             return(
               <div key={commentId} className='comment-container'>
-                <Comment commentId={commentId}/>
+                <Comment commentId={commentId} onCommentDeleted={()=>{onCommentDeleted()}}/>
               </div>
             )
           })

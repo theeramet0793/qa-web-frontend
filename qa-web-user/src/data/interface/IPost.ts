@@ -1,3 +1,5 @@
+import { ITag } from "./ITag";
+
 export interface IPost{
   postId: number,
   userId: number,
@@ -7,6 +9,7 @@ export interface IPost{
   lastUpdateDate: string;
   lastUpdateTime: string;
   username: string;
+  tagList: ITag[];
 }
 
 export interface IPostsFeed{

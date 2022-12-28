@@ -43,20 +43,20 @@
           }
         }
       }
-
-    }
-    .more-menu-button{
-      svg{
-        width: 20px;
-        height: 20px;
+      .comment-detail{
+        color: var(--color-text);
+        border: none;
+        background-color: transparent;
+        resize: none;
+        padding: 0.5rem 1rem;
       }
-    }
-    .comment-detail{
-      color: var(--color-text);
-      border: none;
-      background-color: var(--color-normal-bg);
-      resize: none;
-      padding: 0.5rem 1rem;
+      .more-menu-button{
+        svg{
+          width: 20px;
+          height: 20px;
+        }
+      }
+
     }
   }
 }
