@@ -4,7 +4,7 @@ import './post.scss'
 import RoundButton from './roundButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import MoreMenu from './moreMenu';
-import LikeIcon from '../assets/svg/hand-thumbs-up.svg'
+import ShiftIcon from '../assets/svg/shift.svg'
 import CommentIcon from '../assets/svg/chat-text.svg'
 import FollowIcon from '../assets/svg/bookmark-frame.svg'
 import { useTranslation } from 'react-i18next';
@@ -29,6 +29,7 @@ import { ICommentsFeed, ICountComment } from '../data/interface/IComment';
 import OwnerNewComment from './ownerNewComment';
 import Tag from './tag';
 import { convertTagsToOptions } from '../utils/convert';
+import { IUpvote } from '../data/interface/IUpvote';
 
 export interface PostProps{
   postId: number;
@@ -48,6 +49,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ comment, setComment] = useState<string>('');
   const [ returnCommentId, setReturnCommentId] = useState<number|undefined>(undefined);
   const [ countComment, setCountComment] = useState<number>(0);
+  const [ isUpvote, setIsUpvote] = useState<boolean>(false);
+  const [ enableUpvote, setEnableUpvote] = useState<boolean>(false);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -69,6 +72,15 @@ const Post: React.FC<PostProps> = ({postId}) => {
   },[posts])
 
   useEffect(()=>{
+    Client.get<IUpvote>('/getUpvote/'+postId+'/'+userProfile?.userId)
+    .then((res)=>{
+      setIsUpvote(res.data.isUpvote);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[postId, userProfile?.userId])
+
+  useEffect(()=>{
     if(isDeletedPost){
       setTimeout(() => {
         setIsFadeOutFinish(true);
@@ -80,6 +92,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
     if(posts) refreshCountComment();
     // eslint-disable-next-line 
   },[posts])
+
+  useEffect(()=>{
+    if(enableUpvote) updateUpvote();
+    // eslint-disable-next-line 
+  },[isUpvote])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -129,8 +146,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
       refreshCountComment();
     }).catch( (err) => {
       console.log(err.response);
-    }
-    )
+    })
   }
 
   const refreshCountComment = () =>{
@@ -152,7 +168,6 @@ const Post: React.FC<PostProps> = ({postId}) => {
   }
 
   const renderShowtags = (selectedTags:IOption[]) =>{
-    
     return selectedTags.length > 0? (
       <Row className="pb-4">
         {
@@ -165,6 +180,18 @@ const Post: React.FC<PostProps> = ({postId}) => {
         }
       </Row>
     ): <></>
+  }
+
+  const updateUpvote = () =>{
+    Client.post<string>('/upvote',{
+      postId: posts?.postId,
+      userId: userProfile?.userId,
+      isUpvote: isUpvote,
+    }).then( (res) =>{
+
+    }).catch( (err) => {
+      console.log(err.response);
+    })
   }
 
 
@@ -209,9 +236,9 @@ const Post: React.FC<PostProps> = ({postId}) => {
         <div className='option-container'>
           <Row>
             <Col sm='auto'>
-              <div className='like-button-container'>
-                <RoundButton boxShadowSize='small'>
-                  <ReactSVG src={LikeIcon}/>
+              <div className='upvote-button-container'>
+                <RoundButton boxShadowSize='small' onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote}>
+                  <ReactSVG src={ShiftIcon}/>
                 </RoundButton>
               </div>
             </Col>

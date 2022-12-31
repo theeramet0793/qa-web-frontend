@@ -1,6 +1,5 @@
 
 import './filterPost.scss'
-import SearchBox from "./searchBox";
 import Checkbox from "./checkbox";
 import OblongSelect from "./oblongSelect";
 import { Col, Row } from "react-bootstrap";
@@ -25,9 +24,6 @@ const FilterPost: React.FC<FilterPostProps> = () => {
     <div className="filter-post d-flex justify-content-center align-items-center">
       <div className="filter-container">
           <div className="filter-card border-radius-50px">
-            <div className="search-bar-container">
-              <SearchBox onInputChange={(input)=>{}}/>
-            </div>
             <Row>
               <Col sm='auto'>
                 <div className="checkboxes-container">

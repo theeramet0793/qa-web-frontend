@@ -16,8 +16,7 @@
       width: 100%;
       height: 100%;
       border-radius: 999px;
-      background: var(--color-normal-bg);
-      box-shadow: inset 2px 2px 5px #CFD0E3, inset -2px -2px 5px #FFFFFF;
+      background: var(--color-second-bg);
       border: none;
       padding-left: 3.5rem;
   
@@ -28,7 +27,7 @@
   }
   .menu-list{
     position: absolute;
-    background-color: var(--color-normal-bg);
+    background-color: var(--color-second-bg);
     width: 100%;
     height: fit-content;
     right: 0;

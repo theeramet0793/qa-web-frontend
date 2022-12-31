@@ -23,7 +23,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({placeholder, onInputChange}) =>{
         type='text' 
         onChange={(e)=>{setValue(e.currentTarget.value); onInputChange(e.currentTarget.value)}} 
         value={value}
-        className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
+        className={classNames(`search-box`, value ? `text-normal text-color`:'text-placeholder text-color')} 
         placeholder={placeholder? placeholder:t('SEARCH_POST')}
       />
     </div>

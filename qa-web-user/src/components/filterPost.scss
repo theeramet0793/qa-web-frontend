@@ -7,7 +7,7 @@
   padding-bottom: 4rem;
 
   .filter-container{
-    max-width: 934px;
+    min-width: 934px;
     width: max-content;
     max-height: 390px;
     height: max-content;
@@ -15,17 +15,11 @@
     .filter-card{
       width: 100%;
       height: 100%;
-      background-color: var(--color-normal-bg);
-      border: 2px solid #FFFFFF;
+      background-color: var(--color-second-bg);
+      //border: 2px solid #FFFFFF;
       padding: 43px 41px;
-      border-radius: 50px;
-      box-shadow: 15px 10px 15px #c1c2d8, -1px -3px 6px 1px #FFFFFF;
-        
-      .search-bar-container{
-        max-width: 850px;
-        width: 100%;
-        height: 51px;
-      }
+      border-radius: 12px;
+      //box-shadow: 15px 10px 15px #c1c2d8, -1px -3px 6px 1px #FFFFFF;
 
       .checkboxes-container{
         padding-top: 2.5rem;

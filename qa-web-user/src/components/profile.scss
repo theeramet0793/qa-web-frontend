@@ -12,8 +12,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 2px #FFFFFF;
-      border: 2px solid #FFFFFF;
+      //box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 2px #FFFFFF;
+      //border: 2px solid #FFFFFF;
+      border: none;
       padding: 0%;
 
       &:hover{
@@ -53,7 +54,7 @@
 
   .expand-profile-menu{
     position: absolute;
-    background-color: var(--color-normal-bg);
+    background-color: var(--color-second-bg);
     width: max-content;
     height: fit-content;
     right: 0;

@@ -142,7 +142,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
             <Row>
               <div className="post-detail-container">              
                 <TextareaAutosize
-                  className='post-detail-input text-box text-normal'
+                  className='post-detail-input text-box text-normal text-color'
                   placeholder='อธิบายภาพยนตร์ที่คุณกำลังตามหา...'
                   onChange={(e)=>{setPostdetail(e.currentTarget.value)}}
                 />

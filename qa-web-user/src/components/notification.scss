@@ -1,12 +1,21 @@
 
 .user-notification-container{
-  width: 68px;
-  height: 68px;
-  background: #F0F0F8;
-  border: 2px solid #FFFFFF;
-  box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 2px #FFFFFF;
+  width: 100%;
+  height: 100%;
+  background: var(--color-third-bg);
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg{
+      fill: #ff6270;
+      width: 70%;
+      height: 70%;
+    }
+  }
 }

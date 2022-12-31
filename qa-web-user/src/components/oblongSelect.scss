@@ -6,7 +6,7 @@
   .dropdown-button{
     width: 100%;
     height: 100%;
-    background-color: var(--color-normal-bg);
+    background-color: var(--color-second-bg);
     border: none;
     box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
     border-radius: 999px;
@@ -33,7 +33,7 @@
   }
 
   select option{
-    background-color: var(--color-normal-bg);
+    background-color: var(--color-second-bg);
   }
 
   

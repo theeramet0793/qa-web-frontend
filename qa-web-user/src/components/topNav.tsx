@@ -8,6 +8,7 @@ import Notification from './notification';
 import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { IUser } from '../data/interface/IUser';
+import SearchBox from './searchBox';
 
 export interface TopNavProps{
   onClickReg: () => void;
@@ -35,7 +36,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
   return(
     <div className='top-nav'>
       <Row>
-        <Col>
+        <Col sm={3} className='ps-5 d-flex justify-content-center align-items-center'>
           <div className='logo-container'>
             <div className='logo-oblong'>
               <div className='logo d-flex align-items-center justify-content-center'>
@@ -44,8 +45,13 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
             </div>
           </div>
         </Col>
+        <Col className='d-flex justify-content-center align-items-center'>
+          <div className="search-box-container-qaz">
+            <SearchBox onInputChange={(input)=>{}}/>
+          </div>
+        </Col>
         {!userProfile &&
-          <Col>
+          <Col sm={3} className='pe-3'>
             <Row className='register-row'>
               <Col className='d-flex align-items-center justify-content-end'>
                 <div className='register-btn-container'> 
@@ -69,10 +75,12 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
           </Col>
         }
         {userProfile &&
-          <Col>
+          <Col sm={3} className='pe-3'>
             <Row>
               <Col className='d-flex align-items-center justify-content-end'>
-                <Notification/>
+                <div className='noti-container'>
+                  <Notification/>
+                </div>
               </Col>
               <Col>
                 <div className='top-nav-profile-container'>

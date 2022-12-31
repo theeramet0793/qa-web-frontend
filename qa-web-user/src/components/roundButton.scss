@@ -2,13 +2,15 @@
 .round-button{
   width: 100%;
   height: 100%;
-  background-color: var(--color-normal-bg);
+  background-color: var(--color-second-bg);
   border-radius: 999px;
   border: 2px solid #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  svg{
+    fill: #494955;
+  }
   &:hover{
     cursor: pointer;
   }
@@ -20,4 +22,11 @@
 
 .large-shadow{
   box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 2px #FFFFFF;
+}
+
+.round-button-active{
+  background-color: var(--color-primary-button);
+  svg{
+    fill: var(--color-white);
+  }
 }

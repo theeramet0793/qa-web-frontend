@@ -1,37 +1,29 @@
 
   .top-nav{
-    background-color: var(--color-main-bg);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    background-color: var(--color-second-bg);
+    padding: 1rem 0rem;
 
     .logo-container{
       width: 207px;
+      height: 50px;
 
       .logo-oblong{
         width: 100%;
         height: 100%;
         border-radius: 999px;
-        background-color: var(--color-normal-bg);
-        box-shadow: inset 2px 2px 5px #CFD0E3, inset -2px -2px 5px #FFFFFF;
-        padding: 14px 41px;
-      }
-
-      /* iphone se vertical <=600px */
-      @media only screen and (max-width: 600px) { 
-        margin-left: 1rem;
-      }
-
-      /* notebook, pc screen >1200px */
-      @media only screen and (min-width: 1400px) { 
-        margin-left: 4rem;
-      }
-
-      /* extra screen >1400px */
-      @media only screen and (min-width: 1600px) { 
-        margin-left: 20rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg{
+          fill: var(--color-white);
+        }
       }
     }
-
+    .search-box-container-qaz{
+      max-width: 934px;
+      width: 100%;
+      height: 50px;
+    }
     .register-btn-container{
       width:  207px;
       height: 68px;
@@ -39,7 +31,7 @@
       .btn-reg{
         color: var(--color-text);
         border-radius: 999px;
-        background-color: var(--color-normal-bg);
+        background-color: var(--color-second-bg);
         box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
         display: flex;
         align-items: center;
@@ -50,7 +42,6 @@
         }
       }
     }
-
     .sign-btn-container{
       width:  207px;
       height: 68px;
@@ -69,17 +60,19 @@
         }
       }
     }
-
     .register-row{
       /* ipad  vertical 768-992px */
       @media only screen and (max-width: 915px) { 
         display: none;
       }
     }
-
     .top-nav-profile-container{
-      width: 68px;
-      height: 68px;
+      width: 50px;
+      height: 50px;
+    }
+    .noti-container{
+      width: 50px;
+      height: 50px;
     }
 
   }

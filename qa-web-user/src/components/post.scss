@@ -6,7 +6,7 @@
   box-shadow: 15px 10px 15px #c1c2d8, -1px -3px 6px 1px #FFFFFF;
   border: 2px solid #FFFFFF;
   padding: 43px 41px;
-  background-color: var(--color-normal-bg);
+  background-color: var(--color-second-bg);
 
   .profile-container{
     width: 68px;
@@ -36,9 +36,13 @@
 
   .option-container{
 
-    .like-button-container{
+    .upvote-button-container{
       width: 46px;
       height: 46px;
+      svg{
+        width: 20px;
+        height: 20px;
+      }
     }
 
     .comment-button-container{
@@ -87,7 +91,7 @@
           border-radius: 20px;
           border: none;
           padding: 0.9rem 1.2rem;
-          background-color: var(--color-normal-bg);
+          background-color: var(--color-second-bg);
           resize: none;
 
           &:focus{
@@ -98,7 +102,7 @@
     }
 
     .send-button{
-      background-color: var(--color-normal-bg);
+      background-color: var(--color-second-bg);
       border: 2px solid #FFFFFF;
       border-radius: 999px;
       width: fit-content;
