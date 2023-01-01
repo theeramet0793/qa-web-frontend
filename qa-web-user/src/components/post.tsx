@@ -6,7 +6,6 @@ import ProfileIcon from '../assets/svg/person-fill.svg'
 import MoreMenu from './moreMenu';
 import ShiftIcon from '../assets/svg/shift.svg'
 import CommentIcon from '../assets/svg/chat-text.svg'
-import FollowIcon from '../assets/svg/bookmark-frame.svg'
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
 import { IPost } from '../data/interface/IPost';
@@ -30,6 +29,7 @@ import OwnerNewComment from './ownerNewComment';
 import Tag from './tag';
 import { convertTagsToOptions } from '../utils/convert';
 import { IUpvote } from '../data/interface/IUpvote';
+import FollowButton from './followButton';
 
 export interface PostProps{
   postId: number;
@@ -51,6 +51,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ countComment, setCountComment] = useState<number>(0);
   const [ isUpvote, setIsUpvote] = useState<boolean>(false);
   const [ enableUpvote, setEnableUpvote] = useState<boolean>(false);
+  const [ isFollow, setIsFollow] = useState<boolean>(false);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -112,7 +113,6 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
   const handleSelectOption = (selectedOpt:IOption) =>{
     if(selectedOpt.value === 'deletePost'){
-      //deletePost();
       setIsShowDeletePostModal(true);
     }else if(selectedOpt.value === 'editPost'){
       setIsShowEditPostModal(true);
@@ -206,7 +206,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
       <Row>
         <Col sm='auto'>
           <div className='profile-container'>
-            <RoundButton boxShadowSize='large'>
+            <RoundButton>
               { posterProfileUrl && <img src={posterProfileUrl.urlPath} alt='profile'/>}
               { !posterProfileUrl && <ReactSVG src={ProfileIcon}/>}
             </RoundButton>
@@ -216,7 +216,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           <Row className='text-normal-bold text-color'>
             {posts?.username}
           </Row>
-          <Row className='text-normal text-color'>
+          <Row className='text-small text-color'>
             { renderTime() }
           </Row>
         </Col>
@@ -226,7 +226,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
       </Row>
       <Row>
         <div className='post-content-container'>
-          <div className='text-box text-normal'>
+          <div className='text-normal'>
             <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
           </div>
         </div>
@@ -237,7 +237,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           <Row>
             <Col sm='auto'>
               <div className='upvote-button-container'>
-                <RoundButton boxShadowSize='small' onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote}>
+                <RoundButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote}>
                   <ReactSVG src={ShiftIcon}/>
                 </RoundButton>
               </div>
@@ -248,7 +248,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   <Col sm='auto' className='pe-0'>
                     <ReactSVG src={CommentIcon}/>
                   </Col>
-                  <Col sm='auto' className='text-normal'>
+                  <Col sm='auto' className='text-normal text-color'>
                     {countComment+' ความคิดเห็น'}
                   </Col>
                 </Row>
@@ -256,13 +256,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
               </div>
             </Col>
             <Col className='d-flex justify-content-end'>
-              <div className='follow-button-container text-normal'>
-                <RoundButton boxShadowSize='large'>
-                  <>                  
-                  <ReactSVG src={FollowIcon} className='pe-2'/>
-                  {t('FOLLOW')}
-                  </>
-                </RoundButton>
+              <div className='follow-button-container '>
+                <FollowButton onClick={()=>{setIsFollow(!isFollow)}} isActive={isFollow}/>
               </div>
             </Col>
           </Row>

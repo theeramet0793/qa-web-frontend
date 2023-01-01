@@ -1,10 +1,10 @@
 
 import './filterPost.scss'
-import Checkbox from "./checkbox";
-import OblongSelect from "./oblongSelect";
+import DropdownSelect from "./dropdownSelect";
 import { Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import ToggleSwitch from "./toggleSwitch";
+import DropdownArea from './dropdownArea';
 
 export interface FilterPostProps{
   
@@ -15,73 +15,33 @@ const FilterPost: React.FC<FilterPostProps> = () => {
 
   const { t } = useTranslation();
   const testOptions = [
-    {value:'1',label:'โพสต์ไลก์มากที่สุด'},
-    {value:'2',label:'โพสต์ล่าสุด'},
-    {value:'3',label:'คอมเมนต์ล่าสุด'},
+    {value:'1',label:'เรียงตามความนิยม'},
+    {value:'2',label:'เรียงตามเวลา'},
+    {value:'3',label:'เรียงตามอะไรดี'},
   ]
 
   return(
     <div className="filter-post d-flex justify-content-center align-items-center">
       <div className="filter-container">
-          <div className="filter-card border-radius-50px">
-            <Row>
-              <Col sm='auto'>
-                <div className="checkboxes-container">
-                    <Row className="checkbox-row">
-                      <Col sm='auto'>
-                        <div className="checkbox-container ">
-                          <Checkbox defaultCheck={undefined} onChange={()=>{}}/>
-                        </div>
-                      </Col>
-                      <Col>
-                        <div className="text-normal">
-                          {t('ALL')}
-                        </div>
-                      </Col>
-                    </Row>                 
-                  <div className="sub-check">
-                    <Row className="checkbox-row">
-                      <Col sm='auto'>
-                        <div className="checkbox-container">
-                          <Checkbox defaultCheck={undefined} onChange={()=>{}}/>
-                        </div>
-                      </Col>
-                      <Col>
-                        <div className="text-normal">
-                          {t('SOLVED_POST')}
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row className="checkbox-row">
-                      <Col sm='auto'>
-                        <div className="checkbox-container">
-                          <Checkbox defaultCheck={true} onChange={()=>{}}/>
-                        </div>
-                      </Col>
-                      <Col>
-                        <div className="text-normal">
-                          {t('UNSOLVED_POST')}
-                        </div>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              </Col>
-              <Col>
-                <div className="something-container border-radius-30px">
-
-                </div>
-              </Col>
-              <Col>
+          <div className="filter-card">
+            <Row className='w-100 d-flex justify-content-center' >
+              <Col >                
                 <div className="dropdown-container">
-                  <OblongSelect options={testOptions}/>
+                  <DropdownSelect menuOptions={testOptions} onSelectOption={(selectedOption)=>{}}/>
                 </div>
-                <div className="switch-container text-normal border-radius-30px">
-                  <Row className="d-flex justify-content-center ">{t('ONLY_FOLLOWING_POST')}</Row>
-                  <Row className="d-flex justify-content-center ">
+              </Col>
+              <Col >
+                <div className='checkbox-group-container'>
+                  <DropdownArea onChange={(result)=>{}}/>
+                </div>
+              </Col>
+              <Col className='d-flex justify-content-center'>
+                <Row className="switch-container text-normal text-color d-flex justify-content-center align-items-center">
+                  <Col sm='auto' className="d-flex justify-content-center ">{t('ONLY_FOLLOWING_POST')}</Col>
+                  <Col className="py-1 d-flex justify-content-center ">
                     <ToggleSwitch/>
-                  </Row>
-                </div>
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </div>  

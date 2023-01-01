@@ -127,7 +127,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
       <Row>
         <Col sm='auto' className='px-3'>
           <div className='profile-commenter-container'>
-            <RoundButton boxShadowSize='large'>
+            <RoundButton>
               { commenterProfileUrl && <img src={commenterProfileUrl.urlPath} alt='profile'/>}
               { !commenterProfileUrl && <ReactSVG src={ProfileIcon}/>}
             </RoundButton>
@@ -153,7 +153,8 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
                   onChange={(e)=>{setEditComment(e.currentTarget.value)}}
                 />
               </Row>
-              { !disableTextArea &&
+            </div>
+            { !disableTextArea &&
                 <Row className='d-flex justify-content-center align-items-center'>
                   <div className='button-save-comment-container'>
                     <div className='button-save-comment text-normal' onClick={()=>{updateComment()}}>
@@ -161,8 +162,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
                     </div>
                   </div>
                 </Row>
-              }
-            </div>
+            }
             <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
               <Col sm='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
               <Col className='text-small text-color'>{renderTime()}</Col>

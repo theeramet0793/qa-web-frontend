@@ -14,34 +14,14 @@
   .comment-content-container{
 
     .comment-card{
-      box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
-      border-radius: 15px;
+      border-radius: 12px;
+      background-color: var(--color-third-bg);
       padding: 0.5rem 1rem;
 
       .editable{
-        box-shadow: inset 2px 2px 5px #CFD0E3, inset -2px -2px 5px #FFFFFF;
+        color: var(--color-text);
         outline: none;
         border-radius: 10px;
-      }
-      .button-save-comment-container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        .button-save-comment{
-          background-color: var(--color-primary-button);
-          color: var(--color-white);
-          border: 2px solid #FFFFFF;
-          border-radius: 999px;
-          width: fit-content;
-          height: fit-content;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          padding: 0.5rem 1rem;
-          &:hover{
-            cursor: pointer;
-          }
-        }
       }
       .comment-detail{
         color: var(--color-text);
@@ -57,6 +37,27 @@
         }
       }
 
+    }
+    .button-save-comment-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 0rem;
+      .button-save-comment{
+        background-color: var(--color-primary-button);
+        color: var(--color-text);
+        border-radius: 999px;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        &:hover{
+          cursor: pointer;
+          background-color: var(--color-blue);
+        }
+      }
     }
   }
 }

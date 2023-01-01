@@ -12,8 +12,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      //box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 8px 2px #FFFFFF;
-      //border: 2px solid #FFFFFF;
       border: none;
       padding: 0%;
 
@@ -55,23 +53,24 @@
   .expand-profile-menu{
     position: absolute;
     background-color: var(--color-second-bg);
+    color: var(--color-text);
     width: max-content;
     height: fit-content;
     right: 0;
-    top: 75px;
+    top: 55px;
     height: fit-content;
-    border: 2px solid #FFFFFF;
     border-radius: 10px;
+    padding: 0.5rem;
 
     .option-row {
       display: flex-start;
       align-items: center;
       padding: 0.5rem 1rem;
-      border-bottom: 1px solid var(--color-white);
 
         &:hover{
           cursor: pointer;
-          background-color: var(--color-white);
+          background-color: var(--color-third-bg);
+          border-radius: 10px;
         }
     }
   }

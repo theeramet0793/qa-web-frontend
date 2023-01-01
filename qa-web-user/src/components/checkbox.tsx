@@ -7,7 +7,7 @@ import CheckIcon from '../assets/svg/check.svg'
 
 export interface CheckboxProps{
   defaultCheck: boolean | undefined;
-  onChange: () => void | undefined;
+  onChange: (isClick:boolean) => void | undefined;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({defaultCheck, onChange}) =>{
@@ -17,6 +17,11 @@ const Checkbox: React.FC<CheckboxProps> = ({defaultCheck, onChange}) =>{
   useEffect(()=>{
     if(defaultCheck) setIsCheck(defaultCheck);
   },[defaultCheck])
+
+  useEffect(()=>{
+    onChange(isCheck);
+    // eslint-disable-next-line 
+  },[isCheck])
 
   const renderCheckIcon = () =>{
     return isCheck===true? <ReactSVG src={CheckIcon}/>: <></>

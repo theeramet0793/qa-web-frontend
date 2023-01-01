@@ -9,29 +9,33 @@
     justify-content: center;
     align-items: center;
     border: none;
+    svg{
+      fill: var(--color-white);
+    }
   }
 
   .expand-menu{
     position: absolute;
     background-color: var(--color-second-bg);
+    box-shadow: 0px 0px 10px var(--color-main-bg);
     width: max-content;
     height: fit-content;
     right: 0;
     top: 35px;
     height: fit-content;
-    border: 2px solid #FFFFFF;
-    box-shadow: 15px 10px 50px #D1D2E7, -2px -5px 10px 5px #FFFFFF;
-    border-radius: 10px;
+    border-radius: 12px;
+    padding: 0.5rem;
 
     .option-row {
       display: flex-start;
       align-items: center;
       padding: 0.5rem 1rem;
-      border-bottom: 1px solid var(--color-white);
+      color: var(--color-text);
+      border-radius: 8px;
 
         &:hover{
           cursor: pointer;
-          background-color: var(--color-white);
+          background-color: var(--color-third-bg);
         }
     }
   }

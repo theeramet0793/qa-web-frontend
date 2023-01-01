@@ -3,8 +3,6 @@
   width: 934px;
   height: fit-content;
   border-radius: 50px;
-  box-shadow: 15px 10px 15px #c1c2d8, -1px -3px 6px 1px #FFFFFF;
-  border: 2px solid #FFFFFF;
   padding: 43px 41px;
   background-color: var(--color-second-bg);
 
@@ -31,6 +29,7 @@
       border: none;
       resize: none;
       max-height: 200px;
+      color: var(--color-white);
     }
   }
 
@@ -40,6 +39,7 @@
       width: 46px;
       height: 46px;
       svg{
+        fill: var(--color-white);
         width: 20px;
         height: 20px;
       }
@@ -48,10 +48,13 @@
     .comment-button-container{
       width: fit-content;
       height: 46px;
+      svg{
+        fill: var(--color-yellow);
+      }
     }
 
     .follow-button-container{
-      width: 118px;
+      width: fit-content;
       height: 46px;
     }
   }
@@ -87,13 +90,15 @@
           width: 100%;
           height: fit-content;
           min-height: 53px;
-          box-shadow: inset 2px 2px 5px #CFD0E3, inset -2px -2px 5px #FFFFFF;
           border-radius: 20px;
           border: none;
           padding: 0.9rem 1.2rem;
-          background-color: var(--color-second-bg);
+          background-color: var(--color-third-bg);
+          color: var(--color-text);
           resize: none;
-
+          &::placeholder{
+            color: var(--color-text-placeholder);
+          }
           &:focus{
             outline: none;
           }
@@ -102,8 +107,8 @@
     }
 
     .send-button{
-      background-color: var(--color-second-bg);
-      border: 2px solid #FFFFFF;
+      background-color: var(--color-primary-button);
+      color: var(--color-text);
       border-radius: 999px;
       width: fit-content;
       height: fit-content;
@@ -114,16 +119,12 @@
 
       &:hover{
         cursor: pointer;
-        background-color: var(--color-primary-button);
-        color: var(--color-white);
-        
-        svg{
-          fill: var(--color-white);
-        }
+        background-color: var(--color-blue);
+        color: var(--color-text);
       }
 
       svg{
-        fill: var(--color-text);
+        fill: var(--color-white);
       }
     }
   }
