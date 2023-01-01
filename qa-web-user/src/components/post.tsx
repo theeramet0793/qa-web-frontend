@@ -3,9 +3,11 @@ import { ReactSVG } from 'react-svg';
 import './post.scss'
 import RoundButton from './roundButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
-import MoreMenu from './moreMenu';
+import SendIcon from '../assets/svg/send.svg';
 import ShiftIcon from '../assets/svg/shift.svg'
 import CommentIcon from '../assets/svg/chat-text.svg'
+import BookmarkIcon from '../assets/svg/bookmark-frame.svg'
+import MoreMenu from './moreMenu';
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
 import { IPost } from '../data/interface/IPost';
@@ -21,15 +23,15 @@ import Profile from './profile';
 import DeletePostModal from './modal/deletePostModal';
 import LabelAfterDeletePost from './labelAfterDeletePost';
 import classNames from 'classnames';
-import SendIcon from '../assets/svg/send.svg';
 import { nowDate, nowTime } from '../utils/dateAndTime';
 import FeedComment from './feedComment';
 import { ICommentsFeed, ICountComment } from '../data/interface/IComment';
 import OwnerNewComment from './ownerNewComment';
 import Tag from './tag';
 import { convertTagsToOptions } from '../utils/convert';
-import { IUpvote } from '../data/interface/IUpvote';
+import { ICountUpvote, IUpvote } from '../data/interface/IUpvote';
 import FollowButton from './followButton';
+import { ICountFollow, IFollow } from '../data/interface/IFollow';
 
 export interface PostProps{
   postId: number;
@@ -49,8 +51,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ comment, setComment] = useState<string>('');
   const [ returnCommentId, setReturnCommentId] = useState<number|undefined>(undefined);
   const [ countComment, setCountComment] = useState<number>(0);
-  const [ isUpvote, setIsUpvote] = useState<boolean>(false);
+  const [ countUpvote, setCountUpvote] = useState<number>(0);
+  const [ countFollow, setCountFollow] = useState<number>(0);
   const [ enableUpvote, setEnableUpvote] = useState<boolean>(false);
+  const [ enableFollow, setEnableFollow] = useState<boolean>(false);
+  const [ isUpvote, setIsUpvote] = useState<boolean>(false);
   const [ isFollow, setIsFollow] = useState<boolean>(false);
 
   useEffect(()=>{
@@ -79,6 +84,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }).catch((err)=>{
       console.log(err);
     })
+
+    Client.get<IFollow>('/getfollow/'+postId+'/'+userProfile?.userId)
+    .then((res)=>{
+      setIsFollow(res.data.isFollow);
+    }).catch((err)=>{
+      console.log(err);
+    })
   },[postId, userProfile?.userId])
 
   useEffect(()=>{
@@ -90,7 +102,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
   },[isDeletedPost])
 
   useEffect(()=>{
-    if(posts) refreshCountComment();
+    if(posts){
+      refreshCountComment();
+      refreshCountUpvote();
+      refreshCountFollow();
+    } 
     // eslint-disable-next-line 
   },[posts])
 
@@ -98,6 +114,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
     if(enableUpvote) updateUpvote();
     // eslint-disable-next-line 
   },[isUpvote])
+
+  useEffect(()=>{
+    if(enableFollow) updateFollow();
+    // eslint-disable-next-line 
+  },[isFollow])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -160,6 +181,28 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }
   }
 
+  const refreshCountUpvote = () =>{
+    if(posts){
+      Client.get<ICountUpvote>('/countupvote/'+posts.postId)
+      .then((res)=>{
+        setCountUpvote(res.data.upvotes);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+  }
+
+  const refreshCountFollow = () =>{
+    if(posts){
+      Client.get<ICountFollow>('/countfollow/'+posts.postId)
+      .then((res)=>{
+        setCountFollow(res.data.follows);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }
+  }
+
   const renderTime = () =>{
     if(posts?.createdDate === posts?.lastUpdateDate && posts?.createdTime === posts?.lastUpdateTime){
       return (posts?.createdDate+' เวลา '+posts?.createdTime);
@@ -188,10 +231,26 @@ const Post: React.FC<PostProps> = ({postId}) => {
       userId: userProfile?.userId,
       isUpvote: isUpvote,
     }).then( (res) =>{
-
+      refreshCountUpvote();
     }).catch( (err) => {
       console.log(err.response);
     })
+  }
+
+  const updateFollow = () =>{
+    Client.post<string>('/follow',{
+      postId: posts?.postId,
+      userId: userProfile?.userId,
+      isFollow: isFollow,
+    }).then( (res) =>{
+      refreshCountFollow();
+    }).catch( (err) => {
+      console.log(err.response);
+    })
+  }
+
+  const isNotMyPost = () =>{
+    return (userProfile?.userId !== posts?.userId)
   }
 
 
@@ -236,13 +295,20 @@ const Post: React.FC<PostProps> = ({postId}) => {
         <div className='option-container'>
           <Row>
             <Col sm='auto'>
-              <div className='upvote-button-container'>
-                <RoundButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote}>
-                  <ReactSVG src={ShiftIcon}/>
-                </RoundButton>
-              </div>
+              <Row sm='auto' className='d-flex justify-content-start align-items-center'>
+                <Col>
+                  <div className='upvote-button-container'>
+                    <RoundButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true}>
+                      <ReactSVG src={ShiftIcon}/>
+                    </RoundButton>
+                  </div>
+                </Col>
+                <Col>
+                  <div className='text-normal text-color'>{countUpvote+' ความนิยม'}</div>
+                </Col>
+              </Row>
             </Col>
-            <Col>
+            <Col sm='auto'>
               <div className='comment-button-container d-flex justify-content-center align-items-center'>
                 <Row>
                   <Col sm='auto' className='pe-0'>
@@ -255,32 +321,50 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   
               </div>
             </Col>
-            <Col className='d-flex justify-content-end'>
-              <div className='follow-button-container '>
-                <FollowButton onClick={()=>{setIsFollow(!isFollow)}} isActive={isFollow}/>
+            <Col>
+              <div className='follow-label-container d-flex justify-content-center align-items-center'>
+                <Row>
+                  <Col sm='auto' className='pe-0'>
+                    <ReactSVG src={BookmarkIcon}/>
+                  </Col>
+                  <Col sm='auto' className='text-normal text-color'>
+                    {countFollow+' คนติดตามโพสต์นี้'}
+                  </Col>
+                </Row>
               </div>
             </Col>
+            { isNotMyPost()?
+              <Col className='d-flex justify-content-end'>
+                <div className='follow-button-container '>
+                  <FollowButton onClick={()=>{setEnableFollow(true);setIsFollow(!isFollow);}} isActive={isFollow} disable={userProfile? false:true}/>
+                </div>
+              </Col>:
+              <Col>
+                <div className='text-normal text-color'> ฉันเจอชื่อเรื่องแล้ว</div>
+              </Col>
+            }
           </Row>
         </div>
       </Row>
       <Row>
+      { userProfile && 
         <div className='comments-section-container'>
           <Row>
             <div className='comment-row'>
-              <Row>
-                <Col sm='auto'>
-                  <div className='commenter-profile'>
-                    <RoundLabel >
-                      <Profile enableDropdown={false} disableClick={true}/>
-                    </RoundLabel>
-                  </div>
-                </Col>
-                <Col className='d-flex justify-content-center align-items-center'>
-                  <div className='comment-input'>
-                    <TextareaAutosize className='comment-box text-normal' placeholder={t('TYPE_ANSWER')} value={comment} onChange={(e)=>{setComment(e.currentTarget.value)}}/>
-                  </div>
-                </Col>
-              </Row>
+                <Row>
+                  <Col sm='auto'>
+                    <div className='commenter-profile'>
+                      <RoundLabel >
+                        <Profile enableDropdown={false} disableClick={true}/>
+                      </RoundLabel>
+                    </div>
+                  </Col>
+                  <Col className='d-flex justify-content-center align-items-center'>
+                    <div className='comment-input'>
+                      <TextareaAutosize className='comment-box text-normal' placeholder={t('TYPE_ANSWER')} value={comment} onChange={(e)=>{setComment(e.currentTarget.value)}}/>
+                    </div>
+                  </Col>
+                </Row>
               { comment &&
                   <Row sm='auto' className='d-flex justify-content-center align-items-center pt-2'>
                     <div className='send-button' onClick={()=>{sendComment();}}>
@@ -294,6 +378,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             </div>
           </Row>
         </div>
+      }
       </Row>
       <Row>
         <div className='feed-comments-container'>

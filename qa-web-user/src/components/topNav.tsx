@@ -56,7 +56,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
               <Col className='d-flex align-items-center justify-content-end'>
                 <div className='register-btn-container'> 
                   <div className='btn-reg '>
-                    <div className='text-medium-bold' onClick={onClickReg}>
+                    <div className='text-normal-bold' onClick={onClickReg}>
                       {t('REGISTER')}
                     </div>
                   </div>
@@ -65,7 +65,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
               <Col className='d-flex align-items-center justify-content-start'>
                 <div className='sign-btn-container'> 
                   <div className='btn-sign '>
-                    <div className='text-medium-bold' onClick={onClickSign}>
+                    <div className='text-normal-bold' onClick={onClickSign}>
                       {t('SIGNIN')}
                     </div>
                   </div>

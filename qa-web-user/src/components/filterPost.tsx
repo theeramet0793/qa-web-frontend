@@ -14,10 +14,10 @@ const FilterPost: React.FC<FilterPostProps> = () => {
 
 
   const { t } = useTranslation();
-  const testOptions = [
+  const sortOptions = [
     {value:'1',label:'เรียงตามความนิยม'},
     {value:'2',label:'เรียงตามเวลา'},
-    {value:'3',label:'เรียงตามอะไรดี'},
+    {value:'3',label:'เรียงตามผู้ติดตาม'},
   ]
 
   return(
@@ -27,7 +27,7 @@ const FilterPost: React.FC<FilterPostProps> = () => {
             <Row className='w-100 d-flex justify-content-center' >
               <Col >                
                 <div className="dropdown-container">
-                  <DropdownSelect menuOptions={testOptions} onSelectOption={(selectedOption)=>{}}/>
+                  <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{}}/>
                 </div>
               </Col>
               <Col >

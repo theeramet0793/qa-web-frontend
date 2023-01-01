@@ -6,14 +6,15 @@ export interface RoundButtonProps{
  children: ReactNode | undefined;
  onClick?: () => void | undefined;
  isActive?: boolean;
+ disable?: boolean;
 }
 
-const RoundButton:React.FC<RoundButtonProps> = ({children, onClick, isActive}) => {
+const RoundButton:React.FC<RoundButtonProps> = ({children, onClick, isActive, disable}) => {
 
   return(
     <div 
-      className={classNames("round-button", isActive===true? `round-button-active`:'')}
-      onClick={()=>{onClick && onClick()}}
+      className={classNames("round-button", isActive===true? `round-button-active`:'', disable? 'round-button-disable':'')}
+      onClick={()=>{!disable && onClick && onClick()}}
     >
       {children}
     </div>

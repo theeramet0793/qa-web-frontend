@@ -5,7 +5,6 @@ import XIcon from '../../assets/svg/x.svg'
 import { IUser } from "../../data/interface/IUser";
 import Profile from "../profile";
 import './createPostModal.scss'
-import jwt_decode from "jwt-decode";
 import Client from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
@@ -15,6 +14,8 @@ import { IOption } from "../../data/interface/IOption";
 import { convertTagsToOptions } from "../../utils/convert";
 import SearchBar from "../searchBar";
 import Tag from "../tag";
+import { GetUserData } from "../userData/userData";
+import debounce from "lodash.debounce";
 
 export interface CreatePostModalProps{
   show: boolean;
@@ -26,21 +27,13 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
 
   const { t } = useTranslation();
   const [isShow, setIsShow] = useState<boolean>(false);
-  const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
+  const [userProfile] = useState<IUser|undefined>(GetUserData());
   const [postDetail, setPostdetail] = useState<string>('');
   const [tagOptions, setTagOptions] = useState<IOption[]>([]);
   const [selectedTags, setSelectedTags] = useState<IOption[]>([]);
 
-  //should get user from one location
   useEffect(()=>{
-    const accToken = localStorage.getItem('qa_access_token');
-    if(accToken){
-      setUserProfile( jwt_decode(accToken));
-    }
-  },[show])
-
-  useEffect(()=>{
-    setIsShow(show)
+    setIsShow(show);
   },[show])
 
   const handleSubmit = () =>{
@@ -59,7 +52,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
     )
   }
 
-  const searchTag = (searchStr: string) =>{
+  const searchTag = debounce((searchStr: string) =>{
     if(searchStr){
       Client.get<ITag[]>('/searchtags/'+searchStr)
       .then( (res) =>{
@@ -70,7 +63,8 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
     }else{
       setTagOptions([]);
     }
-  }
+  },700)
+
 
   const addTag4Post = (selectedOption: IOption) =>{
     if(selectedOption){
@@ -114,11 +108,11 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
   }
   
   return(
-    <Modal show={isShow} centered className="create-post-modal" onHide={()=>{onClose()}}>
+    <Modal show={isShow} centered className="create-post-modal" onHide={()=>{onClose(); setSelectedTags([]);}}>
       <Modal.Body>
         <div className="content-container">
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold header-label'>
               {t('CREATE_POST')}
             </div>
             <div className='x-button-container'>
@@ -136,7 +130,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
               </Col>
               <Col>
                 <Row className="text-medium-bold text-color ps-4">{userProfile?.username}</Row>
-                <Row className="ps-4 text-normal">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="ps-4 text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
               </Col>
             </Row>
             <Row>
@@ -152,7 +146,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
               <div className="search-bar-container">
                 <SearchBar 
                   placeholder="เพิ่มแท็ก..." 
-                  onInputchange={(input)=>{searchTag(input)}} 
+                  onInputchange={searchTag} 
                   menuOptions={tagOptions} 
                   onSelectOption={(selectedOption)=>{addTag4Post(selectedOption)}}
                 />

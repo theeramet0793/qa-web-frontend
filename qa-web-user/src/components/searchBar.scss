@@ -16,9 +16,10 @@
       width: 100%;
       height: 100%;
       border-radius: 999px;
-      background: var(--color-second-bg);
+      background: var(--color-third-bg);
       border: none;
       padding-left: 3.5rem;
+      color: var(--color-text);
   
       &:focus{
         outline: none;
@@ -26,25 +27,27 @@
     }
   }
   .menu-list{
-    position: absolute;
     background-color: var(--color-second-bg);
+    box-shadow: 0px 0px 10px var(--color-main-bg);
+    color: var(--color-text);
     width: 100%;
     height: fit-content;
+    position: absolute;
     right: 0;
     top: 55px;
     height: fit-content;
-    border: 2px solid #FFFFFF;
     border-radius: 10px;
+    padding: 0.5rem;
 
     .option-row {
       display: flex-start;
       align-items: center;
       padding: 0.5rem 1rem;
-      border-bottom: 1px solid var(--color-white);
-
+      border-radius: 8px;
         &:hover{
           cursor: pointer;
-          background-color: var(--color-text);
+          background-color: var(--color-yellow);
+          color: var(--color-black);
         }
     }
   }

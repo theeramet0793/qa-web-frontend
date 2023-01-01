@@ -19,3 +19,9 @@
 .round-button-active{
   background-color: var(--color-green);
 }
+
+.round-button-disable{
+  &:hover{
+    cursor: default;
+  }
+}

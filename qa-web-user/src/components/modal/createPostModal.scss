@@ -2,18 +2,18 @@
 .create-post-modal{
 
   .modal-dialog{
-    border-radius: 50px;
     width: max-content;
     display: flex;
     justify-content: center;
 
     .modal-content{
-      border-radius: 50px;
+      background-color: transparent;
       width: fit-content;
 
       .modal-body{
+        border-radius: 12px;
         background-color: var(--color-second-bg);
-        border-radius: 50px;
+        border: 1px solid var(--color-third-bg);
         padding: 0px;
         width: fit-content;
 
@@ -26,17 +26,16 @@
             justify-content: center;
             align-items: center;
             position: relative;
-  
+
             .header-label{
               width: fit-content;
               height: fit-content;
               display: flex;
               justify-content: center;
               align-items: center;
-              padding: 1rem 4rem;
+              padding: 0rem 4rem;
               color: var(--color-text);
             }
-  
             .x-button-container{
               width: 43px;
               height: 43px;
@@ -46,31 +45,19 @@
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-second-bg);
+                background-color: var(--color-third-bg);
                 border-radius: 999px;
-                border: 2px solid #FFFFFF;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 10px 5px 30px #D1D2E7, -1px -3px 6px 1px #FFFFFF;
-                
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-primary-button);
+                  background-color: var(--color-red);
                 }
               }
-
-
               svg{
-                fill: var(--color-text)
+                fill: var(--color-white)
               }
-
-              &:hover{
-                svg{
-                  fill: var(--color-white);
-                }
-              }
-
             }
           }
 
@@ -91,7 +78,6 @@
                 border: none;
                 min-height: 150px;
                 max-height: 400px;
-                border-radius: 20px;
                 display: flex;
                 justify-content: flex-start;
                 align-items: flex-start;
@@ -117,7 +103,6 @@
               justify-content: center;
               align-items: center;
               padding: 0.7rem 0rem;
-              box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
               border-radius: 999px;
 
               &:hover{

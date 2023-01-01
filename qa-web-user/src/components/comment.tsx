@@ -154,6 +154,10 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
                 />
               </Row>
             </div>
+            <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
+              <Col sm='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
+              <Col className='text-small text-color'>{renderTime()}</Col>
+            </Row>
             { !disableTextArea &&
                 <Row className='d-flex justify-content-center align-items-center'>
                   <div className='button-save-comment-container'>
@@ -163,10 +167,6 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
                   </div>
                 </Row>
             }
-            <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
-              <Col sm='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
-              <Col className='text-small text-color'>{renderTime()}</Col>
-            </Row>
           </div>
         </Col>
       </Row>

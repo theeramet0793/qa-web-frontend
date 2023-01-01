@@ -1,7 +1,12 @@
 
   .top-nav{
+    position: sticky;
+    top: 0;
+    z-index: 1;
     background-color: var(--color-second-bg);
     padding: 1rem 0rem;
+    width: 100%;
+    border-bottom: 1px solid var(--color-third-bg);
 
     .logo-container{
       width: 207px;
@@ -25,36 +30,36 @@
       height: 50px;
     }
     .register-btn-container{
-      width:  207px;
-      height: 68px;
+      width:  fit-content;
+      height: 50px;
 
       .btn-reg{
+        height: 100%;
         color: var(--color-text);
         border-radius: 999px;
-        background-color: var(--color-second-bg);
-        box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
+        background-color: var(--color-third-bg);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1rem 1rem;
+        padding: 0.5rem 2rem;
         &:hover{
           cursor: pointer;
         }
       }
     }
     .sign-btn-container{
-      width:  207px;
-      height: 68px;
+      width:  fit-content;
+      height: 50px;
 
       .btn-sign{
+        height: 100%;
         color: var(--color-text);
         border-radius: 999px;
         background-color: var(--color-primary-button);
-        box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 1rem 1rem;
+        padding: 0.5rem 2rem;
         &:hover{
           cursor: pointer;
         }

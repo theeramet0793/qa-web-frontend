@@ -3,3 +3,8 @@ export interface IUpvote{
   userId: number;
   isUpvote: boolean;
 }
+
+export interface ICountUpvote{
+  postId: number;
+  upvotes: number;
+}

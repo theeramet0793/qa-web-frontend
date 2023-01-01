@@ -77,7 +77,7 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold   header-label'>
               ลงชื่อเข้าใช้
             </div>
             <div className='x-button-container'>

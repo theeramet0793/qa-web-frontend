@@ -1,0 +1,121 @@
+
+.edit-post-modal{
+
+  .modal-dialog{
+    width: max-content;
+    display: flex;
+    justify-content: center;
+
+    .modal-content{
+      background-color: transparent;
+      width: fit-content;
+
+      .modal-body{
+        border-radius: 12px;
+        background-color: var(--color-second-bg);
+        border: 1px solid var(--color-third-bg);
+        padding: 0px;
+        width: fit-content;
+
+        .content-container{
+          padding: 39px 38px;
+          width: fit-content;
+
+          .header-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            .header-label{
+              width: fit-content;
+              height: fit-content;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 0rem 4rem;
+              color: var(--color-text);
+            }
+            .x-button-container{
+              width: 43px;
+              height: 43px;
+              position: absolute;
+              right: 0;
+
+              .x-icon{
+                width: 100%;
+                height: 100%;
+                background-color: var(--color-third-bg);
+                border-radius: 999px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover{
+                  cursor: pointer;
+                  background-color: var(--color-red);
+                }
+              }
+              svg{
+                fill: var(--color-white)
+              }
+            }
+          }
+
+          .body-container{
+            width: 774px;
+            padding-top: 1rem;
+
+            .create-post-profile-container{
+              width: 68px;
+              height: 68px;
+              padding: 0rem 0rem;
+            }
+
+            .post-detail-container{
+              padding: 1.5rem 0rem;
+
+              .post-detail-input{
+                border: none;
+                min-height: 150px;
+                max-height: 400px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: flex-start;
+                overflow: visible;
+                resize: none;
+
+                &:focus{
+                  outline: none;
+                }
+
+              }
+            }
+            .search-bar-container{
+              width: 100%;
+              height: 51px;
+              padding: 0rem 0rem;
+            }
+            .button-create-post{
+              margin-top: 2rem;
+              background-color: var(--color-primary-button);
+              color: var(--color-text);
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 0.7rem 0rem;
+              border-radius: 999px;
+
+              &:hover{
+                cursor: pointer;
+              }
+
+              &:active{
+                opacity: 0.8;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

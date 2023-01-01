@@ -2,20 +2,20 @@
 .sign-modal{
 
   .modal-dialog{
-    border-radius: 50px;
     width: fit-content;
     display: flex;
     justify-content: center;
     
     .modal-content{
-      border-radius: 50px;
+      background-color: transparent;
       width: fit-content;
 
       .modal-body{
         background-color: var(--color-second-bg);
-        border-radius: 50px;
+        border-radius: 12px;
         padding: 0px;
         width: fit-content;
+        border: 1px solid var(--color-third-bg);
 
         .content-container{
           padding: 39px 38px;
@@ -33,7 +33,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              padding: 1rem 4rem;
+              padding: 0rem 4rem;
               color: var(--color-text);
             }
   
@@ -46,13 +46,11 @@
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-second-bg);
+                background-color: var(--color-third-bg);
                 border-radius: 999px;
-                border: 2px solid #FFFFFF;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                box-shadow: 10px 5px 30px #D1D2E7, -1px -3px 6px 1px #FFFFFF;
                 
                 &:hover{
                   cursor: pointer;
@@ -82,7 +80,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              color: #d85e7f;
+              color: var(--color-red);
             }
 
             .row{
@@ -93,6 +91,7 @@
                 width: 100%;
                 border: none;
                 border-radius: 999px;
+                color: var(--color-text);
   
                 &:focus{
                   outline: none;
@@ -107,7 +106,6 @@
                 justify-content: center;
                 align-items: center;
                 padding: 0.7rem 0rem;
-                box-shadow: 2px 2px 5px #CFD0E3, -2px -2px 5px #FFFFFF;
 
                 &:hover{
                   cursor: pointer;

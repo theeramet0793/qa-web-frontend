@@ -18,3 +18,8 @@
 .follow-active{
   background-color: var(--color-blue);
 }
+.follow-button-disable{
+  &:hover{
+    cursor: default;
+  }
+}

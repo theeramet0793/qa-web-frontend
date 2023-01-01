@@ -8,14 +8,15 @@ import { Col, Row } from 'react-bootstrap';
 export interface FollowButtonprops{
   isActive: boolean;
   onClick: () => void;
+  disable: boolean;
 }
 
-const FollowButton:React.FC<FollowButtonprops> = ({isActive, onClick}) =>{
+const FollowButton:React.FC<FollowButtonprops> = ({isActive, onClick, disable}) =>{
 
   const { t } = useTranslation();
   
   return(
-    <div className={classNames( isActive? 'follow-active':'','follow-button text-normal text-color')} onClick={()=>{onClick()}}>
+    <div className={classNames( isActive? 'follow-active':'', disable? 'follow-button-disable':'' ,'follow-button text-normal text-color')} onClick={()=>{!disable && onClick()}}>
       <Row>
         <Col sm='auto' className='d-flex justify-content-center align-items-center pe-0'>
           <ReactSVG src={FollowIcon} className=''/>

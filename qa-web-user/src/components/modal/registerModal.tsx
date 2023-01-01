@@ -196,7 +196,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({show, onClose}) => {
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold   header-label'>
               สมัครสมาชิก
             </div>
             <div className='x-button-container'>

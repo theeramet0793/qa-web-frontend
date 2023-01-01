@@ -92,7 +92,7 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
       <Modal.Body>
         <div className="content-container">
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold header-label'>
               {t('CHANGE_PROFILE')}
             </div>
             <div className='x-button-container'>
@@ -113,7 +113,7 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
             <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler()}}>
                 อัพโหลด
             </div>
-            <div className="d-flex justify-content-center align-items-center">
+            <div className="d-flex justify-content-center align-items-center text-color">
               Uploaded {uploadProg} %
             </div>
           </div>

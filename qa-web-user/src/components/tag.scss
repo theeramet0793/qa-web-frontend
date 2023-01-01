@@ -4,8 +4,8 @@
   margin-bottom: 0.3rem;
   padding: 0.7rem 1rem;
   border-radius: 15px;
-  background-color: var(--color-green);
-  color: var(--color-text);
+  background-color: var(--color-yellow);
+  color: var(--color-black);
   .x-icon-container{
     width: 27px;
     height: 27px;
@@ -15,7 +15,7 @@
     svg{
       width: 100%;
       height: 100%;
-      fill: #D75B7D; 
+      fill: var(--color-white); 
     }
   }
 }

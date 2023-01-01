@@ -22,11 +22,11 @@ const DeletePostModal: React.FC<deletePostModalProps> = ({onClose, onConfirm, sh
   },[show])
 
   return(
-    <Modal  show={isShow} centered className="create-post-modal" onHide={()=>{onClose()}}>
+    <Modal  show={isShow} centered className="delete-post-modal" onHide={()=>{onClose()}}>
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold   header-label'>
               {t('DELETE_POST')}
             </div>
             <div className='x-button-container'>
@@ -37,7 +37,7 @@ const DeletePostModal: React.FC<deletePostModalProps> = ({onClose, onConfirm, sh
           </div>
           <div className='body-container-delete-post-modal'>
             <Row>
-              <div className='d-flex justify-content-center align-items-center text-normal pt-2'>
+              <div className='d-flex justify-content-center align-items-center text-normal pt-2 text-color'>
                 คุณแน่ใจหรือไม่ที่จะลบโพสต์นี้ ?
               </div>
             </Row>

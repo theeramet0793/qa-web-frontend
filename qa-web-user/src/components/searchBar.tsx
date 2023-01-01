@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ReactSVG } from 'react-svg';
 import { IOption } from '../data/interface/IOption';
@@ -18,6 +18,11 @@ const SearchBar: React.FC<SearchBarProps> = ({menuOptions, onSelectOption, place
   
   const { t } = useTranslation();
   const [value, setValue] = useState<string>('');
+  const [thisMenuOptions, setThisMenuOptions] = useState<IOption[]>(menuOptions);
+
+  useEffect(()=>{
+    setThisMenuOptions(menuOptions);
+  },[menuOptions])
   
   return(
     <div className='search-bar-container'>
@@ -26,22 +31,22 @@ const SearchBar: React.FC<SearchBarProps> = ({menuOptions, onSelectOption, place
         <ReactSVG src={SearchIcon} className='search-icon'/>
         <input 
           type='text' 
-          onChange={(e)=>{setValue(e.currentTarget.value); onInputchange(e.currentTarget.value)}} 
+          onChange={(e)=>{setValue(e.currentTarget.value);  onInputchange(e.currentTarget.value);}} 
           value={value}
           className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
           placeholder={placeholder? placeholder:t('SEARCH_POST')}
         />
       </div>
       </div>
-      {(menuOptions.length!==0) &&
+      {(thisMenuOptions.length!==0) &&
         <div className='menu-list'>
           { 
-            menuOptions.map((option, index)=>{
+            thisMenuOptions.map((option, index)=>{
               return (
                 <div 
                   key={index} 
                   className='option-row text-normal' 
-                  onClick={()=>{onSelectOption(option); setValue(''); onInputchange(''); }}
+                  onClick={()=>{onSelectOption(option); setValue(''); setThisMenuOptions([]); onInputchange(''); }}
                 >
                   {option.label}
                 </div>

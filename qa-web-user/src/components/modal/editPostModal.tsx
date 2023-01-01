@@ -4,7 +4,7 @@ import { ReactSVG } from "react-svg";
 import XIcon from '../../assets/svg/x.svg'
 import { IUser } from "../../data/interface/IUser";
 import Profile from "../profile";
-import './createPostModal.scss'
+import './editPostModal.scss'
 import Client from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
@@ -16,6 +16,7 @@ import { ITag } from "../../data/interface/ITag";
 import { convertTagsToOptions } from "../../utils/convert";
 import Tag from "../tag";
 import SearchBar from "../searchBar";
+import debounce from "lodash.debounce";
 
 export interface EditPostModalProps{
   show: boolean;
@@ -57,7 +58,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
     )
   }
 
-  const searchTag = (searchStr: string) =>{
+  const searchTag = debounce((searchStr: string) =>{
     if(searchStr){
       Client.get<ITag[]>('/searchtags/'+searchStr)
       .then( (res) =>{
@@ -68,7 +69,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
     }else{
       setTagOptions([]);
     }
-  }
+  },700)
 
   const addTag4Post = (selectedOption: IOption) =>{
     if(selectedOption){
@@ -112,11 +113,11 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
   }
   
   return(
-    <Modal show={isShow} centered className="create-post-modal" onHide={()=>{onClose()}}>
+    <Modal show={isShow} centered className="edit-post-modal" onHide={()=>{onClose()}}>
       <Modal.Body>
         <div className="content-container">
           <div className='header-container'>
-            <div className='text-large-bold flat-label header-label'>
+            <div className='text-large-bold   header-label'>
               {t('EDIT_POST')}
             </div>
             <div className='x-button-container'>
@@ -134,13 +135,13 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
               </Col>
               <Col>
                 <Row className="text-medium-bold text-color ps-4">{userProfile?.username}</Row>
-                <Row className="ps-4 text-normal">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="ps-4 text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
               </Col>
             </Row>
             <Row>
               <div className="post-detail-container">              
                 <TextareaAutosize
-                  className='post-detail-input text-box text-normal'
+                  className='post-detail-input text-box text-normal text-color'
                   placeholder='อธิบายภาพยนตร์ที่คุณกำลังตามหา...'
                   defaultValue={originalPostDetail}
                   onChange={(e)=>{setPostdetail(e.currentTarget.value)}}
@@ -151,7 +152,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
               <div className="search-bar-container">
                 <SearchBar 
                   placeholder="เพิ่มแท็ก..." 
-                  onInputchange={(input)=>{searchTag(input)}} 
+                  onInputchange={searchTag} 
                   menuOptions={tagOptions} 
                   onSelectOption={(selectedOption)=>{addTag4Post(selectedOption)}}
                 />
