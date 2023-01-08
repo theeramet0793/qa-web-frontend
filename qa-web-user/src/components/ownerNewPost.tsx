@@ -5,9 +5,10 @@ import Post from './post';
 
 export interface OwnerNewPostProps{
  newPostId?: number;
+ clearData: boolean;
 }
 
-const OwnerNewPost:React.FC<OwnerNewPostProps> = ({newPostId}) => {
+const OwnerNewPost:React.FC<OwnerNewPostProps> = ({newPostId, clearData}) => {
 
   const [newPostIdArray, setNewPostIdArray] = useState<(number)[]>([]);
 
@@ -19,6 +20,10 @@ const OwnerNewPost:React.FC<OwnerNewPostProps> = ({newPostId}) => {
     }
     // eslint-disable-next-line 
   },[newPostId])
+
+  useEffect(()=>{
+      setNewPostIdArray([]);
+  },[clearData])
 
   return(
     <div className='owner-new-post-container d-flex justify-content-center'>

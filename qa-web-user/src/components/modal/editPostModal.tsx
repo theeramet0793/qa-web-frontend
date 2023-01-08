@@ -87,7 +87,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
         {
           selectedTags.map((tag)=>{
             return(
-            <Col sm='auto'>
+            <Col sm='auto' key={tag.value}>
               <Tag tagName={tag.label} tagId={tag.value} removable={true} onRemoveTag={(tagId)=>{removeTagFromList(tagId)}}/>
             </Col>)
           })

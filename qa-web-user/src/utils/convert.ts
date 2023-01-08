@@ -1,3 +1,4 @@
+import { IMovie } from "../data/interface/IMovie";
 import { IOption } from "../data/interface/IOption";
 import { ITag } from "../data/interface/ITag";
 
@@ -9,7 +10,16 @@ import { ITag } from "../data/interface/ITag";
         options.push(option);
       })
     }
+    return options;
+  }
 
-
+  export const convertMoviesToOptions = ( movies:IMovie[] ) =>{
+    var options: IOption[] = [];
+    if(movies.length > 0){
+      movies.forEach((movie)=>{
+        var option: IOption = {label:movie.movieName, value:movie.movieId.toString()};
+        options.push(option);
+      })
+    }
     return options;
   }

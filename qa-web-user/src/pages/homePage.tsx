@@ -8,6 +8,7 @@ import RegisterModal from "../components/modal/registerModal";
 import SignInModal from "../components/modal/signInModal";
 import OwnerNewPost from "../components/ownerNewPost";
 import TopNav from "../components/topNav";
+import { PostType, SortBy } from "../data/enum/filterEnum";
 
 const HomePage: React.FC = () =>{
 
@@ -18,6 +19,10 @@ const HomePage: React.FC = () =>{
   const [isShowCreatePostModal, setIsShowCreatePostModal] = useState<boolean>(false);
   const [isShowChangeProfileModal, setIsShowChangeProfileModal] = useState<boolean>(false);
   const [newPostId, setNewPostId] = useState<number|undefined>(undefined);
+  const [filterSortBy, setFilterSortBy] = useState<SortBy>(SortBy.Date);
+  const [filterType, setFilterType] = useState<PostType>(PostType.All);
+  const [filterOnlyFollow, setFilterOnlyFollow] = useState<boolean>(false);
+  const [triggerOnRefresh, setTriggerOnRefresh] = useState<boolean>(false);
 
   return(
     <>
@@ -30,11 +35,16 @@ const HomePage: React.FC = () =>{
         onSignInSuccess={()=>{setIsShowCreatePostCard(true)}}
       />
       {isShowCreatePostCard && <CreatePost onClickCreate={()=>{setIsShowCreatePostModal(true)}}/>}
-      <FilterPost/>
-      <OwnerNewPost newPostId={newPostId}/>
-      <FeedPost/>
+      <FilterPost 
+        onFilterSortByChange={(sortby)=>{setFilterSortBy(sortby)}} 
+        onFilterTypeChange={(type)=>{setFilterType(type)}} 
+        onFilterOnlyFollowChange={(isOnlyFollow)=>{setFilterOnlyFollow(isOnlyFollow)}}
+        defaultOnlyFollow={filterOnlyFollow}
+      />
+      <OwnerNewPost newPostId={newPostId} clearData={triggerOnRefresh}/>
+      <FeedPost filterSortBy={filterSortBy} filterType={filterType} filterIsOnlyFollow={filterOnlyFollow} onRefreshFeed={()=>{setTriggerOnRefresh(!triggerOnRefresh)}}/>
       <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} />
-      <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true)}}/>
+      <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true); window.location.href = '/loading'}}/>
       <CreatePostModal show={isShowCreatePostModal} onClose={()=> setIsShowCreatePostModal(false)} onCreateNewPostSuccess={(postId)=>{setNewPostId(postId)}}/>
       <ChangeProfileModal show={isShowChangeProfileModal} onClose={()=>{setIsShowChangeProfileModal(false)}}/>
     </>

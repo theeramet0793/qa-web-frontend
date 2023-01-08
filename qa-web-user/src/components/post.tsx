@@ -32,6 +32,10 @@ import { convertTagsToOptions } from '../utils/convert';
 import { ICountUpvote, IUpvote } from '../data/interface/IUpvote';
 import FollowButton from './followButton';
 import { ICountFollow, IFollow } from '../data/interface/IFollow';
+import FoundMovieButton from './foundMovieButton';
+import FoundMovieModal from './modal/foundMovieModal';
+import { IMovie } from '../data/interface/IMovie';
+import FoundMovieLabel from './foundMovieLabel';
 
 export interface PostProps{
   postId: number;
@@ -42,6 +46,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const { t } = useTranslation();
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
   const [ isShowEditPostModal, setIsShowEditPostModal ] = useState<boolean>(false);
+  const [ isShowFoundMovieModal, setIsShowFoundMovieModal ] = useState<boolean>(false);
   const [ posts, setPosts ] = useState<IPost|undefined>(undefined);
   const [ isDataUpdate, setIsDataUpdate] = useState<boolean>(false);
   const [ posterProfileUrl, setPosterProfileUrl ] = useState<IProfileImage|undefined>(undefined);
@@ -57,6 +62,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ enableFollow, setEnableFollow] = useState<boolean>(false);
   const [ isUpvote, setIsUpvote] = useState<boolean>(false);
   const [ isFollow, setIsFollow] = useState<boolean>(false);
+  const [ foundMovie, setFoundMovie] = useState<IMovie|undefined>(undefined);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -78,15 +84,32 @@ const Post: React.FC<PostProps> = ({postId}) => {
   },[posts])
 
   useEffect(()=>{
+    // have same logic as this  2 function  please edit both
+    if(posts)
+    Client.get<IMovie>('/getmovie/'+posts.postId)
+    .then((res)=>{
+      (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[posts])
+
+  useEffect(()=>{
     Client.get<IUpvote>('/getUpvote/'+postId+'/'+userProfile?.userId)
     .then((res)=>{
       setIsUpvote(res.data.isUpvote);
     }).catch((err)=>{
       console.log(err);
     })
+  },[postId, userProfile?.userId])
 
+  useEffect(()=>{
+    if(userProfile?.userId)
     Client.get<IFollow>('/getfollow/'+postId+'/'+userProfile?.userId)
     .then((res)=>{
+      //console.log(res.data);
+      
+      if(res.data.isFollow !== undefined)
       setIsFollow(res.data.isFollow);
     }).catch((err)=>{
       console.log(err);
@@ -203,6 +226,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }
   }
 
+  const refreshMovie = () =>{
+    if(posts)
+    Client.get<IMovie>('/getmovie/'+posts.postId)
+    .then((res)=>{
+      (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+
   const renderTime = () =>{
     if(posts?.createdDate === posts?.lastUpdateDate && posts?.createdTime === posts?.lastUpdateTime){
       return (posts?.createdDate+' เวลา '+posts?.createdTime);
@@ -216,7 +249,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         {
           selectedTags.map((tag)=>{
             return(
-            <Col sm='auto'>
+            <Col sm='auto' key={tag.value}>
               <Tag tagName={tag.label} tagId={tag.value} removable={false} />
             </Col>)
           })
@@ -271,7 +304,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             </RoundButton>
           </div>
         </Col>
-        <Col className='d-flex flex-column justify-content-center mx-2'>
+        <Col sm='auto' className='d-flex flex-column justify-content-center mx-2'>
           <Row className='text-normal-bold text-color'>
             {posts?.username}
           </Row>
@@ -279,6 +312,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
             { renderTime() }
           </Row>
         </Col>
+        {
+          foundMovie?
+          <Col className='found-movie-container-ddf'>
+            <FoundMovieLabel movieName={foundMovie.movieName}/>
+          </Col>:<></>
+        }
         <Col className='d-flex justify-content-end'>
           <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
         </Col>
@@ -339,8 +378,10 @@ const Post: React.FC<PostProps> = ({postId}) => {
                   <FollowButton onClick={()=>{setEnableFollow(true);setIsFollow(!isFollow);}} isActive={isFollow} disable={userProfile? false:true}/>
                 </div>
               </Col>:
-              <Col>
-                <div className='text-normal text-color'> ฉันเจอชื่อเรื่องแล้ว</div>
+              <Col className='d-flex justify-content-end'>
+                <div className='found-movie-container'> 
+                  <FoundMovieButton onClick={()=>{setIsShowFoundMovieModal(true);}} text={foundMovie? 'แก้ไขชื่อภาพยนตร์':'เจอแล้วจ้า'}/>
+                </div>
               </Col>
             }
           </Row>
@@ -399,6 +440,15 @@ const Post: React.FC<PostProps> = ({postId}) => {
         show={isShowDeletePostModal}
         onConfirm={()=>{deletePost();}}
       />}
+      {
+        <FoundMovieModal 
+          postId={posts?.postId} 
+          show={isShowFoundMovieModal} 
+          onClose={()=>{setIsShowFoundMovieModal(false)}}
+          defaultMovieName={foundMovie?.movieName}
+          onSaveSuccess={()=>{refreshMovie()}}
+        />
+      }
     </div>
   )
 }

@@ -4,9 +4,10 @@ import { ReactSVG } from 'react-svg';
 import './dropdownArea.scss'
 import ChevronDownIcon from '../assets/svg/chevron-down.svg'
 import Checkbox from './checkbox';
+import { PostType } from '../data/enum/filterEnum';
 
 export interface DropDownAreaprops{
- onChange: (result:'ALL'|'SOLVED'|'UNSOLVED')=>void;
+ onChange: (result:PostType)=>void;
 }
 
 const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
@@ -22,7 +23,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
   const ALL = "ทั้งหมด";
 
   useEffect(()=>{
-    ((check1Value && check2Value)||(!check1Value && !check2Value))? onChange('ALL'): check1Value? onChange('SOLVED'):onChange('UNSOLVED');
+    ((check1Value && check2Value)||(!check1Value && !check2Value))? onChange(PostType.All): check1Value? onChange(PostType.Solved):onChange(PostType.Unsolved);
     // eslint-disable-next-line 
   },[check1Value, check2Value])
 

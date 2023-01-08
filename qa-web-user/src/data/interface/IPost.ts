@@ -10,6 +10,7 @@ export interface IPost{
   lastUpdateTime: string;
   username: string;
   tagList: ITag[];
+  movieId: number;
 }
 
 export interface IPostsFeed{

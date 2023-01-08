@@ -5,19 +5,23 @@ import { Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import ToggleSwitch from "./toggleSwitch";
 import DropdownArea from './dropdownArea';
+import { PostType, SortBy } from '../data/enum/filterEnum';
 
 export interface FilterPostProps{
-  
+  onFilterSortByChange:(sortby:SortBy) => void;
+  onFilterTypeChange:(postType:PostType) => void;
+  onFilterOnlyFollowChange:(isOnlyFollow:boolean) => void;
+  defaultOnlyFollow: boolean;
 }
 
-const FilterPost: React.FC<FilterPostProps> = () => {
+const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilterSortByChange, onFilterTypeChange, defaultOnlyFollow}) => {
 
 
   const { t } = useTranslation();
   const sortOptions = [
-    {value:'1',label:'เรียงตามความนิยม'},
-    {value:'2',label:'เรียงตามเวลา'},
-    {value:'3',label:'เรียงตามผู้ติดตาม'},
+    {value:SortBy.Date,label:'เรียงตามเวลา'},
+    {value:SortBy.Upvote,label:'เรียงตามความนิยม'},
+    {value:SortBy.Follow,label:'เรียงตามผู้ติดตาม'},
   ]
 
   return(
@@ -27,19 +31,19 @@ const FilterPost: React.FC<FilterPostProps> = () => {
             <Row className='w-100 d-flex justify-content-center' >
               <Col >                
                 <div className="dropdown-container">
-                  <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{}}/>
+                  <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{onFilterSortByChange(selectedOption.value as SortBy)}}/>
                 </div>
               </Col>
               <Col >
                 <div className='checkbox-group-container'>
-                  <DropdownArea onChange={(result)=>{}}/>
+                  <DropdownArea onChange={(result)=>{onFilterTypeChange(result)}}/>
                 </div>
               </Col>
               <Col className='d-flex justify-content-center'>
                 <Row className="switch-container text-normal text-color d-flex justify-content-center align-items-center">
                   <Col sm='auto' className="d-flex justify-content-center ">{t('ONLY_FOLLOWING_POST')}</Col>
                   <Col className="py-1 d-flex justify-content-center ">
-                    <ToggleSwitch/>
+                    <ToggleSwitch defaultValue={defaultOnlyFollow} onChange={(result)=>{onFilterOnlyFollowChange(result); }}/>
                   </Col>
                 </Row>
               </Col>
