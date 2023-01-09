@@ -22,6 +22,11 @@
         svg{
           fill: var(--color-white);
         }
+        .logo{
+          &:hover{
+            cursor: pointer;
+          }
+        }
       }
     }
     .search-box-container-qaz{
@@ -63,12 +68,6 @@
         &:hover{
           cursor: pointer;
         }
-      }
-    }
-    .register-row{
-      /* ipad  vertical 768-992px */
-      @media only screen and (max-width: 915px) { 
-        display: none;
       }
     }
     .top-nav-profile-container{

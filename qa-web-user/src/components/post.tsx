@@ -95,8 +95,13 @@ const Post: React.FC<PostProps> = ({postId}) => {
   },[posts])
 
   useEffect(()=>{
-    Client.get<IUpvote>('/getUpvote/'+postId+'/'+userProfile?.userId)
-    .then((res)=>{
+    Client.get<IUpvote>('/getUpvote/', {
+      params:{ 
+        postId: postId, 
+        userId: userProfile?.userId
+      }
+    }).then((res)=>{
+      if(res.data.isUpvote)
       setIsUpvote(res.data.isUpvote);
     }).catch((err)=>{
       console.log(err);

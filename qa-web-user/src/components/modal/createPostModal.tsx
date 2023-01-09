@@ -45,6 +45,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
       tagList: getTagList(),
     }).then( (res) =>{
       onClose();
+      setSelectedTags([]);
       onCreateNewPostSuccess && onCreateNewPostSuccess(res.data.postId);
     }).catch( (err) => {
       console.log(err.response);

@@ -17,6 +17,7 @@
     "CREATE_POST":"Create post",
     "EDIT_POST":"Create post",
     "DELETE_POST":"Delete post",
-    "MOVIE_NAME":"Movie name"
+    "MOVIE_NAME":"Movie name",
+    "EDIT_PROFILE":"Edit profile"
   }
 }

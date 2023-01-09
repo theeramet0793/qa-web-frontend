@@ -9,6 +9,7 @@ import jwt_decode from "jwt-decode";
 import { useEffect, useState } from 'react';
 import { IUser } from '../data/interface/IUser';
 import SearchBox from './searchBox';
+import { useNavigate } from 'react-router-dom'
 
 export interface TopNavProps{
   onClickReg: () => void;
@@ -16,11 +17,13 @@ export interface TopNavProps{
   isSignInSuccess: boolean;
   onSignOut: ()=> void;
   onSignInSuccess: ()=>void;
-  onChangeProfile: ()=>void;
+  onProfile: ()=>void;
+  newProfileUrl?: string;
 }
 
-const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess, onSignOut, onSignInSuccess, onChangeProfile}) => {
+const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess, onSignOut, onSignInSuccess, onProfile, newProfileUrl}) => {
 
+  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
 
   useEffect(()=>{
@@ -39,7 +42,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
         <Col sm={3} className='ps-5 d-flex justify-content-center align-items-center'>
           <div className='logo-container'>
             <div className='logo-oblong'>
-              <div className='logo d-flex align-items-center justify-content-center'>
+              <div className='logo d-flex align-items-center justify-content-center' onClick={()=>{navigate('/');}}>
                 <ReactSVG src={Logo}/>
               </div>
             </div>
@@ -87,7 +90,8 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                   <Profile 
                     onSignOut={()=>onSignOut()} 
                     enableDropdown={true} 
-                    onChangeProfile={()=>onChangeProfile()}
+                    onProfile={()=>{onProfile()}}
+                    newProfileUrl={newProfileUrl}
                   /> 
                 </div>
               </Col>

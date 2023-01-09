@@ -2,42 +2,36 @@ import { ReactSVG } from 'react-svg';
 import './profile.scss'
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import { useEffect, useState } from 'react';
-import jwt_decode from "jwt-decode";
 import { IUser } from '../data/interface/IUser';
 import { useTranslation } from 'react-i18next';
 import Client from '../lib/axios/axios';
 import { IProfileImage } from '../data/interface/IProfileImage';
 import classNames from 'classnames'
+import { GetUserData } from './userData/userData';
 
 
 export interface ProfileProps{
   onSignOut?: ()=> void;
-  onChangeProfile?: ()=> void;
+  onProfile?: ()=>void;
   enableDropdown: boolean;
   disableClick?: boolean;
+  newProfileUrl?: string;
 }
 
-const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangeProfile, disableClick}) =>{
+const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, disableClick, newProfileUrl}) =>{
 
   const { t } = useTranslation();
-  const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
+  const [userProfile] = useState<IUser|undefined>(GetUserData());
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
   const [testOptions,setTestOptions] = useState<{label:string|undefined,value:string}[]>();
-  const [profileUrl, setProfileUrl] = useState<IProfileImage|undefined>(undefined);
-
-  useEffect(()=>{
-    const accessToken = localStorage.getItem('qa_access_token');
-    if(accessToken){
-      setUserProfile( jwt_decode<IUser>(accessToken))
-    }
-  },[])
+  const [profileUrl, setProfileUrl] = useState<string|undefined>(undefined);
 
   useEffect(()=>{
     setTestOptions(
       [
         {label:userProfile?.username, value:'1'},
         {label:userProfile?.email, value:'2'},
-        {label:t('CHANGE_PROFILE'), value:'changeProfile'},
+        {label:t('EDIT_PROFILE'), value:'editProfile'},
         {label:t('SIGN_OUT'), value:'signOut'},
       ]
     )
@@ -47,11 +41,15 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
     if(userProfile)
     Client.get<IProfileImage>('/profileUrl/'+userProfile?.userId)
     .then((res)=>{
-      setProfileUrl(res.data);
+      setProfileUrl(res.data.urlPath);
     }).catch((err)=>{
       console.log(err);
     })
 },[userProfile])
+
+  useEffect(()=>{
+    setProfileUrl(newProfileUrl);
+  },[newProfileUrl])
 
   const delayedCloseMenu = () => {
     setTimeout(()=>setIsShowDropdown(false), 200);
@@ -60,8 +58,8 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
   const handleOnClickOption = (option:string) => {
     if(option==='signOut'){
       onSignOut && onSignOut();
-    }else if(option==='changeProfile'){
-      onChangeProfile && onChangeProfile();
+    }else if(option==='editProfile'){
+      onProfile && onProfile();
     }
   }
 
@@ -72,7 +70,7 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onChangePro
         onClick={()=>{setIsShowDropdown(!isShowDropdown)}} 
         onBlur={()=>{delayedCloseMenu()}}
       >
-        {profileUrl && <img src={profileUrl.urlPath} alt='profile'/>}
+        {profileUrl && <img src={profileUrl} alt='profile'/>}
         {!profileUrl && <ReactSVG src={ProfileIcon}/>}
       </button>
       {isShowDropdown && enableDropdown &&

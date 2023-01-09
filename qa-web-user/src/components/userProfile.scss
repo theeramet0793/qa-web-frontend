@@ -1,0 +1,76 @@
+
+.user-profile-container-ghjk{
+  width: 100%;
+  min-height: 89vh;
+  display: flex;
+  background-color: var(--color-main-bg);
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0rem;
+
+  .user-profile-child-container{
+    width: fit-content;
+    height: 100%;
+    display: flex-start;
+    justify-content: center;
+    padding: 2rem 3rem;
+    background-color: var(--color-second-bg);
+    border-radius: 12px;
+    .btn-return{
+      width: 35px;
+      height: 35px;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &:hover{
+        cursor: pointer;
+      }
+      svg{
+        fill: var(--color-white);
+      }
+    }
+    .profile-container{
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0rem;
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        object-fit: cover;
+      }
+    }
+    .edit-picture-container{
+      width: fit-content;
+      height: 100%;
+      padding: 1rem 0rem;
+      .btn-edit-picture{
+        background-color: var(--color-green);
+        border-radius: 999px;
+        padding: 0.3rem 1rem ;
+        &:hover{
+          cursor: pointer;
+        }
+        svg{
+          fill: var(--color-white);
+        }
+      }
+    }
+    .info-container{
+      width: 90%;
+      height: fit-content;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      background-color: var(--color-third-bg);
+      svg{
+        fill: var(--color-white);
+      }
+    }
+  }
+}

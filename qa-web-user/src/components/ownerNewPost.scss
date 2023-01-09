@@ -1,13 +1,13 @@
 
 .owner-new-post-container{
   background-color: var(--color-main-bg);
-  width: 100vw;
+  width: 100%;
 
   .posts-container{
     display: flexbox;
 
     .post-container{
-      padding: 2rem 0rem;
+      padding: 0rem 0rem;
     }
   }
 }

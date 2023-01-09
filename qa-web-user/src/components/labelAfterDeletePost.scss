@@ -4,5 +4,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(9, 131, 74);
+  color: var(--color-green);
+  .trash-icon-container{
+    svg{
+      fill: var(--color-green);
+    }
+    
+  }
+}
+
+.fade-out-label{
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 600ms;
+  transition-timing-function: linear;
+  transition-delay: 200ms; 
 }

@@ -10,13 +10,15 @@ import Client from "../../lib/axios/axios";
 import { IUser } from "../../data/interface/IUser";
 import { GetUserData } from "../userData/userData";
 import { nowDateTime } from "../../utils/dateAndTime";
+import classNames from 'classnames';
 
 export interface ChangeProfileModalProps{
   show: boolean;
   onClose: () => void;
+  hasNewURLPath?: (newUrl:string) => void;
 }
 
-const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) => {
+const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose, hasNewURLPath}) => {
 
   const { t } = useTranslation();
   const [isShow, setIsShow] = useState<boolean>(false);
@@ -24,11 +26,23 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
   const [file, setFile] = useState<File|undefined|null>(undefined);
   const [userProfile ] = useState<IUser|undefined>(GetUserData());
   const [urlPath, setUrlPath] = useState<string|undefined>(undefined);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   useEffect(()=>{
     setIsShow(show);
     setFile(undefined);
   },[show])
+
+  useEffect(()=>{
+    if(uploadProg>=100){
+      setTimeout(() => {
+        onClose();
+        setUploadProg(0);
+        setIsUploading(false);
+      }, 2000);
+    } 
+    //eslint-disable-next-line
+  },[uploadProg])
 
   useEffect(()=>{
     if(urlPath){
@@ -38,12 +52,11 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
       urlPath: urlPath,
       date: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
       time: now.getHours()+':'+now.getMinutes(), 
-    }).then( (res) =>{
+      }).then( (res) =>{
 
-    }).catch( (err) => {
+      }).catch( (err) => {
 
-    }
-    )
+      })
     }
   },[urlPath, userProfile])
 
@@ -68,24 +81,20 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
       getDownloadURL(uploadTask.snapshot.ref)
       .then((url)=>{
         setUrlPath(url);
+        hasNewURLPath && hasNewURLPath(url);
       });
     })
   }
 
-  // const uploadProfileUrl = () =>{
-  //   var now = new Date();
-  //   Client.post<string>('/profileUrl',{
-  //     userId: userProfile?.userId,
-  //     urlPath: urlPath,
-  //     date: now.getFullYear()+'-'+now.getMonth()+'-'+now.getDate(),
-  //     time: now.getHours()+':'+now.getMinutes(), 
-  //   }).then( (res) =>{
-
-  //   }).catch( (err) => {
-
-  //   }
-  //   )
-  // }
+  const renderPercent = (percent:number) =>{
+    return(    
+    <div className="progress-bar-container">
+      <div className={classNames(percent===100? 'progress':'inprogress'," text-normal text-color")} >
+        {percent===100? 'อัพโหลดสำเร็จ':'กำลังอัพโหลด'}
+      </div>
+    </div>
+    )
+  }
   
   return(
     <Modal show={isShow} centered className="change-profile-modal">
@@ -96,7 +105,7 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
               {t('CHANGE_PROFILE')}
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose();}} >
+              <div className='x-icon' onClick={()=>{onClose(); setUploadProg(0)}} >
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
@@ -108,13 +117,14 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose}) 
               </div>
             </div>
             <div className="input-image-container">
-                <input type={'file'} multiple={false} className='input-image-file' onChange={(e)=>{setFile(e.currentTarget.files?.item(0))}}/>
+                <input type={'file'} multiple={false} className='input-image-file text-color' onChange={(e)=>{setFile(e.currentTarget.files?.item(0))}}/>
             </div>
-            <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler()}}>
+            <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler(); setIsUploading(true)}}>
                 อัพโหลด
             </div>
             <div className="d-flex justify-content-center align-items-center text-color">
-              Uploaded {uploadProg} %
+              {/*Uploaded {uploadProg} %*/}
+              {(isUploading) && renderPercent(uploadProg)}
             </div>
           </div>
         </div>

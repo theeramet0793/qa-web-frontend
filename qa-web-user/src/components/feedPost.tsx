@@ -39,6 +39,8 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOn
           currentAmount: 0,
         }
       }).then((res)=>{
+        if(res.data.length === 0)
+        setHasMore(false);
         setPosts(res.data);
         onRefreshFeed();
       }).catch((err)=>{
@@ -46,6 +48,10 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOn
       })
       // eslint-disable-next-line 
   },[filterSortBy, filterType, filterIsOnlyFollow, userProfile])
+
+  useEffect(()=>{
+    setHasMore(true);
+  },[filterSortBy, filterType, filterIsOnlyFollow])
 
   const fetchData = () =>{
     Client.get<IPostsFeed[]>('/posts/',{
@@ -84,7 +90,7 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOn
           dataLength={posts?.length? posts.length:0} //This is important field to render the next data
           next={fetchData}
           hasMore={hasMore}
-          loader={<h4 className='text-color'>Loading...</h4>}
+          loader={<h4 className='text-color' style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               <b className='text-color'>Yay! You have seen it all</b>
