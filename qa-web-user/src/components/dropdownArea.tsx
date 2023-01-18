@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 import './dropdownArea.scss'
 import ChevronDownIcon from '../assets/svg/chevron-down.svg'
@@ -37,35 +37,35 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
         className='dropdown-area-button'
         onClick={()=> setIsShowMenu(!isShowMenu)}
       >
-        <Row className='w-100'>
-          <Col sm={10} className=' text-normal text-color d-flex justify-content-start align-items-center'>
+        <Container className='content-container'>
+          <Row  className='py-1 text-normal text-color d-flex justify-content-center align-items-center'>
             <div>{'โพสต์'+renderPostType()}</div>
-          </Col>
-          <Col sm={2} className='d-flex align-items-center justify-content-center'> 
+          </Row>
+          <Row  className='d-flex align-items-center justify-content-center'> 
             <ReactSVG src={ChevronDownIcon}/>
-          </Col>
-        </Row>
+          </Row>
+        </Container>
       </button>
       {isShowMenu &&
         <button className='expand-menu text-color text-normal' onBlur={()=>{delayedCloseMenu()}}>  
           <Row className='ps-3'>
             <Row className='py-1'>
-              <Col sm='auto'>
+              <Col xs='auto' className='ps-0'>
                 <div className='checkbox-container'>
                   <Checkbox defaultCheck={check1Value} onChange={(isCheck)=>{setCheck1Value(isCheck)}}/>
                 </div>
               </Col>
-              <Col className='d-flex justify-content-start align-items-center'>            
+              <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            
                 {SOLVED}
               </Col>
             </Row>
             <Row className='py-1'>
-              <Col sm='auto'>
+              <Col xs='auto' className='ps-0'>
                 <div className='checkbox-container'>
                   <Checkbox defaultCheck={check2Value} onChange={(isCheck)=>{setCheck2Value(isCheck)}}/>
                 </div>
               </Col>
-              <Col className='d-flex justify-content-start align-items-center'>            
+              <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            
                 {UNSOLVED}
               </Col>
             </Row>

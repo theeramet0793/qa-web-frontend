@@ -250,7 +250,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
   const renderShowtags = (selectedTags:IOption[]) =>{
     return selectedTags.length > 0? (
-      <Row className="pb-4">
+      <Row className="pb-4 row-cols-auto">
         {
           selectedTags.map((tag)=>{
             return(
@@ -301,7 +301,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   return(
     <div className={classNames("post-card", isDeletedPost? 'fade-out-post':'')} >
       <Row>
-        <Col sm='auto'>
+        <Col xs='auto'>
           <div className='profile-container'>
             <RoundButton>
               { posterProfileUrl && <img src={posterProfileUrl.urlPath} alt='profile'/>}
@@ -309,7 +309,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
             </RoundButton>
           </div>
         </Col>
-        <Col sm='auto' className='d-flex flex-column justify-content-center mx-2'>
+        <Col xs='auto' className='d-flex flex-column justify-content-center mx-2'>
           <Row className='text-normal-bold text-color'>
             {posts?.username}
           </Row>
@@ -317,12 +317,6 @@ const Post: React.FC<PostProps> = ({postId}) => {
             { renderTime() }
           </Row>
         </Col>
-        {
-          foundMovie?
-          <Col className='found-movie-container-ddf'>
-            <FoundMovieLabel movieName={foundMovie.movieName}/>
-          </Col>:<></>
-        }
         <Col className='d-flex justify-content-end'>
           <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
         </Col>
@@ -335,47 +329,70 @@ const Post: React.FC<PostProps> = ({postId}) => {
         </div>
       </Row>
       {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
+      {
+          foundMovie?
+          <Row>
+            <div className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
+              <FoundMovieLabel movieName={foundMovie.movieName}/>
+            </div>
+          </Row>:<></>  
+      }
+      <Row>
+        <div className='info-container'>
+          <Row>
+            <Col>
+              <div className='upvote-label-container'>
+                <Row className='d-flex align-items-center justify-content-center'>
+                    <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
+                      <ReactSVG src={ShiftIcon}/>
+                    </Col>
+                    <Col  className='text-normal text-color'>
+                      {countUpvote+' คะแนนโหวต'}
+                    </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col>
+              <div className='comment-button-container'>
+                <Row className='d-flex align-items-center justify-content-center'>
+                    <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
+                      <ReactSVG src={CommentIcon}/>
+                    </Col>
+                    <Col className='text-normal text-color'>
+                      {countComment+' ความคิดเห็น'}
+                    </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col>
+              <div className='follow-label-container'>
+                <Row className='d-flex align-items-center justify-content-center'>
+                    <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
+                      <ReactSVG src={BookmarkIcon}/>
+                    </Col>
+                    <Col className='text-normal text-color'>
+                      {countFollow+' ผู้ติดตาม'}
+                    </Col>
+                </Row>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </Row>
       <Row>
         <div className='option-container'>
           <Row>
-            <Col sm='auto'>
-              <Row sm='auto' className='d-flex justify-content-start align-items-center'>
+            <Col xs='auto'>
+              <Row xs='auto' className='d-flex justify-content-start align-items-center'>
                 <Col>
                   <div className='upvote-button-container'>
                     <RoundButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true}>
                       <ReactSVG src={ShiftIcon}/>
+                      <div className='px-2 text-normal text-color'>{'โหวตขึ้น'}</div>
                     </RoundButton>
                   </div>
                 </Col>
-                <Col>
-                  <div className='text-normal text-color'>{countUpvote+' ความนิยม'}</div>
-                </Col>
               </Row>
-            </Col>
-            <Col sm='auto'>
-              <div className='comment-button-container d-flex justify-content-center align-items-center'>
-                <Row>
-                  <Col sm='auto' className='pe-0'>
-                    <ReactSVG src={CommentIcon}/>
-                  </Col>
-                  <Col sm='auto' className='text-normal text-color'>
-                    {countComment+' ความคิดเห็น'}
-                  </Col>
-                </Row>
-                  
-              </div>
-            </Col>
-            <Col>
-              <div className='follow-label-container d-flex justify-content-center align-items-center'>
-                <Row>
-                  <Col sm='auto' className='pe-0'>
-                    <ReactSVG src={BookmarkIcon}/>
-                  </Col>
-                  <Col sm='auto' className='text-normal text-color'>
-                    {countFollow+' คนติดตามโพสต์นี้'}
-                  </Col>
-                </Row>
-              </div>
             </Col>
             { isNotMyPost()?
               <Col className='d-flex justify-content-end'>
@@ -398,24 +415,24 @@ const Post: React.FC<PostProps> = ({postId}) => {
           <Row>
             <div className='comment-row'>
                 <Row>
-                  <Col sm='auto'>
+                  <Col xs='auto' className='px-1'>
                     <div className='commenter-profile'>
                       <RoundLabel >
                         <Profile enableDropdown={false} disableClick={true}/>
                       </RoundLabel>
                     </div>
                   </Col>
-                  <Col className='d-flex justify-content-center align-items-center'>
+                  <Col className='px-1 d-flex justify-content-center align-items-center'>
                     <div className='comment-input'>
                       <TextareaAutosize className='comment-box text-normal' placeholder={t('TYPE_ANSWER')} value={comment} onChange={(e)=>{setComment(e.currentTarget.value)}}/>
                     </div>
                   </Col>
                 </Row>
               { comment &&
-                  <Row sm='auto' className='d-flex justify-content-center align-items-center pt-2'>
+                  <Row xs='auto' className='d-flex justify-content-center align-items-center pt-2'>
                     <div className='send-button' onClick={()=>{sendComment();}}>
                       <Row>
-                        <Col sm='auto' className='pe-0'><ReactSVG src={SendIcon}/></Col>
+                        <Col xs='auto' className='pe-0'><ReactSVG src={SendIcon}/></Col>
                         <Col className='pe-2 text-normal'>{'แสดงความคิดเห็น'}</Col>
                       </Row>
                     </div> 

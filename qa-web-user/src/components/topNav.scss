@@ -7,103 +7,117 @@
     padding: 1rem 0rem;
     width: 100%;
     border-bottom: 1px solid var(--color-third-bg);
-
-    .logo-container{
-      width: 207px;
-      height: 50px;
-
-      .logo-oblong{
+    .content-container{
+      width: 100%;
+      margin: 0px;
+      .logo-container{
         width: 100%;
         height: 100%;
-        border-radius: 999px;
+        padding-left: 12%;
         display: flex;
-        justify-content: center;
         align-items: center;
-        svg{
-          fill: var(--color-white);
-        }
         .logo{
+          width: 100%;
+          height: 100%;
+          svg{
+            width: 100%;
+            height: 100%;
+            fill: var(--color-white);
+          }
           &:hover{
             cursor: pointer;
           }
         }
+        
       }
-    }
-    .search-box-container-qaz{
-      max-width: 934px;
-      width: 100%;
-      height: 50px;
-    }
-    .register-btn-container{
-      width:  fit-content;
-      height: 50px;
-
-      .btn-reg{
+      .search-box-container-qaz{
+        max-width: 934px;
+        width: 100%;
+        height: 40px;
+        max-width: 600px;
+      }
+      .register-row{
+        width: 100%;
         height: 100%;
-        color: var(--color-text);
-        border-radius: 999px;
-        background-color: var(--color-third-bg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem 2rem;
-        &:hover{
-          cursor: pointer;
+        @media only screen and (max-width: 760px){
+          display: none;
+        }
+        .register-btn-container{
+          width:  100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .btn-reg{
+            width: 100%;
+            height: fit-content;
+            color: var(--color-text);
+            border-radius: 999px;
+            background-color: var(--color-third-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 10%;
+            text-align: center;
+            white-space: nowrap;
+            &:hover{
+              cursor: pointer;
+            }
+          }
+        }
+        .sign-btn-container{
+          width:  100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+    
+          .btn-sign{
+            width: 100%;
+            height: fit-content;
+            color: var(--color-text);
+            border-radius: 999px;
+            background-color: var(--color-primary-button);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 10%;
+            text-align: center;
+            &:hover{
+              cursor: pointer;
+            }
+          }
         }
       }
-    }
-    .sign-btn-container{
-      width:  fit-content;
-      height: 50px;
-
-      .btn-sign{
-        height: 100%;
-        color: var(--color-text);
-        border-radius: 999px;
-        background-color: var(--color-primary-button);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.5rem 2rem;
-        &:hover{
-          cursor: pointer;
+      .top-nav-profile-container{
+        width: 40px;
+        height: 40px;
+      }
+      .noti-container{
+        width: 40px;
+        height: 40px;
+      }
+      .navbar-more-menu-container{
+        @media only screen and (min-width: 760px){
+          display: none;
         }
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
       }
     }
-    .top-nav-profile-container{
-      width: 50px;
-      height: 50px;
-    }
-    .noti-container{
-      width: 50px;
-      height: 50px;
-    }
-
   }
 
 
-/* iphone se vertical <=600px */
-@media only screen and (max-width: 600px) { 
+/* iphone xr*/
+// @media only screen and (max-width: 420px) { 
+//   .logo-container{
+//     width: 150px;
+//     height: 30px;
+//   }
+//  }
 
- }
 
-/* iphone se horizontal 600-768px */
-@media only screen and (min-width: 600px) { 
-
-}
-
-/* ipad  vertical 768-992px */
-@media only screen and (min-width: 768px) { 
-
- }
-
-/* ipad  horizontal 992-1200 px */
-@media only screen and (min-width: 992px) { 
-
- }
-
-/* notebook, pc screen >1200px */
-@media only screen and (min-width: 1200px) { 
-
- }
 

@@ -67,18 +67,22 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
   }
 
   const updateComment = () =>{
-    Client.patch<string>('/update/comment',{
-      commentDetail: editComment,
-      commentId: comment?.commentId,
-      date: nowDate(),
-      time: nowTime(),
-    })
-    .then((res)=>{
+    if(editComment){
+      Client.patch<string>('/update/comment',{
+        commentDetail: editComment,
+        commentId: comment?.commentId,
+        date: nowDate(),
+        time: nowTime(),
+      })
+      .then((res)=>{
+        setDisableTextArea(true);
+        setTriggerUpdateSuccess(!triggerUpdateSuccess);
+      }).catch((err)=>{
+        console.log(err);
+      })
+    }else{
       setDisableTextArea(true);
-      setTriggerUpdateSuccess(!triggerUpdateSuccess);
-    }).catch((err)=>{
-      console.log(err);
-    })
+    }
   }
 
   const renderTime = () =>{
@@ -125,7 +129,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
   return(
     <div className={classNames('comment-main-container', isCommentDeleted? 'fade-out-comment':'')}>
       <Row>
-        <Col sm='auto' className='px-3'>
+        <Col xs='auto' className='px-1'>
           <div className='profile-commenter-container'>
             <RoundButton>
               { commenterProfileUrl && <img src={commenterProfileUrl.urlPath} alt='profile'/>}
@@ -133,7 +137,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
             </RoundButton>
           </div>
         </Col>
-        <Col>
+        <Col className='px-1'>
           <div className='comment-content-container'>
             <div className='comment-card'>
               <Row className='px-0 py-0'>
@@ -155,7 +159,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
               </Row>
             </div>
             <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
-              <Col sm='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
+              <Col xs='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
               <Col className='text-small text-color'>{renderTime()}</Col>
             </Row>
             { !disableTextArea &&

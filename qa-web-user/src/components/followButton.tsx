@@ -18,7 +18,7 @@ const FollowButton:React.FC<FollowButtonprops> = ({isActive, onClick, disable}) 
   return(
     <div className={classNames( isActive? 'follow-active':'', disable? 'follow-button-disable':'' ,'follow-button text-normal text-color')} onClick={()=>{!disable && onClick()}}>
       <Row>
-        <Col sm='auto' className='d-flex justify-content-center align-items-center pe-0'>
+        <Col xs='auto' className='d-flex justify-content-center align-items-center pe-0'>
           <ReactSVG src={FollowIcon} className=''/>
         </Col>
         <Col className='d-flex justify-content-start align-items-center'>

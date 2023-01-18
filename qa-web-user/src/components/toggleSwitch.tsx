@@ -11,10 +11,18 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({defaultValue, onChange}) => 
   const[value, setValue] = useState<boolean>(defaultValue);
 
   return(
-    <label className="switch">
-      <input type="checkbox" checked={value} onChange={(e)=>{setValue(e.currentTarget.checked); onChange(e.currentTarget.checked)}}/>
-      <span className="slider round"></span>
-    </label>
+    <div className='custom-toggle-switch'>
+      <div className="form-check form-switch">
+      <input 
+        className="form-check-input" 
+        type="checkbox" 
+        id="flexSwitchCheckChecked" 
+        checked={value} 
+        onChange={(e)=>{setValue(e.currentTarget.checked); onChange(e.currentTarget.checked)}}
+      />
+      </div>
+    </div>
+
   )
 }
 

@@ -15,7 +15,7 @@ const  CreatePost: React.FC<CreatePostProps> = ({onClickCreate}) =>{
     <div className="create-post-container">
       <div className="create-post-card">
         <Row>
-          <Col sm={'auto'}>
+          <Col xs={'auto'}>
             <div className='profile-container'>
               <Profile enableDropdown={false}/>
             </div>

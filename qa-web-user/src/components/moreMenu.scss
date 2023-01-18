@@ -4,6 +4,7 @@
   position: relative;
 
   .more-menu-button{
+    position: relative;
     background-color: transparent;
     display: flex;
     justify-content: center;
@@ -18,10 +19,10 @@
     position: absolute;
     background-color: var(--color-second-bg);
     box-shadow: 0px 0px 10px var(--color-main-bg);
-    width: max-content;
+    width: fit-content;
     height: fit-content;
     right: 0;
-    top: 35px;
+    top: 120%;
     height: fit-content;
     border-radius: 12px;
     padding: 0.5rem;
@@ -29,9 +30,10 @@
     .option-row {
       display: flex-start;
       align-items: center;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.5rem;
       color: var(--color-text);
       border-radius: 8px;
+      min-width: max-content;
 
         &:hover{
           cursor: pointer;

@@ -1,11 +1,13 @@
 
 .feed-post-container{
   background-color: var(--color-main-bg);
-  padding-bottom: 3rem;
+  padding: 0rem 1rem 3rem 1rem ;
   width: 100%;
   min-height: 60vh;
 
   .posts-container{
+    width: 100%;
+    max-width: 700px;
     display: flexbox;
 
     .post-container{

@@ -3,7 +3,7 @@ import './dropdownSelect.scss'
 import { IOption } from '../data/interface/IOption';
 import { useState } from 'react';
 import ChevronDownIcon from '../assets/svg/chevron-down.svg'
-import { Col, Row } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 
 
@@ -27,14 +27,14 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({menuOptions, onSelectOpt
         onClick={()=> setIsShowMenu(!isShowMenu)}
         onBlur={()=>{delayedCloseMenu()}}
       >
-        <Row className='w-100'>
-          <Col sm={10} className=' text-normal text-color d-flex justify-content-start align-items-center'>
+        <Container className='content-container'>
+          <Row className='py-1 text-normal text-color d-flex justify-content-center align-items-center'>
             {selectedOption.label}
-          </Col>
-          <Col sm={2} className='d-flex align-items-center justify-content-center'> 
+          </Row>
+          <Row className='d-flex align-items-center justify-content-center'> 
             <ReactSVG src={ChevronDownIcon}/>
-          </Col>
-        </Row>
+          </Row>
+        </Container>
       </button>
       {isShowMenu &&
         <div className='expand-menu'>  

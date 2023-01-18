@@ -41,7 +41,7 @@ const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilt
               </Col>
               <Col className='d-flex justify-content-center'>
                 <Row className="switch-container text-normal text-color d-flex justify-content-center align-items-center">
-                  <Col sm='auto' className="d-flex justify-content-center ">{t('ONLY_FOLLOWING_POST')}</Col>
+                  <Col sm='auto' className="d-flex justify-content-center text-center">{t('ONLY_FOLLOWING_POST')}</Col>
                   <Col className="py-1 d-flex justify-content-center ">
                     <ToggleSwitch defaultValue={defaultOnlyFollow} onChange={(result)=>{onFilterOnlyFollowChange(result); }}/>
                   </Col>

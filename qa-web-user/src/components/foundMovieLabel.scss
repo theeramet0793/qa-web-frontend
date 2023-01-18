@@ -1,12 +1,12 @@
 
 .found-movie-label-container{
-  width: fit-content;
+  width: 100%;
   height: 100%;
   background-color: var(--color-green);
   color: var(--color-text);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 10px;
 }
