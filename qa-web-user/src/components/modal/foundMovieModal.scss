@@ -2,24 +2,29 @@
 .found-movie-modal{
   
   .modal-dialog{
-    width: fit-content;
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin: auto;
+    padding: 0rem 1rem;
+    max-width: 600px;
     
     .modal-content{
       background-color: transparent;
-      width: fit-content;
+      width: 100%;
 
       .modal-body{
-        background-color: var(--color-second-bg);
+        @media only screen and (min-width: 450px) {
+          padding: 2rem;
+        }
         border-radius: 12px;
-        padding: 0px;
-        width: fit-content;
+        background-color: var(--color-second-bg);
         border: 1px solid var(--color-third-bg);
+        padding: 1rem;
+        width: 100%;
 
         .content-container{
-          padding: 39px 38px;
-          width: fit-content;
+          width: 100%;
 
           .header-container{
             display: flex;
@@ -35,6 +40,7 @@
               align-items: center;
               padding: 0rem 4rem;
               color: var(--color-text);
+              text-align: center;
             }
   
             .x-button-container{
@@ -71,30 +77,35 @@
           }
 
           .body-container{
-            width: 594px;
+            width: 100%;
             padding-top: 1rem;
-            .add-movie-name-container{
+            .add-movie-name-container-vvbi{
               width: 100%;
               height: fit-content;
-              padding: 1rem 0rem;
+              padding: 1rem;
             }
-            .button-save{
-              background-color: var(--color-red);
-              color: var(--color-text);
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0.7rem 0rem;
-              border-radius: 999px;
+            .button-save-container{
+              width: 100%;
+              padding: 1rem 1rem;
+              .button-save{
+                background-color: var(--color-red);
+                color: var(--color-text);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.7rem 0rem;
+                border-radius: 999px;
 
-              &:hover{
-                cursor: pointer;
-              }
+                &:hover{
+                  cursor: pointer;
+                }
 
-              &:active{
-                opacity: 0.8;
-              }
+                &:active{
+                  opacity: 0.8;
+                }
             }
+            }
+
           }
         }
       }

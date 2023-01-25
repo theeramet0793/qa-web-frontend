@@ -79,11 +79,11 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
 
   const renderShowtags = () =>{
     return(
-      <Row className="pt-3">
+      <Row className="pt-3 tags-container">
         {
           selectedTags.map((tag)=>{
             return(
-            <Col sm='auto'>
+            <Col xs='auto'>
               <Tag tagName={tag.label} tagId={tag.value} removable={true} onRemoveTag={(tagId)=>{removeTagFromList(tagId)}}/>
             </Col>)
           })
@@ -109,7 +109,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
   }
   
   return(
-    <Modal show={isShow} centered className="create-post-modal" onHide={()=>{onClose(); setSelectedTags([]);}}>
+    <Modal show={isShow} centered className="create-post-modal" onHide={()=>{onClose(); setSelectedTags([]); setTagOptions([]);}}>
       <Modal.Body>
         <div className="content-container">
           <div className='header-container'>
@@ -117,21 +117,21 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
               {t('CREATE_POST')}
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose(); setSelectedTags([]);}} >
+              <div className='x-icon' onClick={()=>{onClose(); setSelectedTags([]); setTagOptions([]);}} >
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
           </div>
           <div className='body-container'>
             <Row>
-              <Col sm='auto'>
+              <Col xs='auto' className="d-flex justify-content-center align-items-center">
                 <div className='create-post-profile-container'>
                   <Profile enableDropdown={false}/> 
                 </div>
               </Col>
               <Col>
-                <Row className="text-medium-bold text-color ps-4">{userProfile?.username}</Row>
-                <Row className="ps-4 text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="text-medium-bold text-color ">{userProfile?.username}</Row>
+                <Row className="text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
               </Col>
             </Row>
             <Row>
@@ -144,7 +144,7 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
               </div>
             </Row>
             <Row>
-              <div className="search-bar-container">
+              <div className="search-bar-container-sdd">
                 <SearchBar 
                   placeholder="เพิ่มแท็ก..." 
                   onInputchange={searchTag} 
@@ -155,8 +155,10 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
             </Row>
             { selectedTags && renderShowtags()}
             <Row>
-              <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
-                โพสต์
+              <div className="button-create-container">
+                <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
+                  โพสต์
+                </div>
               </div>
             </Row>
           </div>

@@ -14,15 +14,12 @@ export interface HomePageProps{
 
 }
 
-const HomePage: React.FC<HomePageProps> = () =>{
+const SearchingPage: React.FC<HomePageProps> = () =>{
 
   const navigate = useNavigate();
   const [isShowRegModal, setIsShowRegModal] = useState<boolean>(false);
   const [isShowSigModal, setIsShowSigModal] = useState<boolean>(false);
   const [isSignInComplete, setIsSignInComplete] = useState<boolean>(false);
-  const [isShowCreatePostCard, setIsShowCreatePostCard] = useState<boolean>(false);
-  const [isShowCreatePostModal, setIsShowCreatePostModal] = useState<boolean>(false);
-  const [newPostId, setNewPostId] = useState<number|undefined>(undefined);
   const [filterSortBy, setFilterSortBy] = useState<SortBy>(SortBy.Date);
   const [filterType, setFilterType] = useState<PostType>(PostType.All);
   const [filterOnlyFollow, setFilterOnlyFollow] = useState<boolean>(false);
@@ -34,24 +31,15 @@ const HomePage: React.FC<HomePageProps> = () =>{
         onClickReg={()=> setIsShowRegModal(true)}
         onClickSign={()=> setIsShowSigModal(true)}
         isSignInSuccess={isSignInComplete}
-        onSignOut={()=>{localStorage.removeItem('qa_access_token'); window.location.reload(); setIsShowCreatePostCard(false);}}
-        onSignInSuccess={()=>{setIsShowCreatePostCard(true)}}
+        onSignOut={()=>{localStorage.removeItem('qa_access_token'); window.location.reload(); }}
+        onSignInSuccess={()=>{/*Do nothing*/}}
         onProfile={()=> {navigate('/profile')}}
       />
-      {isShowCreatePostCard && <CreatePost onClickCreate={()=>{setIsShowCreatePostModal(true)}}/>}
-      <FilterPost 
-        onFilterSortByChange={(sortby)=>{setFilterSortBy(sortby)}} 
-        onFilterTypeChange={(type)=>{setFilterType(type)}} 
-        onFilterOnlyFollowChange={(isOnlyFollow)=>{setFilterOnlyFollow(isOnlyFollow)}}
-        defaultOnlyFollow={filterOnlyFollow}
-      />
-      <OwnerNewPost newPostId={newPostId} clearData={triggerOnRefresh}/>
       <FeedPost filterSortBy={filterSortBy} filterPostType={filterType} filterIsOnlyFollow={filterOnlyFollow} onRefreshFeed={()=>{setTriggerOnRefresh(!triggerOnRefresh)}}/>
       <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} />
       <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true); navigate('/loading')}}/>
-      <CreatePostModal show={isShowCreatePostModal} onClose={()=> setIsShowCreatePostModal(false)} onCreateNewPostSuccess={(postId)=>{setNewPostId(postId)}}/>
     </>
   )
 }
 
-export default HomePage;
+export default SearchingPage;

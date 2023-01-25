@@ -1,6 +1,7 @@
 
 .search-bar-container{
-  width: fit-content;
+  width: 100%;
+  height: 100%;
   position: relative;
   .search-box-container{
     width: 100%;
@@ -8,8 +9,8 @@
   
     .search-icon{
       position: absolute;
-      padding-left: 1rem;
-      padding-top: 0.7rem;
+      padding-left: 0.7rem;
+      padding-top: 0.5rem;
     }
   
     .search-box{
@@ -18,7 +19,7 @@
       border-radius: 999px;
       background: var(--color-third-bg);
       border: none;
-      padding-left: 3.5rem;
+      padding-left: 2.5rem;
       color: var(--color-text);
   
       &:focus{

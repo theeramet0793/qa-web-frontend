@@ -25,6 +25,12 @@
         border-radius: 999px;
         object-fit: cover;
       }
+
+      svg{
+        max-width: 40px;
+        max-height: 40px;
+        fill: var(--color-third-bg);
+      }
     }
 
     .disable{

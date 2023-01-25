@@ -83,7 +83,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
           </div>
           <div className='body-container'>
             <Row>
-              <div className='add-movie-name-container'>
+              <div className='add-movie-name-container-vvbi'>
                 <AddMovieName 
                   defaultMovieName={defaultMovieName}
                   menuOptions={movieOptions} 
@@ -93,8 +93,10 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
               </div> 
             </Row>
             <Row>
-              <div className={classNames('button-save text-normal-bold')} onClick={()=>{handleSubmit()}}>
-                บันทึก
+              <div className='button-save-container'>
+                <div className={classNames('button-save text-normal-bold')} onClick={()=>{handleSubmit()}}>
+                  บันทึก
+                </div>
               </div>
             </Row>
           </div>

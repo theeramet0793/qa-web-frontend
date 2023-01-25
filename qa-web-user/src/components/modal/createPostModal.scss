@@ -2,24 +2,26 @@
 .create-post-modal{
 
   .modal-dialog{
-    width: max-content;
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin: auto;
+    padding: 0rem 1rem;
+    max-width: 600px;
 
     .modal-content{
       background-color: transparent;
-      width: fit-content;
+      width: 100%;
 
       .modal-body{
         border-radius: 12px;
         background-color: var(--color-second-bg);
         border: 1px solid var(--color-third-bg);
-        padding: 0px;
-        width: fit-content;
+        padding: 1rem;
+        width: 100%;
 
         .content-container{
-          padding: 39px 38px;
-          width: fit-content;
+          width: 100%;
 
           .header-container{
             display: flex;
@@ -62,17 +64,16 @@
           }
 
           .body-container{
-            width: 774px;
+            width: 100%;
             padding-top: 1rem;
 
             .create-post-profile-container{
-              width: 68px;
-              height: 68px;
-              padding: 0rem 0rem;
+              width: 40px;
+              height: 40px;
             }
 
             .post-detail-container{
-              padding: 1.5rem 0rem;
+              padding: 1.5rem 1rem;
 
               .post-detail-input{
                 border: none;
@@ -90,29 +91,36 @@
 
               }
             }
-            .search-bar-container{
+            .search-bar-container-sdd{
               width: 100%;
-              height: 51px;
-              padding: 0rem 0rem;
+              height: 40px;
+              padding: 0rem 1rem;
             }
-            .button-create-post{
-              margin-top: 2rem;
-              background-color: var(--color-primary-button);
-              color: var(--color-text);
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0.7rem 0rem;
-              border-radius: 999px;
+            .tags-container{
+              padding: 0rem 1rem;
+            }
+            .button-create-container{
+              padding: 0rem 1rem;
+              .button-create-post{
+                margin-top: 1rem;
+                background-color: var(--color-primary-button);
+                color: var(--color-text);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0.7rem 0rem;
+                border-radius: 999px;
 
-              &:hover{
-                cursor: pointer;
-              }
+                &:hover{
+                  cursor: pointer;
+                }
 
-              &:active{
-                opacity: 0.8;
+                &:active{
+                  opacity: 0.8;
+                }
               }
             }
+
           }
         }
       }

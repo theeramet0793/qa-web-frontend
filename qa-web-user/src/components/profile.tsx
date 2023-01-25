@@ -1,6 +1,5 @@
-import { ReactSVG } from 'react-svg';
+
 import './profile.scss'
-import ProfileIcon from '../assets/svg/person-fill.svg'
 import { useEffect, useState } from 'react';
 import { IUser } from '../data/interface/IUser';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +7,7 @@ import Client from '../lib/axios/axios';
 import { IProfileImage } from '../data/interface/IProfileImage';
 import classNames from 'classnames'
 import { GetUserData } from './userData/userData';
+import DefaultProfile from '../assets/images/default-profile.jpg'
 
 
 export interface ProfileProps{
@@ -70,8 +70,7 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, 
         onClick={()=>{setIsShowDropdown(!isShowDropdown)}} 
         onBlur={()=>{delayedCloseMenu()}}
       >
-        {profileUrl && <img src={profileUrl} alt='profile'/>}
-        {!profileUrl && <ReactSVG src={ProfileIcon}/>}
+        <img src={profileUrl? profileUrl:DefaultProfile} alt='profile'/>
       </button>
       {isShowDropdown && enableDropdown &&
         <div className='expand-profile-menu'>  

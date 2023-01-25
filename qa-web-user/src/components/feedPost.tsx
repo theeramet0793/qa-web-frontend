@@ -10,12 +10,12 @@ import { GetUserData } from './userData/userData';
 
 export interface FeedPostProps{
   filterSortBy:SortBy;
-  filterType:PostType;
+  filterPostType:PostType;
   filterIsOnlyFollow:boolean;
   onRefreshFeed: () => void;
 }
 
-const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOnlyFollow, onRefreshFeed}) => {
+const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filterIsOnlyFollow, onRefreshFeed}) => {
 
   const [posts, setPosts] = useState<IPostsFeed[]|undefined>(undefined);
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
@@ -33,7 +33,7 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOn
       Client.get<IPostsFeed[]>('/posts/',{
         params:{
           sortby:filterSortBy,
-          type: filterType,
+          type: filterPostType,
           followby: filterIsOnlyFollow? userProfile?.userId:'',
           fetchAmount: fetchPerTime,
           currentAmount: 0,
@@ -47,17 +47,17 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterType, filterIsOn
         console.log(err);
       })
       // eslint-disable-next-line 
-  },[filterSortBy, filterType, filterIsOnlyFollow, userProfile])
+  },[filterSortBy, filterPostType, filterIsOnlyFollow, userProfile])
 
   useEffect(()=>{
     setHasMore(true);
-  },[filterSortBy, filterType, filterIsOnlyFollow])
+  },[filterSortBy, filterPostType, filterIsOnlyFollow])
 
   const fetchData = () =>{
     Client.get<IPostsFeed[]>('/posts/',{
       params:{
         sortby:filterSortBy,
-        type: filterType,
+        type: filterPostType,
         followby: filterIsOnlyFollow? userProfile?.userId:'',
         fetchAmount: fetchPerTime,
         currentAmount: currentPostCount,

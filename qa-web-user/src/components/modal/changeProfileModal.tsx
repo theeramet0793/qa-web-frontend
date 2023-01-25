@@ -69,6 +69,7 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose, h
       alert("Please choose a file first!");
       return;
     }
+    setIsUploading(true);
     const storageRef = ref(firebaseStorage,`/profileImage/${'user-'+userProfile?.username+'-'+userProfile?.userId+'-'+nowDateTime()}`)
     const uploadTask = uploadBytesResumable(storageRef,file)
 
@@ -119,7 +120,7 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose, h
             <div className="input-image-container">
                 <input type={'file'} multiple={false} className='input-image-file text-color' onChange={(e)=>{setFile(e.currentTarget.files?.item(0))}}/>
             </div>
-            <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler(); setIsUploading(true)}}>
+            <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler();}}>
                 อัพโหลด
             </div>
             <div className="d-flex justify-content-center align-items-center text-color">

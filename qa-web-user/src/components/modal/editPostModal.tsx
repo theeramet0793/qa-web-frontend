@@ -83,11 +83,11 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
 
   const renderShowtags = () =>{
     return(
-      <Row className="pt-3">
+      <Row className="pt-3 tags-container">
         {
           selectedTags.map((tag)=>{
             return(
-            <Col sm='auto' key={tag.value}>
+            <Col xs='auto' key={tag.value}>
               <Tag tagName={tag.label} tagId={tag.value} removable={true} onRemoveTag={(tagId)=>{removeTagFromList(tagId)}}/>
             </Col>)
           })
@@ -128,14 +128,14 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
           </div>
           <div className='body-container'>
             <Row>
-              <Col sm='auto'>
+              <Col xs='auto' className="d-flex justify-content-center align-items-center">
                 <div className='create-post-profile-container'>
                   <Profile enableDropdown={true}/> 
                 </div>
               </Col>
               <Col>
-                <Row className="text-medium-bold text-color ps-4">{userProfile?.username}</Row>
-                <Row className="ps-4 text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="text-medium-bold text-color">{userProfile?.username}</Row>
+                <Row className="text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
               </Col>
             </Row>
             <Row>
@@ -149,7 +149,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
               </div>
             </Row>
             <Row>
-              <div className="search-bar-container">
+              <div className="search-bar-container-sdd">
                 <SearchBar 
                   placeholder="เพิ่มแท็ก..." 
                   onInputchange={searchTag} 
@@ -160,8 +160,10 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
             </Row>
             { selectedTags && renderShowtags()}
             <Row>
-              <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
-                บันทึกโพสต์
+              <div className="button-create-container">
+                <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
+                  บันทึกโพสต์
+                </div>
               </div>
             </Row>
           </div>

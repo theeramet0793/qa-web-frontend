@@ -2,23 +2,29 @@
 .change-profile-modal{
 
   .modal-dialog{
-    width: fit-content;
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin: auto;
+    padding: 0rem 1rem;
+    max-width: 600px;
 
     .modal-content{
       background-color: transparent;
-      width: fit-content;
+      width: 100%;
 
       .modal-body{
-        background-color: var(--color-second-bg);
+        @media only screen and (min-width: 450px) {
+          padding: 2rem;
+        }
         border-radius: 12px;
-        padding: 0px;
-        width: fit-content;
+        background-color: var(--color-second-bg);
+        border: 1px solid var(--color-third-bg);
+        padding: 1rem;
+        width: 100%;
 
         .content-container{
-          padding: 2rem;
-          width: fit-content;
+          width: 100%;
 
           .header-container{
             display: flex;
@@ -88,9 +94,23 @@
             }
             .input-image-container{
               padding: 1rem 0rem;
+              input{
+                width: 100%;
+                background-color: var(--color-gray);
+                border-radius: 999px;
+                text-overflow: ellipsis;
+                padding: 0.2rem;
+                &::file-selector-button{
+                  border-radius: 999px ;
+                  border: none;
+                  &:hover{
+                    cursor: pointer;
+                  }
+                }
+              }
             }
             .button-upload-picture{
-              width: 561px;
+              width: 100%;
               margin-top: 0rem;
               background-color: var(--color-primary-button);
               color: var(--color-text);

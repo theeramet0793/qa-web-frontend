@@ -27,16 +27,14 @@ const SearchBar: React.FC<SearchBarProps> = ({menuOptions, onSelectOption, place
   return(
     <div className='search-bar-container'>
       <div className='search-box-container'>
-        <div className='search-box-container'>
-          <ReactSVG src={SearchIcon} className='search-icon'/>
-          <input 
-            type='text' 
-            onChange={(e)=>{setValue(e.currentTarget.value);  onInputchange(e.currentTarget.value);}} 
-            value={value}
-            className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
-            placeholder={placeholder? placeholder:t('SEARCH_POST')}
-          />
-        </div>
+        <ReactSVG src={SearchIcon} className='search-icon'/>
+        <input 
+          type='text' 
+          onChange={(e)=>{setValue(e.currentTarget.value);  onInputchange(e.currentTarget.value);}} 
+          value={value}
+          className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
+          placeholder={placeholder? placeholder:t('SEARCH_POST')}
+        />
       </div>
       {(thisMenuOptions.length!==0) &&
         <div className='menu-list'>

@@ -52,7 +52,7 @@ const UserProfile:React.FC<UserProfileProps> = ({onClose, onChangeProfile}) =>{
               <div className='edit-picture-container text-color text-normal'>
                 <div className='btn-edit-picture' onClick={()=>{setIsShowChangeProfileModal(true)}}>
                   <Row>
-                    <Col sm='auto' className='pe-0'><ReactSVG src={PencilIcon}/></Col>
+                    <Col xs='auto' className='pe-0'><ReactSVG src={PencilIcon}/></Col>
                     <Col>เปลี่ยนรูปโปรไฟล์</Col>
                   </Row> 
                 </div>
@@ -62,15 +62,15 @@ const UserProfile:React.FC<UserProfileProps> = ({onClose, onChangeProfile}) =>{
               <Row className='py-2 d-flex justify-content-center align-items-center'>
                 <Row className='info-container d-flex justify-content-center align-items-center'>
                   <Col className='text-color text-normal'>Username: {userProfile?.username}</Col>
-                  <Col sm='auto' className='text-color'>
+                  <Col xs='auto' className='text-color'>
                     <div><ReactSVG src={PencilIcon}/></div>
                   </Col>
                 </Row>
               </Row>
               <Row className='py-2 d-flex justify-content-center align-items-center'>
                 <Row className='info-container d-flex justify-content-center align-items-center'>
-                  <Col className='text-color tetx-normal'>Email: {userProfile?.email}</Col>
-                  <Col sm='auto' className='text-color'>
+                  <Col className='text-color text-normal'>Email: {userProfile?.email}</Col>
+                  <Col xs='auto' className='text-color'>
                     <div><ReactSVG src={PencilIcon}/></div>
                   </Col>
                 </Row>
@@ -78,7 +78,7 @@ const UserProfile:React.FC<UserProfileProps> = ({onClose, onChangeProfile}) =>{
               <Row className='py-2 d-flex justify-content-center align-items-center'>
                 <Row className='info-container d-flex justify-content-center align-items-center'>
                   <Col className='text-color text-normal'>Password</Col>
-                  <Col sm='auto' className='text-color'>
+                  <Col xs='auto' className='text-color'>
                     <div><ReactSVG src={PencilIcon}/></div>
                   </Col>
                 </Row>

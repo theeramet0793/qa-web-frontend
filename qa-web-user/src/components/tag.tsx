@@ -15,9 +15,9 @@ const Tag:React.FC<TagProps> = ({tagName, tagId, onRemoveTag, removable}) =>{
   return(
     <div className="tag-container text-normal">
       <Row>
-        <Col sm='auto'>{tagName}</Col>
+        <Col xs='auto' className='d-flex justify-content-center align-items-center'>{tagName}</Col>
         { removable &&
-          <Col sm='auto'>
+          <Col xs='auto'>
             <div className="x-icon-container" onClick={()=>{onRemoveTag && onRemoveTag(tagId)}}>
               <ReactSVG src={XIcon}/>
             </div> 

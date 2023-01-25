@@ -331,7 +331,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
       {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
       {
           foundMovie?
-          <Row>
+          <Row className='d-flex justify-content-center align-items-center'>
             <div className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
               <FoundMovieLabel movieName={foundMovie.movieName}/>
             </div>

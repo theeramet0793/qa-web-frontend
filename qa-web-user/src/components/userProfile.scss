@@ -1,19 +1,20 @@
 
 .user-profile-container-ghjk{
   width: 100%;
-  min-height: 89vh;
+  min-height: 92vh;
   display: flex;
   background-color: var(--color-main-bg);
   justify-content: center;
   align-items: center;
-  padding: 2rem 0rem;
+  padding: 2rem 1rem;
 
   .user-profile-child-container{
-    width: fit-content;
+    width: 100%;
+    max-width: 700px;
     height: 100%;
     display: flex-start;
     justify-content: center;
-    padding: 2rem 3rem;
+    padding: 1.5rem;
     background-color: var(--color-second-bg);
     border-radius: 12px;
     .btn-return{
