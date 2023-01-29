@@ -50,7 +50,6 @@ const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilt
             </Row>
           </div>  
       </div>
-
     </div>
   )
 }

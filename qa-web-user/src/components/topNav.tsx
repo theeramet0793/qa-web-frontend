@@ -17,6 +17,7 @@ import Client from '../lib/axios/axios';
 import { IMainSearch } from '../data/interface/IMainSearch';
 import TagIcon from '../assets/svg/tag.svg'
 import PersonIcon from '../assets/svg/person-fill.svg'
+import { SearchType } from '../data/enum/filterEnum';
 
 export interface TopNavProps{
   onClickReg: () => void;
@@ -26,14 +27,17 @@ export interface TopNavProps{
   onSignInSuccess: ()=>void;
   onProfile: ()=>void;
   newProfileUrl?: string;
+  defaultSearch?: string;
 }
 
-const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess, onSignOut, onSignInSuccess, onProfile, newProfileUrl}) => {
+const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSuccess, onSignOut, onSignInSuccess, onProfile, newProfileUrl, defaultSearch}) => {
 
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
   const [searchMenuOptions, setSearchMenuOptions] = useState<IMainSearchOption[]>([]);
+  const [selectedOption , setSelectedOption] = useState<IMainSearchOption|undefined>(undefined);
   const [resultSearch, setResultSearch] = useState<IMainSearch|undefined>(undefined);
   const [searchString, setSearchString] = useState<string>('');
   const signAndRegOptions:IOption[] = [
@@ -85,12 +89,18 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
       }).catch( (err) => {
         console.log(err.response);
       })
+      setIsShowMenu(true);
       setSearchString(searchStr);
     }else{
       setResultSearch(undefined);
       setSearchString('');
     }
+    setSelectedOption(undefined);
   },700)
+
+  const handleClick = (option:IMainSearchOption) =>{
+    navigate('/searching/?keyword='+option.label+"?type="+option.type+"?id="+option.value)
+  }
   
   return(
     <div className='top-nav'>
@@ -104,8 +114,8 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
         </Col>
         <Col xs={4} sm={6}  className='d-flex justify-content-center align-items-center'>
           <div className="search-box-container-qaz">
-            <SearchBox onInputChange={searchMain}/>
-            { searchString &&
+            <SearchBox onInputChange={searchMain} defaultSearch={selectedOption?.label? selectedOption?.label:defaultSearch}/>
+            { isShowMenu && searchString &&
               <div className='menu-main-list'>
                 {searchMenuOptions.length !==0 &&
                   <div className='menu-list'>
@@ -115,7 +125,12 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                           <div 
                             key={index} 
                             className='option-row text-normal' 
-                            onClick={()=>{ }}
+                            onClick={()=>{
+                              handleClick(option); 
+                              setSearchMenuOptions([]); 
+                              setIsShowMenu(false);
+                              setSelectedOption(option);
+                            }}
                           >
                             <Row>
                               <Col xs='auto' className='d-flex justify-content-center align-items-center'>
@@ -139,7 +154,10 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                   </div>
                 }
                 <div className='menu-default-search-by-string-container'>
-                  <div className='menu-default-search-by-string'>
+                  <div 
+                    className='menu-default-search-by-string'
+                    onClick={()=>{navigate('/searching/?keyword='+searchString+"?type="+SearchType.Post+"?id=null");setSearchMenuOptions([]); setIsShowMenu(false);}}
+                  >
                     {"ค้นหา \""+searchString+"\" "}
                   </div>
                 </div>

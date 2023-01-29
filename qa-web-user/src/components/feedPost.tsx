@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { PostType, SortBy } from '../data/enum/filterEnum';
+import { PostType, SearchType, SortBy } from '../data/enum/filterEnum';
+import { IMainSearchOption } from '../data/interface/IOption';
 import { IPostsFeed } from '../data/interface/IPost';
 import { IUser } from '../data/interface/IUser';
 import Client from '../lib/axios/axios';
@@ -13,15 +14,20 @@ export interface FeedPostProps{
   filterPostType:PostType;
   filterIsOnlyFollow:boolean;
   onRefreshFeed: () => void;
+  mainSearch?: IMainSearchOption|undefined;
+  searchType?: SearchType;
 }
 
-const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filterIsOnlyFollow, onRefreshFeed}) => {
+const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filterIsOnlyFollow, onRefreshFeed, mainSearch, searchType}) => {
 
   const [posts, setPosts] = useState<IPostsFeed[]|undefined>(undefined);
-  const [ userProfile ] = useState<IUser|undefined>(GetUserData());
+  const [userProfile] = useState<IUser|undefined>(GetUserData());
   const [currentPostCount, setCurrentPostCount] = useState<number>(0);
   const [fetchPerTime] = useState<number>(5);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const [searchWord, setSearchWord] = useState<string>('');
+  const [searchingType, setSearchingType] = useState<string>('');
+  const [searchingId, setSearchingId] = useState<string>('');
 
   useEffect(()=>{
     if(posts){
@@ -30,13 +36,32 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filter
   },[posts])
 
   useEffect(()=>{
-      Client.get<IPostsFeed[]>('/posts/',{
+    if(mainSearch){
+      setSearchWord(mainSearch.label);
+      setSearchingType(mainSearch.type);
+      setSearchingId(mainSearch.value)
+    }
+  },[mainSearch])
+
+  useEffect(()=>{
+    if(searchType){
+      setSearchingType(searchType.toString());
+    }
+  },[searchType])
+
+  useEffect(()=>{
+      let api = (searchWord && searchType)? '/searchposts':'/posts/';
+      Client.get<IPostsFeed[]>(api,{
         params:{
           sortby:filterSortBy,
           type: filterPostType,
           followby: filterIsOnlyFollow? userProfile?.userId:'',
           fetchAmount: fetchPerTime,
           currentAmount: 0,
+
+          searchWord: searchWord,
+          searchType: searchingType,
+          searchId: searchingId,
         }
       }).then((res)=>{
         if(res.data.length === 0)
@@ -47,20 +72,25 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filter
         console.log(err);
       })
       // eslint-disable-next-line 
-  },[filterSortBy, filterPostType, filterIsOnlyFollow, userProfile])
+  },[filterSortBy, filterPostType, filterIsOnlyFollow, userProfile, searchWord, searchingType])
 
   useEffect(()=>{
     setHasMore(true);
   },[filterSortBy, filterPostType, filterIsOnlyFollow])
 
   const fetchData = () =>{
-    Client.get<IPostsFeed[]>('/posts/',{
+    let api = (searchWord && searchType)? '/searchposts':'/posts/';
+    Client.get<IPostsFeed[]>(api,{
       params:{
         sortby:filterSortBy,
         type: filterPostType,
         followby: filterIsOnlyFollow? userProfile?.userId:'',
         fetchAmount: fetchPerTime,
         currentAmount: currentPostCount,
+
+        searchWord: searchWord,
+        searchType: searchingType,
+        searchId: searchingId,
       }
     }).then((res)=>{
       if(res.data.length === 0)

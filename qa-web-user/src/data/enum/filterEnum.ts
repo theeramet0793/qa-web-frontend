@@ -9,3 +9,9 @@ export enum PostType{
   Solved = 'solved',
   Unsolved = 'unsolved'
 }
+
+export enum SearchType{
+  Tag = "TAG",
+  Post = 'POST',
+  User = 'USER'
+}
