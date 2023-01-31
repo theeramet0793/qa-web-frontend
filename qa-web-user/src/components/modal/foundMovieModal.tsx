@@ -4,15 +4,15 @@ import { ReactSVG } from 'react-svg';
 import './foundMovieModal.scss'
 import XIcon from '../../assets/svg/x.svg'
 import classNames from 'classnames';
-import AddMovieName from '../addMovieName';
 import { IOption } from '../../data/interface/IOption';
 import debounce from 'lodash.debounce';
 import Client from '../../lib/axios/axios';
-import { IMovie } from '../../data/interface/IMovie';
+import { ISearchMovieTMDB } from '../../data/interface/IMovie';
 import { convertMoviesToOptions } from '../../utils/convert';
 import { GetUserData } from '../userData/userData';
 import { IUser } from '../../data/interface/IUser';
 import { nowDate, nowTime } from '../../utils/dateAndTime';
+import SearchBar from '../searchBar';
 
 export interface FoundMovieModalProps{
   postId: number | undefined;
@@ -34,13 +34,16 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
     setIsShow(show)
   },[show])
 
+  useEffect(()=>{
+    if(defaultMovieName)
+    setMovieName(defaultMovieName);
+  },[defaultMovieName])
+
   const searchMovie = debounce((searchStr: string) =>{
-    setMovieName(searchStr);
-    setMovieId('');
     if(searchStr){
-      Client.get<IMovie[]>('/searchmovies/'+searchStr)
+      Client.get<ISearchMovieTMDB>('/searchmovies/'+searchStr)
       .then( (res) =>{
-        setMovieOptions(convertMoviesToOptions(res.data));
+        setMovieOptions(convertMoviesToOptions(res.data.results).slice(0,4));
       }).catch( (err) => {
         console.log(err.response);
       })
@@ -84,13 +87,20 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
           <div className='body-container'>
             <Row>
               <div className='add-movie-name-container-vvbi'>
-                <AddMovieName 
-                  defaultMovieName={defaultMovieName}
-                  menuOptions={movieOptions} 
+                <SearchBar 
+                  placeholder="ค้นหาชื่อภาพยนตร์..." 
                   onInputchange={searchMovie} 
-                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label)}} 
+                  menuOptions={movieOptions} 
+                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label)}}
                 />
               </div> 
+            </Row>
+            <Row>
+              <div className='current-movie-container'>
+                <div className='movie-name text-color text-normal'>
+                  {"ชื่อภาพยนตร์ : "}{movieName}
+                </div>
+              </div>
             </Row>
             <Row>
               <div className='button-save-container'>

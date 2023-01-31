@@ -35,6 +35,10 @@ const SearchingPage: React.FC<HomePageProps> = () =>{
     setDefaultSearch(selectedSearch.label);
   }, [location.search])
 
+  useEffect(()=>{
+    
+  },[searchType])
+
   return(
     <>
       <TopNav 

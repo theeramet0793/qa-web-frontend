@@ -3,6 +3,8 @@ import { Col, Row } from "react-bootstrap";
 import { SearchType } from "../data/enum/filterEnum";
 import './filterSearch.scss'
 import classNames from 'classnames';
+import { useLocation } from "react-router-dom";
+import { convertPathQueryStringToMainOption } from "../utils/convert";
 
 
 export interface FilterSearchProps{
@@ -12,7 +14,19 @@ export interface FilterSearchProps{
 
 const FilterSearch: React.FC<FilterSearchProps> = ({defaultSearchType, onSelectButton}) =>{
 
+  const location = useLocation();
   const [selectedButton, setSelectedButton] = useState<SearchType>(SearchType.Post);
+
+  useEffect(()=>{
+    let selectedSearch = (convertPathQueryStringToMainOption(decodeURI(location.search)));
+    if(selectedSearch.type==="POST"){
+      setSelectedButton(SearchType.Post)
+    }else if(selectedSearch.type==="TAG"){
+      setSelectedButton(SearchType.Tag)
+    }else{
+      setSelectedButton(SearchType.User)
+    }
+  }, [location.search])
 
   useEffect(()=>{
     onSelectButton(selectedButton);

@@ -1,5 +1,5 @@
 import { SearchType } from "../data/enum/filterEnum";
-import { IMovie } from "../data/interface/IMovie";
+import { IMovieTMDB } from "../data/interface/IMovie";
 import { IMainSearchOption, IOption } from "../data/interface/IOption";
 import { ITag } from "../data/interface/ITag";
 
@@ -14,26 +14,28 @@ import { ITag } from "../data/interface/ITag";
     return options;
   }
 
-  export const convertMoviesToOptions = ( movies:IMovie[] ) =>{
+  export const convertMoviesToOptions = ( movies:IMovieTMDB[] ) =>{
     var options: IOption[] = [];
+    console.log(movies);
     if(movies.length > 0){
       movies.forEach((movie)=>{
-        var option: IOption = {label:movie.movieName, value:movie.movieId.toString()};
+        var option: IOption = {label:movie.original_title+" ( "+movie.title+" )", value:movie.id.toString()};
         options.push(option);
       })
     }
+    
     return options;
   }
 
   export const convertPathQueryStringToMainOption = (pathQuery:string) =>{
-    //sample path query = ?keyword=หนังแฟนตาซี?type=TAG?id=1
+    //sample path query = ?keyword=หนังแฟนตาซี?type=TAG
     let result:string[] =  pathQuery.replaceAll('?',"*").replaceAll("=","*").split("*") ;
     
-    if(result.length >= 7){
+    if(result.length >= 5){
       let obj:IMainSearchOption = {
         label: result[2],
         type: result[4],
-        value: result[6]
+        value: "unneccessary"
       }
       return obj;
     }else{

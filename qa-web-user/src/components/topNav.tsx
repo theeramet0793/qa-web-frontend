@@ -99,7 +99,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
   },700)
 
   const handleClick = (option:IMainSearchOption) =>{
-    navigate('/searching/?keyword='+option.label+"?type="+option.type+"?id="+option.value)
+    navigate('/searching/?keyword='+option.label+"?type="+option.type)
   }
   
   return(
@@ -156,7 +156,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                 <div className='menu-default-search-by-string-container'>
                   <div 
                     className='menu-default-search-by-string'
-                    onClick={()=>{navigate('/searching/?keyword='+searchString+"?type="+SearchType.Post+"?id=null");setSearchMenuOptions([]); setIsShowMenu(false);}}
+                    onClick={()=>{navigate('/searching/?keyword='+searchString+"?type="+SearchType.Post);setSearchMenuOptions([]); setIsShowMenu(false);}}
                   >
                     {"ค้นหา \""+searchString+"\" "}
                   </div>

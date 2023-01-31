@@ -81,8 +81,16 @@
             padding-top: 1rem;
             .add-movie-name-container-vvbi{
               width: 100%;
-              height: fit-content;
-              padding: 1rem;
+              height: 40px;
+            }
+            .current-movie-container{
+              padding: 0.5rem 1rem;
+              text-align: center;
+              .movie-name{
+                background-color: var(--color-green);
+                border-radius: 10px;
+                padding:0.5rem ;
+              }
             }
             .button-save-container{
               width: 100%;
