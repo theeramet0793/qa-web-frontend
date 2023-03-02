@@ -11,6 +11,7 @@ export interface IPost{
   username: string;
   tagList: ITag[];
   movieId: number;
+  isReccommend: boolean;
 }
 
 export interface IPostsFeed{

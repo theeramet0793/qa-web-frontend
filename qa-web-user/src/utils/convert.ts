@@ -54,3 +54,14 @@ import { ITag } from "../data/interface/ITag";
     else if(str?.toLowerCase()===SearchType.User.toLowerCase()) return SearchType.User
     else return undefined;
   }
+
+  export const convertPathQueryStringToPostId = (pathQuery:string) =>{
+    //sample path query = ?postId=124
+    let postId:string =  pathQuery.substring(8) ;
+    try{
+      let postIdInt:number = parseInt(postId);
+      return postIdInt;
+    }catch(e){
+      return undefined;
+    }
+  }

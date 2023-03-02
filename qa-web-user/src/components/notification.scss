@@ -1,5 +1,6 @@
 
 .user-notification-container{
+  position: relative;
   width: 100%;
   height: 100%;
   background: var(--color-third-bg);
@@ -7,15 +8,80 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &:hover{
+    background-color: var(--color-fourth-bg);
+  }
 
-  div{
+  .btn-noti{
+    background-color: transparent;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    svg{
-      fill: var(--color-red);
-      width: 70%;
-      height: 70%;
+    border: none;
+    .bell-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg{
+        fill: var(--color-white);
+        width: 70%;
+        height: 70%;
+      }
+      // .has-unread{
+      //   svg{
+      //     fill: var(--color-red);
+      //   }
+      // }
+    }
+    .expand-menu{
+      position: absolute;
+      background-color: var(--color-second-bg);
+      box-shadow: 0px 0px 10px var(--color-main-bg);
+      width: fit-content;
+      max-width: 500px;
+      height: fit-content;
+      max-height: 400px;
+      @media only screen and (max-width: 390px){
+        max-width: 250px;
+      }
+      overflow-y: scroll;
+      right: 0;
+      top: 120%;
+      border-radius: 12px;
+      padding: 0.5rem;
+      .no-noti{
+        width: max-content;
+        max-width: 500px;
+        padding: 0.5rem;
+      }
+      .option-row {
+        display: flex-start;
+        align-items: center;
+        padding: 1rem 0.5rem;
+        color: var(--color-text);
+        border-radius: 8px;
+        min-width: max-content;
+        border-bottom: 1px solid var(--color-third-bg);
+        &:hover{
+          cursor: pointer;
+          background-color: var(--color-third-bg);
+        }
+        .dot-icon{
+          width: 10px;
+          height: 10px;
+          svg{
+            fill: var(--color-red);
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .noti-post-detail{
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+          max-width: 200px;
+          height: 100%;
+        }
+      }
     }
   }
 }

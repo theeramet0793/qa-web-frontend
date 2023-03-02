@@ -91,15 +91,20 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
                   placeholder="ค้นหาชื่อภาพยนตร์..." 
                   onInputchange={searchMovie} 
                   menuOptions={movieOptions} 
-                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label)}}
+                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label);}}
                 />
               </div> 
             </Row>
             <Row>
               <div className='current-movie-container'>
-                <div className='movie-name text-color text-normal'>
-                  {"ชื่อภาพยนตร์ : "}{movieName}
-                </div>
+                { movieName && 
+                  <div className='movie-name text-color text-normal'>
+                    <div className='delete-movie-button' onClick={()=>{setMovieId(''); setMovieName('');}}>
+                      <ReactSVG src={XIcon}/>
+                    </div>
+                    {"ชื่อภาพยนตร์ : "}{movieName}
+                  </div>
+                }
               </div>
             </Row>
             <Row>

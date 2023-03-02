@@ -36,6 +36,8 @@ import FoundMovieButton from './foundMovieButton';
 import FoundMovieModal from './modal/foundMovieModal';
 import { IMovie } from '../data/interface/IMovie';
 import FoundMovieLabel from './foundMovieLabel';
+import Reccommendation from './reccommendation';
+import ReccommendationModal from './modal/reccommendationModal';
 
 export interface PostProps{
   postId: number;
@@ -46,6 +48,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const { t } = useTranslation();
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
   const [ isShowEditPostModal, setIsShowEditPostModal ] = useState<boolean>(false);
+  const [ isShowRecMovieModal, setIsShowRecMovieModal ] = useState<boolean>(false);
   const [ isShowFoundMovieModal, setIsShowFoundMovieModal ] = useState<boolean>(false);
   const [ posts, setPosts ] = useState<IPost|undefined>(undefined);
   const [ isDataUpdate, setIsDataUpdate] = useState<boolean>(false);
@@ -231,15 +234,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }
   }
 
-  const refreshMovie = () =>{
-    if(posts)
-    Client.get<IMovie>('/getmovie/'+posts.postId)
-    .then((res)=>{
-      (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
-    }).catch((err)=>{
-      console.log(err);
-    })
-  }
+  // const refreshMovie = () =>{
+  //   // have same logic as this  2 function  please edit both
+  //   if(posts)
+  //   Client.get<IMovie>('/getmovie/'+posts.postId)
+  //   .then((res)=>{
+  //     (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
+  //   }).catch((err)=>{
+  //     console.log(err);
+  //   })
+  // }
 
   const renderTime = () =>{
     if(posts?.createdDate === posts?.lastUpdateDate && posts?.createdTime === posts?.lastUpdateTime){
@@ -318,7 +322,21 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </Row>
         </Col>
         <Col className='d-flex justify-content-end'>
-          <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
+          <Row>
+            { ( !posts?.movieId ) &&
+              <Col>
+                <div className='rec-in-post-container'>
+                  <Reccommendation
+                    onclick={()=>{setIsShowRecMovieModal(true)}}
+                    isReccommending={posts?.isReccommend}
+                  />
+                </div>
+              </Col>
+            }
+            <Col>
+              <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
+            </Col>
+          </Row>
         </Col>
       </Row>
       <Row>
@@ -468,7 +486,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
           show={isShowFoundMovieModal} 
           onClose={()=>{setIsShowFoundMovieModal(false)}}
           defaultMovieName={foundMovie?.movieName}
-          onSaveSuccess={()=>{refreshMovie()}}
+          onSaveSuccess={()=>{setIsDataUpdate(!isDataUpdate);}}
+        />
+      }
+      { isShowRecMovieModal &&
+        <ReccommendationModal
+          postId={posts?.postId}
+          postOwnerId={posts?.userId}
+          show={isShowRecMovieModal}
+          onclose={()=>{setIsShowRecMovieModal(false)}}
+          refreshPost={()=>{setIsDataUpdate(!isDataUpdate);}}
         />
       }
     </div>

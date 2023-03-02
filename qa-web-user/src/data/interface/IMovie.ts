@@ -15,3 +15,8 @@ export interface IMovieTMDB{
   original_title:string;
   title:string;
 }
+
+export interface IReccommendMovie{
+  postId:number;
+  movielist:IMovie[]
+}

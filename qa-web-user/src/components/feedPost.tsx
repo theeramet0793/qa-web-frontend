@@ -100,7 +100,6 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filter
     }).catch((err)=>{
       console.log(err);
     })
-    // eslint-disable-next-line
   }
 
   const addMorePost = (newMorePost:IPostsFeed[]) =>{
