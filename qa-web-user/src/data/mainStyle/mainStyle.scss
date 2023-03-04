@@ -66,11 +66,19 @@
   --color-blue: #1f8dff;
   --color-red: #ff6270;
   --color-gray: #ccc;
+  --color-orange: #ff5a00;
+  --color-light-green: #91b728;
+  --color-light-gray: #f8f8f8;
+  --color-light-gray-2: #e6e6e6;
+  --color-dark-gray: #c7c7c7;
+  --color-dark-gray-2: #818181;
+  --color-dark-red: #c42b2c;
+
   font-size: 16px;
 }
 
 .text-color{
-  color: var(--color-text);
+  color: #000000;
 }
 
 .text-color-placeholder{
@@ -89,7 +97,7 @@
 
 .text-normal{
   font-family: Lato-Regular, NotoSansThai-Regular;
-  font-size: clamp(12px, 2vw, 16px);
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 .text-medium{

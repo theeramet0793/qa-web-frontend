@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 import './dropdownArea.scss'
 import ChevronDownIcon from '../assets/svg/chevron-down.svg'
@@ -37,14 +37,14 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
         className='dropdown-area-button'
         onClick={()=> setIsShowMenu(!isShowMenu)}
       >
-        <Container className='content-container'>
-          <Row  className='py-1 text-normal text-color d-flex justify-content-center align-items-center'>
-            <div>{'โพสต์'+renderPostType()}</div>
-          </Row>
-          <Row  className='d-flex align-items-center justify-content-center'> 
+        <Row className='content-container'>
+          <Col xs={12} sm={9} className='py-1 text-small d-flex justify-content-start align-items-center'>
+            {'โพสต์'+renderPostType()}
+          </Col>
+          <Col xs={12} sm={3} className='d-flex align-items-center justify-content-center'> 
             <ReactSVG src={ChevronDownIcon}/>
-          </Row>
-        </Container>
+          </Col>
+        </Row>
       </button>
       {isShowMenu &&
         <button className='expand-menu text-color text-normal' onBlur={()=>{delayedCloseMenu()}}>  

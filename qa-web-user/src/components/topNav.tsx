@@ -104,6 +104,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
   
   return(
     <div className='top-nav'>
+      <Row className='color-bar'></Row>
       <Row className='content-container'>
         <Col xs={3} sm={3} className=' d-flex justify-content-center align-items-center'>
           <div className='logo-container'>

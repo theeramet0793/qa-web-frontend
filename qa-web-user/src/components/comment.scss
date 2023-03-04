@@ -4,26 +4,34 @@
   .profile-commenter-container{
     width: 40px;
     height: 40px;
-    img{
+    .round-btn{
       width: 100%;
       height: 100%;
-      border-radius: 999px;
-      object-fit: cover;
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        object-fit: cover;
+      }
     }
+
   }
   .comment-content-container{
 
     .comment-card{
-      border-radius: 12px;
-      background-color: var(--color-third-bg);
+      //border-radius: 12px;
+      background-color: var(--color-light-gray);
       padding: 0.5rem 1rem;
+      .commenter-user-name{
+        color: var(--color-dark-gray-2);
+      }
       .editable{
         color: var(--color-text);
         outline: none;
         border-radius: 10px;
       }
       .comment-detail{
-        color: var(--color-text);
+        color: var(--color-black);
         border: none;
         background-color: transparent;
         resize: none;

@@ -8,21 +8,27 @@
   }
   width: 100%;
   height: fit-content;
-  border-radius: 12px;
+  //border-radius: 12px;
   padding: 2.5rem ;
-  background-color: var(--color-second-bg);
-  margin: 3rem 0rem;
+  background-color: var(--color-white);
+  margin: 0rem 0rem 3rem 0rem;
 
   .profile-container{
     width: 50px;
     height: 50px;
-
-    img{
+    .round-button{
       width: 100%;
       height: 100%;
-      border-radius: 999px;
-      object-fit: cover;
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        object-fit: cover;
+      }
     }
+  }
+  .time-container{
+    color: var(--color-dark-gray-2);
   }
   .rec-in-post-container{
     width: 100%;
@@ -45,7 +51,7 @@
       border: none;
       resize: none;
       max-height: 200px;
-      color: var(--color-white);
+      color: var(--color-black);
     }
   }
 
@@ -58,10 +64,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      color: var(--color-dark-gray-2);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-yellow);
+        fill: var(--color-dark-gray);
       }
     }
     .comment-button-container{
@@ -70,10 +77,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      color: var(--color-dark-gray-2);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-yellow);
+        fill: var(--color-dark-gray);
       }
     }
     .follow-label-container{
@@ -82,26 +90,22 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      color: var(--color-dark-gray-2);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-yellow);
+        fill: var(--color-dark-gray);
       }
     }
   }
 
   .option-container{
-    border-bottom: 1px solid var(--color-third-bg);
-    border-top: 1px solid var(--color-third-bg);
+    border-bottom: 1px solid var(--color-dark-gray);
+    border-top: 1px solid var(--color-dark-gray);
     padding: 0.7rem 0.5rem;
     .upvote-button-container{
       width: fit-content;
       height: 40px;
-      svg{
-        fill: var(--color-white);
-        width: 20px;
-        height: 20px;
-      }
     }
     .follow-button-container{
       width: fit-content;
@@ -144,11 +148,11 @@
           width: 100%;
           height: fit-content;
           min-height: 53px;
-          border-radius: 20px;
+          //border-radius: 20px;
           border: none;
           padding: 0.9rem 1.2rem;
-          background-color: var(--color-third-bg);
-          color: var(--color-text);
+          background-color: var(--color-light-gray);
+          color: var(--color-black);
           resize: none;
           &::placeholder{
             color: var(--color-text-placeholder);
@@ -161,8 +165,8 @@
     }
 
     .send-button{
-      background-color: var(--color-primary-button);
-      color: var(--color-text);
+      background-color: var(--color-orange);
+      color: var(--color-white);
       border-radius: 999px;
       width: fit-content;
       height: fit-content;
@@ -173,8 +177,9 @@
 
       &:hover{
         cursor: pointer;
-        background-color: var(--color-blue);
-        color: var(--color-text);
+        opacity: 0.8;
+        // background-color: var(--color-light-green);
+        // color: var(--color-text);
       }
 
       svg{

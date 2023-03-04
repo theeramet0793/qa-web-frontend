@@ -8,7 +8,6 @@ import './comment.scss'
 import MoreMenu from './moreMenu';
 import { GetUserData } from './userData/userData';
 import TextareaAutosize from 'react-textarea-autosize';
-import RoundButton from './roundButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import { ReactSVG } from 'react-svg';
 import { IProfileImage } from '../data/interface/IProfileImage';
@@ -131,10 +130,10 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
       <Row>
         <Col xs='auto' className='px-1'>
           <div className='profile-commenter-container'>
-            <RoundButton>
+            <div className='round-btn'>
               { commenterProfileUrl && <img src={commenterProfileUrl.urlPath} alt='profile'/>}
               { !commenterProfileUrl && <ReactSVG src={ProfileIcon}/>}
-            </RoundButton>
+            </div>
           </div>
         </Col>
         <Col className='px-1'>
@@ -142,7 +141,7 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
             <div className='comment-card'>
               <Row className='px-0 py-0'>
                 <Col className='d-flex justify-content-start align-items-center'>
-                  <div className='text-small-bold text-color'>{comment?.username}</div>
+                  <div className='text-small-bold commenter-user-name'>{comment?.username+"-"+renderTime()}</div>
                 </Col>
                 <Col className='d-flex justify-content-end align-items-center'>
                   <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
@@ -158,10 +157,9 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
                 />
               </Row>
             </div>
-            <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
-              <Col xs='auto' className='text-small text-color'>{'ถูกใจ'}</Col>
+            {/* <Row className='d-flex justify-content-end align-items-center pt-1 ps-2'>
               <Col className='text-small text-color'>{renderTime()}</Col>
-            </Row>
+            </Row> */}
             { !disableTextArea &&
                 <Row className='d-flex justify-content-center align-items-center'>
                   <div className='button-save-comment-container'>

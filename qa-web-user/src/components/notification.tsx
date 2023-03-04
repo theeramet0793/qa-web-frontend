@@ -11,6 +11,7 @@ import CircleIcon from '../assets/svg/circle-fill.svg'
 import { nowDate, nowTime } from '../utils/dateAndTime';
 import { useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
+import CountNoti from './countNoti';
 
 export interface NotificationProps{
 
@@ -22,7 +23,7 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
   const [menuNoti, setMenuNoti] = useState<INotification[]|undefined>(undefined);
   const [userProfile] = useState<IUser|undefined>(GetUserData());
-  //const [hasUnread, setHasUnread] = useState<boolean>(false);
+  const [countUnread, setCountUnread] = useState<number>(0);
 
   useEffect(()=>{
     Client.get<INotification[]>('/getnoti',{
@@ -37,12 +38,12 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
     })
   },[userProfile])
 
-  // useEffect(()=>{
-  //   let result = menuNoti?.find((noti)=>{ return noti.isRead = false })
-  //   if(result !== undefined){
-  //     setHasUnread(true);
-  //   }
-  // },[menuNoti])
+  useEffect(()=>{
+    let result = menuNoti?.filter(x => !x.isRead).length
+    if(result !== undefined && result !== 0){
+      setCountUnread(result);
+    }
+  },[menuNoti])
 
   const renderNotiAction = (notiType:string) =>{
     if(notiType==="Add"){
@@ -76,7 +77,11 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
 
   return(
     <div className='user-notification-container'>
-      {/* {hasUnread && <div className='dot-icon-qw'><ReactSVG src={CircleIcon}/></div>} */}
+      {countUnread ? 
+        <div className='count-unread-noti'>
+          <CountNoti notiUnreadAmount={countUnread}/>
+        </div>:<></>
+      }
       <button onClick={()=>setIsShowMenu(!isShowMenu)} className='btn-noti'>
         <ReactSVG src={NotificationIcon} className={classNames('bell-icon')}/>
         { isShowMenu &&

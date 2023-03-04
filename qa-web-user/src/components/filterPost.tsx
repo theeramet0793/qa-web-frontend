@@ -29,23 +29,23 @@ const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilt
       <div className="filter-container">
           <div className="filter-card">
             <Row className='w-100 d-flex justify-content-center' >
-              <Col >                
-                <div className="dropdown-container">
-                  <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{onFilterSortByChange(selectedOption.value as SortBy)}}/>
-                </div>
+              <Col className='d-flex justify-content-center'>
+                <Row className="switch-container text-small d-flex justify-content-center align-items-center">
+                  <Col xs='auto' className="d-flex justify-content-center text-center">{t('ONLY_FOLLOWING_POST')}</Col>
+                  <Col className="py-1 d-flex justify-content-center ">
+                    <ToggleSwitch defaultValue={defaultOnlyFollow} onChange={(result)=>{onFilterOnlyFollowChange(result); }}/>
+                  </Col>
+                </Row>
               </Col>
               <Col >
                 <div className='checkbox-group-container'>
                   <DropdownArea onChange={(result)=>{onFilterTypeChange(result)}}/>
                 </div>
               </Col>
-              <Col className='d-flex justify-content-center'>
-                <Row className="switch-container text-normal text-color d-flex justify-content-center align-items-center">
-                  <Col sm='auto' className="d-flex justify-content-center text-center">{t('ONLY_FOLLOWING_POST')}</Col>
-                  <Col className="py-1 d-flex justify-content-center ">
-                    <ToggleSwitch defaultValue={defaultOnlyFollow} onChange={(result)=>{onFilterOnlyFollowChange(result); }}/>
-                  </Col>
-                </Row>
+              <Col >                
+                <div className="dropdown-container">
+                  <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{onFilterSortByChange(selectedOption.value as SortBy)}}/>
+                </div>
               </Col>
             </Row>
           </div>  

@@ -19,7 +19,7 @@ const FoundMovieButton:React.FC<FoundMovieButtonProps> = ({onClick, text}) =>{
           <ReactSVG src={SearchHeartIcon} className='found-svg'/>
         </Col>
         <Col className='d-flex justify-content-start align-items-center'>
-          <div className='text-normal text-color'>{text? text:'ตัวหนังสือ'}</div>
+          <div className='text-normal '>{text? text:'ตัวหนังสือ'}</div>
         </Col>
       </Row>
     </div>

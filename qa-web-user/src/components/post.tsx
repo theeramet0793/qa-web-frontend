@@ -1,12 +1,12 @@
 import { Col, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 import './post.scss'
-import RoundButton from './roundButton';
+import UpvoteButton from './upvoteButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import SendIcon from '../assets/svg/send.svg';
-import ShiftIcon from '../assets/svg/shift.svg'
-import CommentIcon from '../assets/svg/chat-text.svg'
-import BookmarkIcon from '../assets/svg/bookmark-frame.svg'
+import ShiftIcon from '../assets/svg/shift-fill.svg'
+import CommentIcon from '../assets/svg/chat-left-fill.svg'
+import BookmarkIcon from '../assets/svg/bookmark-heart-fill.svg'
 import MoreMenu from './moreMenu';
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
@@ -307,17 +307,17 @@ const Post: React.FC<PostProps> = ({postId}) => {
       <Row>
         <Col xs='auto'>
           <div className='profile-container'>
-            <RoundButton>
+            <div className='round-button'>
               { posterProfileUrl && <img src={posterProfileUrl.urlPath} alt='profile'/>}
               { !posterProfileUrl && <ReactSVG src={ProfileIcon}/>}
-            </RoundButton>
+            </div>
           </div>
         </Col>
         <Col xs='auto' className='d-flex flex-column justify-content-center mx-2'>
           <Row className='text-normal-bold text-color'>
             {posts?.username}
           </Row>
-          <Row className='text-small text-color'>
+          <Row className='text-small time-container'>
             { renderTime() }
           </Row>
         </Col>
@@ -364,7 +364,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={ShiftIcon}/>
                     </Col>
-                    <Col  className='text-normal text-color'>
+                    <Col  className='text-normal'>
                       {countUpvote+' คะแนนโหวต'}
                     </Col>
                 </Row>
@@ -376,7 +376,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={CommentIcon}/>
                     </Col>
-                    <Col className='text-normal text-color'>
+                    <Col className='text-normal '>
                       {countComment+' ความคิดเห็น'}
                     </Col>
                 </Row>
@@ -388,7 +388,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={BookmarkIcon}/>
                     </Col>
-                    <Col className='text-normal text-color'>
+                    <Col className='text-normal '>
                       {countFollow+' ผู้ติดตาม'}
                     </Col>
                 </Row>
@@ -404,10 +404,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
               <Row xs='auto' className='d-flex justify-content-start align-items-center'>
                 <Col>
                   <div className='upvote-button-container'>
-                    <RoundButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true}>
-                      <ReactSVG src={ShiftIcon}/>
-                      <div className='px-2 text-normal text-color'>{'โหวตขึ้น'}</div>
-                    </RoundButton>
+                    <UpvoteButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true}/>
                   </div>
                 </Col>
               </Row>

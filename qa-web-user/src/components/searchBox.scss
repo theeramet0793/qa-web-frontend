@@ -13,7 +13,7 @@
     svg{
       width: 20px;
       height: 20px;
-      fill: var(--color-text-placeholder);
+      fill: var(--color-dark-gray-2);
     }
   }
 
@@ -21,16 +21,19 @@
     width: 100%;
     height: 100%;
     border-radius: 999px;
-    background: var(--color-third-bg);
+    background: var(--color-light-gray);
     border: none;
     padding-left: 2.5rem;
     padding-right: 1rem;
-
+    color: var(--color-dark-gray-2);
     &:focus{
-      outline: none;
+      outline-color: var(--color-orange);
+      outline-width: 1px;
+      color: var(--color-black);
+      background-color: var(--color-white);
     }
     &::placeholder{
-      color: var(--color-text-placeholder);
+      color: var(--color-dark-gray-2);
     }
   }
 }
