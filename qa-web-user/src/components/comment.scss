@@ -1,6 +1,6 @@
 
 .comment-main-container{
-  padding: 0.7rem 0rem;
+  padding: 1rem 0rem 0rem 0rem;
   .profile-commenter-container{
     width: 40px;
     height: 40px;
@@ -19,14 +19,19 @@
   .comment-content-container{
 
     .comment-card{
-      //border-radius: 12px;
-      background-color: var(--color-light-gray);
+      border-radius: 10px;
+      background-color: var(--color-cb-gray-2);
       padding: 0.5rem 1rem;
       .commenter-user-name{
-        color: var(--color-dark-gray-2);
+        color: var(--color-cb-gray-3);
+      }
+      .comment-time{
+        display: flex-start;
+        align-items: center;
+        color: var(--color-cb-gray-3);
       }
       .editable{
-        color: var(--color-text);
+        color: var(--color-black);
         outline: none;
         border-radius: 10px;
       }
@@ -35,7 +40,7 @@
         border: none;
         background-color: transparent;
         resize: none;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 1rem 0rem 1rem;
       }
       .more-menu-button{
         svg{

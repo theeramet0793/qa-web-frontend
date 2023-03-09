@@ -9,14 +9,16 @@
 }
 
 .checked{
-  background-color: var(--color-fourth-bg);
+  background-color: var(--color-white);
   border-radius: 5px;
+  border: 1px solid var(--color-cb-blue-1);
   svg{
-    fill: var(--color-white);
+    fill: var(--color-cb-blue-1);
   }
 }
 
 .unchecked{
-  background-color: var(--color-fourth-bg);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-cb-gray-5);
   border-radius: 5px;
 }

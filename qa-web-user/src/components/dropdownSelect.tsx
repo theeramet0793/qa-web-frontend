@@ -28,7 +28,7 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({menuOptions, onSelectOpt
         onBlur={()=>{delayedCloseMenu()}}
       >
         <Row className='content-container'>
-          <Col xs={12} sm={9} className='py-1 text-small d-flex justify-content-start align-items-center'>
+          <Col xs={12} sm={9} className='py-1 d-flex justify-content-start align-items-center'>
             {selectedOption.label}
           </Col>
           <Col xs={12} sm={3} className='d-flex align-items-center justify-content-center'> 

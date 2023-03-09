@@ -9,15 +9,15 @@
     box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
     .color-bar{
       width: 100%;
-      height: 20px;
-      background-color: var(--color-orange);
+      height: 10px;
+      background-color: var(--color-cb-blue-1);
       padding: 0rem;
       margin: 0rem;
     }
     .content-container{
       width: 100%;
       margin: 0px;
-      padding: 1rem 0rem;
+      padding: 0.6rem 0rem;
       .logo-container{
         width: 100%;
         height: 100%;
@@ -30,7 +30,7 @@
           svg{
             width: 100%;
             height: 100%;
-            fill: var(--color-orange);
+            fill: var(--color-cb-blue-1);
           }
           &:hover{
             cursor: pointer;
@@ -45,23 +45,23 @@
         position: relative;
 
         .menu-main-list{
-          background-color: var(--color-second-bg);
-          box-shadow: 0px 0px 10px var(--color-main-bg);
-          color: var(--color-text);
+          background-color: var(--color-white);
+          box-shadow: 0px 0px 10px var(--color-cb-gray-3);
+          //color: var(--color-black);
           width: 100%;
           max-width: 600px;
           min-width: 200px;
           max-height: fit-content;
           position: absolute;
           right: 0;
-          top: 110%;
+          top: 125%;
           border-radius: 10px;
           // padding: 0.5rem;
           .menu-list{
-            background-color: var(--color-second-bg);
+            background-color: var(--color-white);
             //box-shadow: 0px 0px 10px var(--color-main-bg);
-            color: var(--color-text);
-            border-bottom: 1px solid var(--color-third-bg);
+            color: var(--color-black);
+            border-bottom: 1px solid var(--color-cb-gray-2);
             width: 100%;
             max-width: 600px;
             min-width: 200px;
@@ -77,23 +77,24 @@
             .option-row {
               display: flex-start;
               align-items: center;
-              padding: 0.5rem 1rem;
+              padding: 0.5rem 1.25rem;
               border-radius: 8px;
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-yellow);
+                  background-color: var(--color-cb-gray-2);
                   color: var(--color-black);
-                  .row-tag-container{
-                    background-color: var(--color-white);
-                    svg{
-                      fill: var(--color-black);
-                    }
-                  }
+                  // .row-tag-container{
+                  //   background-color: var(--color-light-green);
+                  //   svg{
+                  //     fill: var(--color-white);
+                  //   }
+                  // }
                 }
                 .row-tag-container{
                   padding: 0.2rem;
-                  background-color: var(--color-third-bg);
+                  background-color: var(--color-cb-green-1);
                   border-radius: 8px;
+                  color: var(--color-white);
                   svg{
                     max-width: 16px;
                     max-height: 16px;
@@ -109,13 +110,18 @@
             min-height: 35px;
             .menu-default-search-by-string{
               height: fit-content;
-              background-color: var(--color-second-bg);
-              color: var(--color-text);
+              //background-color: var(--color-second-bg);
+              color: var(--color-black);
               padding: 0.5rem;
               border-radius: 10px;
               &:hover{
                 cursor: pointer;
-                background-color: var(--color-third-bg);
+                background-color: var(--color-cb-gray-2);
+              }
+              svg{
+                width: 21px;
+                height: 21px;
+                fill: var(--color-cb-gray-3);
               }
             }
           }
@@ -137,9 +143,10 @@
           .btn-reg{
             width: 100%;
             height: fit-content;
-            color: var(--color-text);
+            color: var(--color-cb-blue-1);
             border-radius: 999px;
-            background-color: var(--color-third-bg);
+            background-color: var(--color-white);
+            border: 1px solid var(--color-cb-blue-1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -161,9 +168,9 @@
           .btn-sign{
             width: 100%;
             height: fit-content;
-            color: var(--color-text);
+            color: var(--color-white);
             border-radius: 999px;
-            background-color: var(--color-primary-button);
+            background-color: var(--color-cb-blue-1);
             display: flex;
             align-items: center;
             justify-content: center;

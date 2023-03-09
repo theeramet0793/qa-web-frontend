@@ -140,14 +140,21 @@ const Comment:React.FC<CommentProps> = ({commentId, onCommentDeleted}) =>{
           <div className='comment-content-container'>
             <div className='comment-card'>
               <Row className='px-0 py-0'>
-                <Col className='d-flex justify-content-start align-items-center'>
-                  <div className='text-small-bold commenter-user-name'>{comment?.username+"-"+renderTime()}</div>
+                <Col xs={10} className='d-flex justify-content-start align-items-center'>
+                  <Row className='d-flex align-items-center justify-content-center'>
+                    <Col xs='auto' className='text-small-bold commenter-user-name'>
+                      {comment?.username}
+                    </Col>
+                    <Col className='text-small comment-time'>
+                      {renderTime()}
+                    </Col>
+                  </Row>
                 </Col>
-                <Col className='d-flex justify-content-end align-items-center'>
-                  <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
+                <Col xs={2} className='d-flex justify-content-end align-items-center'>
+                  <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption} disable={userProfile? false:true}/>
                 </Col>
               </Row>
-              <Row className='pb-2'>
+              <Row>
                 <TextareaAutosize 
                   disabled={disableTextArea} 
                   defaultValue={comment?.commentDetail} 

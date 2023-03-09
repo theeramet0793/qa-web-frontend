@@ -11,14 +11,16 @@ import PencilIcon from '../assets/svg/pencil-fill.svg';
 import FlagIcon from '../assets/svg/flag.svg';
 import SignInIcon from '../assets/svg/box-arrow-in-right.svg';
 import RegisterIcon from '../assets/svg/person-plus.svg';
+import classNames from 'classnames'
 
 export interface MoreMenuProps{
   menuOptions: IOption[];
   onSelectOption: (onSelectOption: IOption) => void; 
   icon?:'list'|'threedot';
+  disable?: boolean;
 }
 
-const MoreMenu: React.FC<MoreMenuProps> = ({menuOptions, onSelectOption, icon}) =>{
+const MoreMenu: React.FC<MoreMenuProps> = ({menuOptions, onSelectOption, icon, disable}) =>{
 
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false)
   const delayedCloseMenu = () => {
@@ -45,10 +47,10 @@ const MoreMenu: React.FC<MoreMenuProps> = ({menuOptions, onSelectOption, icon}) 
   }
 
   return (
-    <div className='more-menu-component-container'>
+    <div className={classNames('more-menu-component-container')}>
       <button 
-        className='more-menu-button'
-        onClick={()=> setIsShowMenu(!isShowMenu)}
+        className={classNames('more-menu-button', disable? 'more-menu-button-disable':'')}
+        onClick={()=> {!disable && setIsShowMenu(!isShowMenu)} }
         onBlur={()=>{delayedCloseMenu()}}
       >
         <ReactSVG src={icon==='list'? ListIcon:ThreeDot}/>

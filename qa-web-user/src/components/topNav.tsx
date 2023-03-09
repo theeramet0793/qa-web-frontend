@@ -17,6 +17,7 @@ import Client from '../lib/axios/axios';
 import { IMainSearch } from '../data/interface/IMainSearch';
 import TagIcon from '../assets/svg/tag.svg'
 import PersonIcon from '../assets/svg/person-fill.svg'
+import SearchIcon from '../assets/svg/search.svg'
 import { SearchType } from '../data/enum/filterEnum';
 
 export interface TopNavProps{
@@ -139,7 +140,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                                   <Col className='d-flex justify-content-end align-items-center'>
                                     <ReactSVG src={option.type === 'TAG'? TagIcon:PersonIcon}/>
                                   </Col>
-                                  <Col className='ps-0 d-flex justify-content-start align-items-center'>
+                                  <Col className='text-small ps-0 d-flex justify-content-start align-items-center'>
                                     {option.type}
                                   </Col>
                                 </Row>
@@ -159,7 +160,10 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                     className='menu-default-search-by-string'
                     onClick={()=>{navigate('/searching/?keyword='+searchString+"?type="+SearchType.Post);setSearchMenuOptions([]); setIsShowMenu(false);}}
                   >
-                    {"ค้นหา \""+searchString+"\" "}
+                    <Row>
+                      <Col xs='auto'><ReactSVG src={SearchIcon}/></Col>
+                      <Col className='text-normal ps-0'>{"ค้นหา \""+searchString+"\" "}</Col>
+                    </Row>
                   </div>
                 </div>
               </div>

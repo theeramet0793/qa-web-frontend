@@ -4,9 +4,6 @@ import './post.scss'
 import UpvoteButton from './upvoteButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
 import SendIcon from '../assets/svg/send.svg';
-import ShiftIcon from '../assets/svg/shift-fill.svg'
-import CommentIcon from '../assets/svg/chat-left-fill.svg'
-import BookmarkIcon from '../assets/svg/bookmark-heart-fill.svg'
 import MoreMenu from './moreMenu';
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
@@ -32,12 +29,11 @@ import { convertTagsToOptions } from '../utils/convert';
 import { ICountUpvote, IUpvote } from '../data/interface/IUpvote';
 import FollowButton from './followButton';
 import { ICountFollow, IFollow } from '../data/interface/IFollow';
-import FoundMovieButton from './foundMovieButton';
 import FoundMovieModal from './modal/foundMovieModal';
 import { IMovie } from '../data/interface/IMovie';
 import FoundMovieLabel from './foundMovieLabel';
 import Reccommendation from './reccommendation';
-import ReccommendationModal from './modal/reccommendationModal';
+import CommentButton from './commentButton';
 
 export interface PostProps{
   postId: number;
@@ -48,7 +44,6 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const { t } = useTranslation();
   const [ userProfile ] = useState<IUser|undefined>(GetUserData());
   const [ isShowEditPostModal, setIsShowEditPostModal ] = useState<boolean>(false);
-  const [ isShowRecMovieModal, setIsShowRecMovieModal ] = useState<boolean>(false);
   const [ isShowFoundMovieModal, setIsShowFoundMovieModal ] = useState<boolean>(false);
   const [ posts, setPosts ] = useState<IPost|undefined>(undefined);
   const [ isDataUpdate, setIsDataUpdate] = useState<boolean>(false);
@@ -66,6 +61,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const [ isUpvote, setIsUpvote] = useState<boolean>(false);
   const [ isFollow, setIsFollow] = useState<boolean>(false);
   const [ foundMovie, setFoundMovie] = useState<IMovie|undefined>(undefined);
+  const [ isShowComment, setIsShowComment] = useState<boolean>(false);
 
   useEffect(()=>{
     Client.get<IPost>('/post/'+postId,
@@ -154,6 +150,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
     {label:'ลบโพสต์', value:'deletePost'},
+    {label:'จัดการชื่อภาพยนตร์', value:'manageFoundMovieName'}
   ]
   const otherUserOptions = [
     {label:'รายงานโพสต์', value:'report'},
@@ -168,6 +165,8 @@ const Post: React.FC<PostProps> = ({postId}) => {
       setIsShowDeletePostModal(true);
     }else if(selectedOpt.value === 'editPost'){
       setIsShowEditPostModal(true);
+    }else if(selectedOpt.value === 'manageFoundMovieName'){
+      setIsShowFoundMovieModal(true);
     }
   }
 
@@ -291,9 +290,9 @@ const Post: React.FC<PostProps> = ({postId}) => {
     })
   }
 
-  const isNotMyPost = () =>{
-    return (userProfile?.userId !== posts?.userId)
-  }
+  // const isNotMyPost = () =>{
+  //   return (userProfile?.userId !== posts?.userId)
+  // }
 
 
   if(isFadeOutFinish){
@@ -322,31 +321,9 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </Row>
         </Col>
         <Col className='d-flex justify-content-end'>
-          <Row>
-            { ( !posts?.movieId ) &&
-              <Col>
-                <div className='rec-in-post-container'>
-                  <Reccommendation
-                    onclick={()=>{setIsShowRecMovieModal(true)}}
-                    isReccommending={posts?.isReccommend}
-                  />
-                </div>
-              </Col>
-            }
-            <Col>
-              <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption}/>
-            </Col>
-          </Row>
+          <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption} disable={userProfile? false:true}/>
         </Col>
       </Row>
-      <Row>
-        <div className='post-content-container'>
-          <div className='text-normal'>
-            <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
-          </div>
-        </div>
-      </Row>
-      {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
       {
           foundMovie?
           <Row className='d-flex justify-content-center align-items-center'>
@@ -356,6 +333,53 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </Row>:<></>  
       }
       <Row>
+        <div className='post-content-container'>
+          <div className='text-normal'>
+            <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
+          </div>
+        </div>
+      </Row>
+      {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
+      <Row>
+        <div className='rec-in-post-container'>
+        { ( !posts?.movieId ) &&
+          <Reccommendation
+            postId={posts?.postId}
+            isReccommending={posts?.isReccommend}
+            postOwnerId={posts?.userId}
+            refreshPost={()=>setIsDataUpdate(!isDataUpdate)}
+          />
+        }
+        </div>
+      </Row>
+      <Row>
+        <div className='option-container'>
+          <Row>
+            <Col className='d-flex justify-content-center align-items-center '>
+              <div className='upvote-button-container'>
+                <UpvoteButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true} upvoteCount={countUpvote}/>
+              </div>
+            </Col>
+            <Col className='d-flex justify-content-center align-items-center '>
+              <div className='comment-button-container'>
+                <CommentButton commentAmount={countComment} onClick={()=>{setIsShowComment(!isShowComment)}}/>
+              </div>
+            </Col>
+            <Col className='d-flex justify-content-center align-items-center '>
+              <div className='follow-button-container '>
+                <FollowButton 
+                  onClick={()=>{setEnableFollow(true);setIsFollow(!isFollow);}} 
+                  isActive={isFollow} 
+                  disable={(userProfile !==undefined && userProfile.userId !== posts?.userId)?  false:true} 
+                  followAmount={countFollow}
+                />
+              </div>
+            </Col>
+
+          </Row>
+        </div>
+      </Row>
+      {/* <Row>
         <div className='info-container'>
           <Row>
             <Col>
@@ -364,7 +388,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={ShiftIcon}/>
                     </Col>
-                    <Col  className='text-normal'>
+                    <Col  className='text-normal-responsive text-center'>
                       {countUpvote+' คะแนนโหวต'}
                     </Col>
                 </Row>
@@ -376,7 +400,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={CommentIcon}/>
                     </Col>
-                    <Col className='text-normal '>
+                    <Col className='text-normal-responsive text-center'>
                       {countComment+' ความคิดเห็น'}
                     </Col>
                 </Row>
@@ -388,7 +412,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
                     <Col xs='auto' className='px-0 d-flex align-items-center justify-content-center'>
                       <ReactSVG src={BookmarkIcon}/>
                     </Col>
-                    <Col className='text-normal '>
+                    <Col className='text-normal-responsive text-center'>
                       {countFollow+' ผู้ติดตาม'}
                     </Col>
                 </Row>
@@ -396,36 +420,9 @@ const Post: React.FC<PostProps> = ({postId}) => {
             </Col>
           </Row>
         </div>
-      </Row>
+      </Row> */}
       <Row>
-        <div className='option-container'>
-          <Row>
-            <Col xs='auto'>
-              <Row xs='auto' className='d-flex justify-content-start align-items-center'>
-                <Col>
-                  <div className='upvote-button-container'>
-                    <UpvoteButton onClick={()=>{setEnableUpvote(true); setIsUpvote(!isUpvote)}} isActive={isUpvote} disable={userProfile? false:true}/>
-                  </div>
-                </Col>
-              </Row>
-            </Col>
-            { isNotMyPost()?
-              <Col className='d-flex justify-content-end'>
-                <div className='follow-button-container '>
-                  <FollowButton onClick={()=>{setEnableFollow(true);setIsFollow(!isFollow);}} isActive={isFollow} disable={userProfile? false:true}/>
-                </div>
-              </Col>:
-              <Col className='d-flex justify-content-end'>
-                <div className='found-movie-container'> 
-                  <FoundMovieButton onClick={()=>{setIsShowFoundMovieModal(true);}} text={foundMovie? 'แก้ไขชื่อภาพยนตร์':'เจอแล้วจ้า'}/>
-                </div>
-              </Col>
-            }
-          </Row>
-        </div>
-      </Row>
-      <Row>
-      { userProfile && 
+      { (userProfile && isShowComment) ?
         <div className='comments-section-container'>
           <Row>
             <div className='comment-row'>
@@ -455,15 +452,17 @@ const Post: React.FC<PostProps> = ({postId}) => {
               }
             </div>
           </Row>
-        </div>
+        </div>:<></>
       }
       </Row>
-      <Row>
-        <div className='feed-comments-container'>
-          <OwnerNewComment newCommentId={returnCommentId} onCommentDeleted={()=>{refreshCountComment()}}/>
-          { posts?.postId && <FeedComment postId={posts?.postId} onCommentDeleted={()=>{refreshCountComment()}}/> }
-        </div>
-      </Row>
+      { isShowComment ?
+        <Row>
+          <div className='feed-comments-container'>
+            <OwnerNewComment newCommentId={returnCommentId} onCommentDeleted={()=>{refreshCountComment()}}/>
+            { posts?.postId && <FeedComment postId={posts?.postId} onCommentDeleted={()=>{refreshCountComment()}}/> }
+          </div>
+        </Row>:<></>
+      }
       {posts &&<EditPostModal 
         show={isShowEditPostModal} 
         onClose={()=>{setIsShowEditPostModal(false)}} 
@@ -486,7 +485,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           onSaveSuccess={()=>{setIsDataUpdate(!isDataUpdate);}}
         />
       }
-      { isShowRecMovieModal &&
+      {/* { isShowRecMovieModal &&
         <ReccommendationModal
           postId={posts?.postId}
           postOwnerId={posts?.userId}
@@ -494,7 +493,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           onclose={()=>{setIsShowRecMovieModal(false)}}
           refreshPost={()=>{setIsDataUpdate(!isDataUpdate);}}
         />
-      }
+      } */}
     </div>
   )
 }

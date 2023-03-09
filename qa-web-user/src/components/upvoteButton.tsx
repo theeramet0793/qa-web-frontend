@@ -8,9 +8,10 @@ export interface UpvoteButtonProps{
  onClick?: () => void | undefined;
  isActive?: boolean;
  disable?: boolean;
+ upvoteCount: number;
 }
 
-const UpvoteButton:React.FC<UpvoteButtonProps> = ({ onClick, isActive, disable}) => {
+const UpvoteButton:React.FC<UpvoteButtonProps> = ({ onClick, isActive, disable, upvoteCount}) => {
 
   return(
     <div 
@@ -18,7 +19,7 @@ const UpvoteButton:React.FC<UpvoteButtonProps> = ({ onClick, isActive, disable})
       onClick={()=>{!disable && onClick && onClick()}}
     >
       <ReactSVG src={ShiftIcon}/>
-      <div className='px-2 text-normal'>{'โหวตขึ้น'}</div>
+      <div className='ps-2 text-normal-responsive text-center'>{upvoteCount+' คะแนนโหวต'}</div>
     </div>
   )
 }

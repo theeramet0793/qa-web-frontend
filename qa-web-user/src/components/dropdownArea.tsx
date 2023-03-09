@@ -20,7 +20,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
   }
   const SOLVED = "พบชื่อภาพยนตร์แล้ว";
   const UNSOLVED = "ยังไม่พบชื่อภาพยนตร์";
-  const ALL = "ทั้งหมด";
+  const ALL = "ทุกประเภท";
 
   useEffect(()=>{
     ((check1Value && check2Value)||(!check1Value && !check2Value))? onChange(PostType.All): check1Value? onChange(PostType.Solved):onChange(PostType.Unsolved);
@@ -38,7 +38,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
         onClick={()=> setIsShowMenu(!isShowMenu)}
       >
         <Row className='content-container'>
-          <Col xs={12} sm={9} className='py-1 text-small d-flex justify-content-start align-items-center'>
+          <Col xs={12} sm={9} className='py-1 d-flex justify-content-start align-items-center'>
             {'โพสต์'+renderPostType()}
           </Col>
           <Col xs={12} sm={3} className='d-flex align-items-center justify-content-center'> 

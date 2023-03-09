@@ -15,10 +15,16 @@
     }
   }
 
+  .more-menu-button-disable{
+    &:hover{
+      cursor: default;
+    }
+  }
+
   .expand-menu{
     position: absolute;
-    background-color: var(--color-second-bg);
-    box-shadow: 0px 0px 10px var(--color-main-bg);
+    background-color: var(--color-white);
+    box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     width: fit-content;
     height: fit-content;
     right: 0;
@@ -30,13 +36,13 @@
       display: flex-start;
       align-items: center;
       padding: 0.5rem 0.5rem;
-      color: var(--color-text);
+      color: var(--color-black);
       border-radius: 8px;
       min-width: max-content;
 
         &:hover{
           cursor: pointer;
-          background-color: var(--color-third-bg);
+          background-color: var(--color-cb-gray-2);
         }
       .more-menu-option{
         svg{

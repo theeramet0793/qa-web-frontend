@@ -8,10 +8,11 @@
   }
   width: 100%;
   height: fit-content;
-  //border-radius: 12px;
+  border-radius: 10px;
   padding: 2.5rem ;
   background-color: var(--color-white);
-  margin: 0rem 0rem 3rem 0rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  margin: 0rem 0rem 2rem 0rem;
 
   .profile-container{
     width: 50px;
@@ -28,16 +29,16 @@
     }
   }
   .time-container{
-    color: var(--color-dark-gray-2);
+    color: var(--color-cb-gray-3);
   }
   .rec-in-post-container{
     width: 100%;
-    height: 50px;
+    height: fit-content;
+    padding: 0.5rem 0rem;
   }
   .found-movie-container-ddf{
     width: 100%;
     height: fit-content;
-    padding: 1rem 0rem 0rem 0rem;
   }
 
   .post-content-container{
@@ -56,6 +57,8 @@
   }
 
   .info-container{
+    border-bottom: 1px solid var(--color-cb-gray-4);
+    border-top: 1px solid var(--color-cb-gray-4);
     width: 100%;
     padding: 0rem 1rem;
     .upvote-label-container{
@@ -64,11 +67,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--color-dark-gray-2);
+      color: var(--color-cb-gray-3);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-dark-gray);
+        fill: var(--color-cb-gray-4);
       }
     }
     .comment-button-container{
@@ -77,11 +80,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--color-dark-gray-2);
+      color: var(--color-cb-gray-3);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-dark-gray);
+        fill: var(--color-cb-gray-4);
       }
     }
     .follow-label-container{
@@ -90,35 +93,35 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--color-dark-gray-2);
+      color: var(--color-cb-gray-3);
       svg{
         width: 20px;
         height: 20px;
-        fill: var(--color-dark-gray);
+        fill: var(--color-cb-gray-4);
       }
     }
   }
 
   .option-container{
-    border-bottom: 1px solid var(--color-dark-gray);
-    border-top: 1px solid var(--color-dark-gray);
-    padding: 0.7rem 0.5rem;
+    border-bottom: 1px solid var(--color-cb-gray-4);
+    border-top: 1px solid var(--color-cb-gray-4);
+    padding: 0.25rem 0.5rem;
     .upvote-button-container{
-      width: fit-content;
+      width: 100%;
       height: 40px;
     }
     .follow-button-container{
-      width: fit-content;
+      width: 100%;
       height: 40px;
     }
-    .follow-movie-container{
-      width: fit-content;
+    .comment-button-container{
+      width: 100%;
       height: 40px;
     }
   }
 
   .comments-section-container{
-    padding: 1rem 1rem;
+    padding: 1rem 1rem 0rem 1rem;
     height: fit-content;
 
     .comment-row{
@@ -147,15 +150,14 @@
         .comment-box{
           width: 100%;
           height: fit-content;
-          min-height: 53px;
-          //border-radius: 20px;
+          border-radius: 10px;
           border: none;
-          padding: 0.9rem 1.2rem;
-          background-color: var(--color-light-gray);
+          padding: 0.5rem 1.2rem;
+          background-color: var(--color-cb-gray-2);
           color: var(--color-black);
           resize: none;
           &::placeholder{
-            color: var(--color-text-placeholder);
+            color: var(--color-cb-gray-3);
           }
           &:focus{
             outline: none;
@@ -165,7 +167,7 @@
     }
 
     .send-button{
-      background-color: var(--color-orange);
+      background-color: var(--color-cb-blue-1);
       color: var(--color-white);
       border-radius: 999px;
       width: fit-content;
