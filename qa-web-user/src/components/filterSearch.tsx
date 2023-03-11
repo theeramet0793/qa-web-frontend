@@ -39,7 +39,7 @@ const FilterSearch: React.FC<FilterSearchProps> = ({defaultSearchType, onSelectB
   
   return(
     <div className="filter-search">
-      <div className="filter-search-container text-color text-normal">
+      <div className="filter-search-container text-normal-responsive">
         <Row>
           <Col>
             <div 
@@ -54,7 +54,7 @@ const FilterSearch: React.FC<FilterSearchProps> = ({defaultSearchType, onSelectB
               className={classNames("radio-filter-button", selectedButton === SearchType.Post? 'active':'')}
               onClick={()=>{setSelectedButton(SearchType.Post)}}
             >
-              โพสต์
+              เนื้อหาโพสต์
             </div>
           </Col>
           <Col>

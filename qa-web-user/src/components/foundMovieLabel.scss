@@ -5,13 +5,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem 0.5rem 0rem 0.5rem;
+  padding: 1rem 0.25rem 0rem 1rem;
   .inside-container{
     width: 100%;
-    //border: 1px solid var(--color-cb-green-1);
-    background-color: var(--color-cb-green-1);
+    background-color: var(--color-purple-3);
     color: var(--color-white);
-    padding: 0.25rem 0rem;
+    padding: 0.5rem 0rem;
     border-radius: 5px;
     .icon-container{
       display: flex;
@@ -27,6 +26,6 @@
   }
 
   svg{
-    fill: var(--color-white);
+    fill: var(--color-yellow-2);
   }
 }

@@ -12,8 +12,8 @@ const Loading:React.FC<LoadingProps> = () =>{
     <div className='welcome-container '>
       <div className='welcome-child-container'>
         <Row>
-          <Row className='d-flex justify-content-center align-items-center'><div className="lds-facebook"><div></div><div></div><div></div></div></Row>
-          <Row><div className='loading-text-container text-color'>loading...</div></Row>
+          <Row className='d-flex justify-content-center align-items-center'><div className="lds-ripple"><div></div><div></div><div></div></div></Row>
+          <Row><div className='loading-text-container'>loading...</div></Row>
         </Row>
       </div>
     </div>

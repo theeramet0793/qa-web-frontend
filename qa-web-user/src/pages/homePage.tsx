@@ -47,7 +47,7 @@ const HomePage: React.FC<HomePageProps> = () =>{
       />
       <OwnerNewPost newPostId={newPostId} clearData={triggerOnRefresh}/>
       <FeedPost filterSortBy={filterSortBy} filterPostType={filterType} filterIsOnlyFollow={filterOnlyFollow} onRefreshFeed={()=>{setTriggerOnRefresh(!triggerOnRefresh)}}/>
-      <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} />
+      <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} onAutoToLogin={()=>{setIsShowSigModal(true)}}/>
       <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true); navigate('/loading')}}/>
       <CreatePostModal show={isShowCreatePostModal} onClose={()=> setIsShowCreatePostModal(false)} onCreateNewPostSuccess={(postId)=>{setNewPostId(postId)}}/>
     </>

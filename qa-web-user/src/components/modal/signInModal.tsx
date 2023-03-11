@@ -1,12 +1,16 @@
 
 import { useEffect, useState } from 'react';
-import { Modal, Row } from 'react-bootstrap';
+import { Col, Modal, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 import './signInModal.scss'
 import XIcon from '../../assets/svg/x.svg'
 import Client from '../../lib/axios/axios';
 import classNames from 'classnames';
 import {IAccessToken} from '../../data/interface/IAccessToken'
+import XFillIcon from '../../assets/svg/exclamation-circle-fill.svg'
+import EyeSlashIcon from '../../assets/svg/eye-slash-fill.svg'
+import EyeIcon from '../../assets/svg/eye-fill.svg'
+import loginImage from '../../assets/images/SignIn.png'
 
 export interface SignInModalProps{
   show: boolean;
@@ -21,6 +25,7 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
   const [password, setPassword] = useState<string>('');
   const [isEmailIncorrect, setIsEmailIncorrect] = useState<boolean>(false);
   const [isPasswordIncorrect, setIsPasswordIncorrect] = useState<boolean>(false);
+  const [isShowPassword, setIsShowPassword] = useState<boolean>(false);
 
   useEffect(()=>{
     setIsShow(show)
@@ -48,7 +53,10 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
   const renderIncorrectEmail = () =>{
     return(
       <div className={classNames('message-login-fail')}>
-        อีเมลไม่ถูกต้อง
+        <Row className='my-0'>
+          <Col xs='auto'><ReactSVG src={XFillIcon}/></Col>
+          <Col>อีเมลไม่ถูกต้อง</Col>
+        </Row>
       </div>
     )
   }
@@ -56,7 +64,10 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
   const renderIncorrectPassword = () =>{
     return(
       <div className={classNames('message-login-fail')}>
-        พาสเวิร์ดไม่ถูกต้อง
+        <Row className='my-0'>
+          <Col xs='auto'><ReactSVG src={XFillIcon}/></Col>
+          <Col>พาสเวิร์ดไม่ถูกต้อง</Col>
+        </Row>
       </div>
     )
   }
@@ -72,20 +83,29 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
     else return undefined; 
   }
 
+  const closeModal = () =>{
+    onClose(); 
+    resetIncorrectMessage();
+    setIsShowPassword(false);
+  }
+
   return(
-    <Modal show={isShow} centered className='sign-modal' onHide={()=>{onClose(); resetIncorrectMessage();}}>
+    <Modal show={isShow} centered className='sign-modal' onHide={()=>{closeModal();}}>
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
-            <div className='text-large-bold   header-label'>
-              ลงชื่อเข้าใช้
+            <div className='image-container'>
+              <img src={loginImage} alt='login'/>
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose(); resetIncorrectMessage();}} >
+              <div className='x-icon' onClick={()=>{closeModal();}} >
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
           </div>
+          <div className='text-large-bold   header-label'>
+              ลงชื่อเข้าใช้งาน
+            </div>
           <div className='body-container'>
             {renderSignInFail()}
             <Row>
@@ -96,13 +116,16 @@ const SignInModal: React.FC<SignInModalProps> = ({show, onClose, onSignInSuccess
                 onChange={(e)=>setEmail(e.currentTarget.value)}
               />
             </Row>
-            <Row>
+            <Row className='input-password-container'>
               <input 
-                type={'password'} 
-                className='input-user-name text-box text-normal'
+                type={isShowPassword? 'text':'password'} 
+                className='input-password  text-box text-normal'
                 placeholder='รหัสผ่าน'
                 onChange={(e)=>setPassword(e.currentTarget.value)}
               />
+              <div className='eye-password-container'>
+                <ReactSVG src={isShowPassword? EyeIcon:EyeSlashIcon} onClick={()=>{ setIsShowPassword(!isShowPassword); }}/>
+              </div>
             </Row>
             <Row>
               <div className='button-create text-normal-bold' onClick={handleSubmit}>

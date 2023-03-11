@@ -8,14 +8,14 @@
     width: 100%;
     height: fit-content;
     padding: 0.25rem 0.5rem;
-    background-color: var(--color-white);
-    color: var(--color-cb-blue-1);
+    background-color: var(--color-purple-1);
+    color: var(--color-yellow-1);
     border-radius: 7px;
     &:hover{
       cursor: pointer;
     }
     svg{
-      fill: var(--color-cb-blue-1);
+      fill: var(--color-yellow-1);
     }
   }
   .expand-movie-list-container{

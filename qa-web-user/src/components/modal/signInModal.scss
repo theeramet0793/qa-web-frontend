@@ -14,11 +14,10 @@
       width: 100%;
 
       .modal-body{
-        background-color: var(--color-second-bg);
+        background-color: var(--color-white);
         border-radius: 12px;
-        padding: 1rem;
+        padding: 1.5rem;
         width: 100%;
-        border: 1px solid var(--color-third-bg);
 
         .content-container{
           width: 100%;
@@ -28,27 +27,28 @@
             justify-content: center;
             align-items: center;
             position: relative;
-  
-            .header-label{
-              width: fit-content;
-              height: fit-content;
+            .image-container{
               display: flex;
-              justify-content: center;
               align-items: center;
-              padding: 0rem 4rem;
-              color: var(--color-text);
+              justify-content: center;
+              img{
+                width: 100px;
+                height: 100px;
+              }
             }
   
             .x-button-container{
-              width: 43px;
-              height: 43px;
+              width: 38px;
+              height: 38px;
               position: absolute;
               right: 0;
+              top: 0;
 
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-third-bg);
+                background-color: var(--color-white);
+                border: 2px solid var(--color-gray-4);
                 border-radius: 999px;
                 display: flex;
                 justify-content: center;
@@ -56,22 +56,30 @@
                 
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-primary-button);
+                  border: 2px solid var(--color-gray-1);
                 }
               }
 
 
               svg{
-                fill: var(--color-text)
+                fill: var(--color-gray-1)
               }
 
-              &:hover{
-                svg{
-                  fill: var(--color-white);
-                }
-              }
+              // &:hover{
+              //   svg{
+              //     fill: var(--color-white);
+              //   }
+              // }
 
             }
+          }
+
+          .header-label{
+            width: 100%;
+            height: fit-content;
+            text-align: center;
+            padding: 1rem 4rem 0rem 4rem;
+            color: var(--color-black);
           }
 
           .body-container{
@@ -82,12 +90,20 @@
               display: flex;
               justify-content: center;
               align-items: center;
-              color: var(--color-red);
+              color: var(--color-purple-4);
+              svg{
+                width: 18px;
+                height: 18px;
+                fill: var(--color-yellow-1);
+              }
+              .row, .col, .col-auto{
+                height: fit-content;
+              }
             }
 
             .row{
-              height: 41px;
-              margin: 2rem 2.5rem;
+              padding: 0.5rem 1.25rem;
+              height: fit-content;
 
               input, .button-create{
                 width: 100%;
@@ -98,12 +114,18 @@
                 &:focus{
                   outline: none;
                 }
+                &::-ms-reveal {
+                  display: none;
+                }
+                &::-ms-clear {
+                  display: none;
+                }
               }
 
               .button-create{
                 margin-top: 1rem;
-                background-color: var(--color-primary-button);
-                color: var(--color-text);
+                background-color: var(--color-purple-3);
+                color: var(--color-white);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -115,6 +137,24 @@
 
                 &:active{
                   opacity: 0.8;
+                }
+              }
+            }
+
+            .input-password-container{
+              position: relative;
+              .input-password{
+                padding-right: 2.5rem;
+              }
+              .eye-password-container{
+                svg{
+                  fill: var(--color-gray-1);
+                  position: absolute;
+                  top: 22px;
+                  right: 40px;
+                  &:hover{
+                    cursor: pointer;
+                  }
                 }
               }
             }

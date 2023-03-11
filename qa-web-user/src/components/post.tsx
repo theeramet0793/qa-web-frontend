@@ -3,7 +3,7 @@ import { ReactSVG } from 'react-svg';
 import './post.scss'
 import UpvoteButton from './upvoteButton';
 import ProfileIcon from '../assets/svg/person-fill.svg'
-import SendIcon from '../assets/svg/send.svg';
+import SendIcon from '../assets/svg/send-fill.svg';
 import MoreMenu from './moreMenu';
 import { useTranslation } from 'react-i18next';
 import RoundLabel from './roundLabel';
@@ -146,6 +146,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
     if(enableFollow) updateFollow();
     // eslint-disable-next-line 
   },[isFollow])
+
+  useEffect(()=>{
+    if(isShowComment===false){
+      setReturnCommentId(undefined);
+    }
+  },[isShowComment])
   
   const ownerUserOptions = [
     {label:'แก้ไขโพสต์', value:'editPost'},
@@ -253,7 +259,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
   const renderShowtags = (selectedTags:IOption[]) =>{
     return selectedTags.length > 0? (
-      <Row className="pb-4 row-cols-auto">
+      <Row className=" row-cols-auto">
         {
           selectedTags.map((tag)=>{
             return(
@@ -313,7 +319,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           </div>
         </Col>
         <Col xs='auto' className='d-flex flex-column justify-content-center mx-2'>
-          <Row className='text-normal-bold text-color'>
+          <Row className='text-normal-bold poster-name-container'>
             {posts?.username}
           </Row>
           <Row className='text-small time-container'>
@@ -325,21 +331,29 @@ const Post: React.FC<PostProps> = ({postId}) => {
         </Col>
       </Row>
       {
-          foundMovie?
-          <Row className='d-flex justify-content-center align-items-center'>
-            <div className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
-              <FoundMovieLabel movieName={foundMovie.movieName}/>
-            </div>
-          </Row>:<></>  
+        foundMovie?
+        <Row className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
+          <FoundMovieLabel movieName={foundMovie.movieName}/>
+        </Row>:<></>
       }
       <Row>
-        <div className='post-content-container'>
-          <div className='text-normal'>
-            <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
+        {
+          foundMovie?
+          <Col sm={5} className='d-flex justify-content-center align-items-center'>
+            <div className='movie-image-container'>
+                <img src={foundMovie.moviePosterPath} alt='No poster'/>
+            </div>
+          </Col>:<></>  
+        }
+        <Col>
+          <div className='post-content-container'>
+            <div className='text-normal'>
+              <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
+            </div>
+            {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
           </div>
-        </div>
+        </Col>
       </Row>
-      {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
       <Row>
         <div className='rec-in-post-container'>
         { ( !posts?.movieId ) &&

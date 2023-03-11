@@ -1,11 +1,12 @@
 .show-one-post-container{
-  background-color: var(--color-main-bg);
+  background-color: var(--color-purple-6);
   padding: 0rem 1rem 3rem 1rem ;
   width: 100%;
-  min-height: 60vh;
+  height: fit-content;
+  min-height: 94vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   .post-container{
     width: 100%;
     max-width: 700px;

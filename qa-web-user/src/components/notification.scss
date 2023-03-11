@@ -3,21 +3,11 @@
   position: relative;
   width: 100%;
   height: 100%;
-  background: var(--color-cb-gray-2);
+  background: var(--color-purple-3);
   border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover{
-    background-color: var(--color-cb-blue-2);
-    // .btn-noti{
-    //   .bell-icon{
-    //     svg{
-    //       fill: var(--color-cb-blue-1);
-    //     }
-    //   }
-    // }
-  }
   .count-unread-noti{
     position: absolute;
     top: 0;
@@ -32,21 +22,36 @@
       align-items: center;
       justify-content: center;
       svg{
-        fill: var(--color-cb-gray-3);
+        fill: var(--color-white);
         width: 70%;
         height: 70%;
       }
     }
     .expand-menu{
       position: absolute;
-      background-color: var(--color-white);
+      background-color: var(--color-gray-1);
       box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
       width: fit-content;
       max-width: 500px;
       height: fit-content;
       max-height: 400px;
-      @media only screen and (max-width: 390px){
-        max-width: 250px;
+      @media only screen and (max-width: 394px){
+        max-width: 270px;
+      }
+      @media only screen and (max-width: 575px) and (min-width: 540px) {
+        max-width: 400px;
+      }
+      @media only screen and (max-width: 540px) and (min-width: 496px) {
+        max-width: 370px;
+      }
+      @media only screen and (max-width: 495px) and (min-width: 464px) {
+        max-width: 350px;
+      }
+      @media only screen and (max-width: 464px) and (min-width: 445px) {
+        max-width: 330px;
+      }
+      @media only screen and (max-width: 444px) and (min-width: 395px) {
+        max-width: 300px;
       }
       overflow-y: scroll;
       right: 0;
@@ -59,25 +64,32 @@
         padding: 0.5rem;
       }
       .option-row {
-        display: flex-start;
+        display: flex;
+        justify-content: flex-start;
         align-items: center;
         padding: 1rem 0.5rem;
-        color: var(--color-black);
-        min-width: max-content;
-        border-bottom: 1px solid var(--color-cb-gray-4);
+        color: var(--color-white);
+        width: max-content;
+        border-bottom: 1px solid var(--color-gray-2);
+        @media only screen and (max-width: 576px) {
+          max-width: fit-content;
+        }
         &:hover{
           cursor: pointer;
           border-radius: 10px;
-          background-color: var(--color-cb-gray-2);
+          background-color: var(--color-gray-2);
         }
         .dot-icon{
           width: 10px;
           height: 10px;
           svg{
-            fill: var(--color-cb-red-1);
+            fill: var(--color-yellow-1);
             width: 100%;
             height: 100%;
           }
+        }
+        .action-type-container{
+          color: var(--color-yellow-1);
         }
         .noti-post-detail{
           white-space: nowrap;
@@ -86,6 +98,12 @@
           width: 100%;
           max-width: 200px;
           height: 100%;
+          @media only screen and (max-width: 576px) {
+            max-width: 250px;
+          }
+        }
+        .time-container{
+          color: var(--color-purple-4)
         }
       }
     }

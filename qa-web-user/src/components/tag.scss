@@ -4,7 +4,9 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
   padding: 0.25rem 1rem;
-  border-radius: 5px;
+  border-radius: 999px;
+  background-color: var(--color-purple-7);
+  color: var(--color-purple-3);
   .x-icon-container{
     width: 27px;
     height: 27px;
@@ -19,30 +21,30 @@
   }
 }
 
-.tag-theme-purple{
-  // background-color: var(--color-cb-purple-2);
-  // color: var(--color-cb-purple-1);
-  background-color: var(--color-cb-purple-1);
-  color: var(--color-white);
-}
+// .tag-theme-purple{
+//   // background-color: var(--color-cb-purple-2);
+//   // color: var(--color-cb-purple-1);
+//   background-color: var(--color-cb-purple-1);
+//   color: var(--color-white);
+// }
 
-.tag-theme-blue{
-  // background-color: var(--color-cb-blue-4);
-  // color: var(--color-cb-blue-3);
-  background-color: var(--color-cb-blue-3);
-  color: var(--color-white);
-}
+// .tag-theme-blue{
+//   // background-color: var(--color-cb-blue-4);
+//   // color: var(--color-cb-blue-3);
+//   background-color: var(--color-cb-blue-3);
+//   color: var(--color-white);
+// }
 
-.tag-theme-orange{
-  // background-color: var(--color-cb-orange-2);
-  // color: var(--color-cb-orange-1);
-  background-color: var(--color-cb-orange-1);
-  color: var(--color-white);
-}
+// .tag-theme-orange{
+//   // background-color: var(--color-cb-orange-2);
+//   // color: var(--color-cb-orange-1);
+//   background-color: var(--color-cb-orange-1);
+//   color: var(--color-white);
+// }
 
-.tag-theme-pink{
-  // background-color: var(--color-cb-pink-2);
-  // color: var(--color-cb-pink-1);
-  background-color: var(--color-cb-pink-1);
-  color: var(--color-white);
-}
+// .tag-theme-pink{
+//   // background-color: var(--color-cb-pink-2);
+//   // color: var(--color-cb-pink-1);
+//   background-color: var(--color-cb-pink-1);
+//   color: var(--color-white);
+// }

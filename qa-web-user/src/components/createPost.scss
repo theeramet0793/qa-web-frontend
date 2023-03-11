@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-cb-blue-2);
+  background-color: var(--color-purple-6);
   padding: 2rem 1rem 0rem 1rem;
 
   .create-post-card{
@@ -17,7 +17,7 @@
     width: 100%;
     max-width: 700px;
     padding: 1rem 1.5rem;
-    background-color: var(--color-white);
+    background: var(--color-purple-1);
     border-radius: 10px;
 
     .profile-container{
@@ -29,17 +29,16 @@
       width: 100%;
       height: 100%;
       border-radius: 999px;
-      background-color: var(--color-cb-gray-2);
+      background: var(--color-purple-3);
       border: none;
       display: flex;
       align-items: flex-start;
       align-items: center;
-      padding-left: 2rem;
-      color: var(--color-cb-gray-3);
+      padding-left: 1rem;
+      color: var(--color-white);
 
       &:hover{
-        background-color: var(--color-cb-gray-5);
-        box-shadow: none;
+        opacity: 0.9;
       }
     }
   }

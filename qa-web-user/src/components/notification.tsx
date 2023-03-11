@@ -6,7 +6,7 @@ import { INotification } from '../data/interface/INotification';
 import Client from '../lib/axios/axios';
 import { GetUserData } from './userData/userData';
 import { IUser } from '../data/interface/IUser';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import CircleIcon from '../assets/svg/circle-fill.svg'
 import { nowDate, nowTime } from '../utils/dateAndTime';
 import { useNavigate } from 'react-router-dom';
@@ -47,11 +47,11 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
 
   const renderNotiAction = (notiType:string) =>{
     if(notiType==="Add"){
-      return "เพิ่มชื่อภาพยนตร์สำหรับโพสต์"
+      return <Row><Col xs='auto' className='action-type-container pe-0'>{"เพิ่ม"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
     }else if(notiType==="Edit"){
-      return "แก้ไขชื่อภาพยนตร์สำหรับโพสต์"
+      return <Row><Col xs='auto' className='action-type-container pe-0'>{"แก้ไข"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
     }else if(notiType==="Remove"){
-      return "ลบชื่อภาพยนตร์สำหรับโพสต์"
+      return <Row><Col xs='auto' className='action-type-container pe-0'>{"ลบ"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
     }else{
       return "-"
     }
@@ -87,12 +87,12 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
         { isShowMenu &&
           <div className='expand-menu'>
             {(menuNoti?.length === 0) &&
-              <div className='no-noti text-normal text-color'>ยังไม่มีการแจ้งเตือน</div>
+              <div className='no-noti text-normal-responsive'>ยังไม่มีการแจ้งเตือน</div>
             }
             { (menuNoti?.length !== 0) && 
               menuNoti?.map((noti,index)=>{
                 return(
-                  <div key={index} className='option-row text-normal' onClick={()=>{markAsRead(noti.postId); navigate("showonepost/?postId="+noti.postId)}}>
+                  <Container key={index} className='option-row text-normal-responsive' onClick={()=>{markAsRead(noti.postId); navigate("/showonepost/?postId="+noti.postId,{ replace: true })}}>
                     <Row>
                       <Col xs='auto'>
                         {!noti.isRead &&
@@ -105,14 +105,14 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
                           <Col className='d-flex justify-content-start align-item-center'>{renderNotiAction(noti.notiType)}</Col>
                         </Row>
                         <Row>
-                          <Col >
+                          <Col xs={12} sm='auto'>
                             <div className='noti-post-detail text-small'>{noti.postDetail}</div>
                           </Col>
-                          <Col xs='auto' className='text-small'>{noti.createdDate}{" "}{noti.createdTime}</Col>
+                          <Col xs={12} sm='auto' className='time-container text-small d-flex justify-content-start'>{noti.createdDate+" เวลา "+noti.createdTime}</Col>
                         </Row>
                       </Col>
                     </Row>
-                  </div>
+                  </Container>
                 )
               })
             }

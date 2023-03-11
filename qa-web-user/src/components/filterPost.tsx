@@ -28,21 +28,21 @@ const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilt
     <div className="filter-post d-flex justify-content-center align-items-center">
       <div className="filter-container">
           <div className="filter-card">
-            <Row className='w-100 d-flex justify-content-center text-normal-responsive' >
-              <Col className='d-flex justify-content-center'>
+            <Row className='w-100 d-flex justify-content-center align-items-center text-normal-responsive' >
+              <Col xs={3} sm={4} md={3} className='d-flex justify-content-center'>
                 <Row className="switch-container d-flex justify-content-center align-items-center">
-                  <Col xs='auto' className="d-flex justify-content-center text-center">{t('ONLY_FOLLOWING_POST')}</Col>
-                  <Col className="py-1 d-flex justify-content-center ">
+                  <Col xs='auto' className="d-flex justify-content-start">{t('ONLY_FOLLOWING_POST')}</Col>
+                  <Col className="toggle-container ">
                     <ToggleSwitch defaultValue={defaultOnlyFollow} onChange={(result)=>{onFilterOnlyFollowChange(result); }}/>
                   </Col>
                 </Row>
               </Col>
-              <Col >
+              <Col className='d-flex justify-content-center align-items-center py-1'>
                 <div className='checkbox-group-container'>
                   <DropdownArea onChange={(result)=>{onFilterTypeChange(result)}}/>
                 </div>
               </Col>
-              <Col >                
+              <Col className='d-flex justify-content-center align-items-center py-1'>
                 <div className="dropdown-container">
                   <DropdownSelect menuOptions={sortOptions} onSelectOption={(selectedOption)=>{onFilterSortByChange(selectedOption.value as SortBy)}}/>
                 </div>

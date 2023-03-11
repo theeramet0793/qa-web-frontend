@@ -28,10 +28,10 @@ const DropdownSelect: React.FC<DropdownSelectProps> = ({menuOptions, onSelectOpt
         onBlur={()=>{delayedCloseMenu()}}
       >
         <Row className='content-container'>
-          <Col xs={12} sm={9} className='py-1 d-flex justify-content-start align-items-center'>
-            {selectedOption.label}
+          <Col className='text-container py-1 d-flex justify-content-start align-items-center'>
+            <span>{selectedOption.label}</span>
           </Col>
-          <Col xs={12} sm={3} className='d-flex align-items-center justify-content-center'> 
+          <Col xs={2} className=' d-flex align-items-center justify-content-center'> 
             <ReactSVG src={ChevronDownIcon}/>
           </Col>
         </Row>

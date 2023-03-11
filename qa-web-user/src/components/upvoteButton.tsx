@@ -2,7 +2,7 @@
 import './upvoteButton.scss'
 import classNames from 'classnames'
 import { ReactSVG } from "react-svg";
-import ShiftIcon from '../assets/svg/shift-fill.svg'
+import StarIcon from '../assets/svg/star-fill.svg'
 
 export interface UpvoteButtonProps{
  onClick?: () => void | undefined;
@@ -18,7 +18,7 @@ const UpvoteButton:React.FC<UpvoteButtonProps> = ({ onClick, isActive, disable, 
       className={classNames(isActive===true? `upvote-button-active`:'upvote-button', disable? 'upvote-button-disable':'')}
       onClick={()=>{!disable && onClick && onClick()}}
     >
-      <ReactSVG src={ShiftIcon}/>
+      <ReactSVG src={StarIcon}/>
       <div className='ps-2 text-normal-responsive text-center'>{upvoteCount+' คะแนนโหวต'}</div>
     </div>
   )

@@ -28,7 +28,9 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
   const [movieOptions, setMovieOptions] = useState<IOption[]>([]);
   const [movieName, setMovieName] = useState<string>('');
   const [movieId, setMovieId] = useState<string>('');
+  const [moviePosterPath, setMoviePosterPath] = useState<string>('');
   const [userProfile] = useState<IUser|undefined>(GetUserData());
+  const [movieMenuList, setMovieMenuList] = useState<ISearchMovieTMDB|undefined>(undefined)
   
   useEffect(()=>{
     setIsShow(show)
@@ -44,6 +46,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
       Client.get<ISearchMovieTMDB>('/searchmovies/'+searchStr)
       .then( (res) =>{
         setMovieOptions(convertMoviesToOptions(res.data.results).slice(0,4));
+        setMovieMenuList(res.data);
       }).catch( (err) => {
         console.log(err.response);
       })
@@ -58,6 +61,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
         postId: postId,
         movieId: movieId,
         movieName: movieName,
+        posterPath: moviePosterPath,
         userId: userProfile?.userId,
         date: nowDate(),
         time: nowTime(),
@@ -70,8 +74,15 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
       })
   }
 
+  const setSelectedMoviePosterPath = (movieId:string) =>{
+    let selectedMovie = movieMenuList?.results.find(x => x.id === parseInt(movieId) )
+    if(selectedMovie){
+      setMoviePosterPath(selectedMovie.poster_path);
+    }
+  }
+
   return(
-    <Modal show={isShow} centered className='found-movie-modal'  onHide={()=>{onClose(); setMovieOptions([]);}}>
+    <Modal show={isShow} centered className='found-movie-modal'  onHide={()=>{onClose(); setMovieOptions([]); setMovieMenuList(undefined)}}>
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
@@ -79,7 +90,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
               พบชื่อภาพยนตร์แล้ว
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose(); setMovieOptions([]);}}>
+              <div className='x-icon' onClick={()=>{onClose(); setMovieOptions([]); setMovieMenuList(undefined)}}>
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
@@ -91,7 +102,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
                   placeholder="ค้นหาชื่อภาพยนตร์..." 
                   onInputchange={searchMovie} 
                   menuOptions={movieOptions} 
-                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label);}}
+                  onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label); setSelectedMoviePosterPath(option.value)}}
                 />
               </div> 
             </Row>
@@ -99,7 +110,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
               <div className='current-movie-container'>
                 { movieName && 
                   <div className='movie-name text-color text-normal'>
-                    <div className='delete-movie-button' onClick={()=>{setMovieId(''); setMovieName('');}}>
+                    <div className='delete-movie-button' onClick={()=>{setMovieId(''); setMovieName(''); setMoviePosterPath('');}}>
                       <ReactSVG src={XIcon}/>
                     </div>
                     {"ชื่อภาพยนตร์ : "}{movieName}

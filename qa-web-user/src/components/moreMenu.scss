@@ -11,7 +11,9 @@
     align-items: center;
     border: none;
     svg{
-      fill: var(--color-dark-gray);
+      width: 20px;
+      height: 20px;
+      fill: var(--color-white);
     }
   }
 
@@ -23,7 +25,7 @@
 
   .expand-menu{
     position: absolute;
-    background-color: var(--color-white);
+    background-color: var(--color-gray-1);
     box-shadow: 0 12px 28px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
     width: fit-content;
     height: fit-content;
@@ -36,17 +38,18 @@
       display: flex-start;
       align-items: center;
       padding: 0.5rem 0.5rem;
-      color: var(--color-black);
+      color: var(--color-white);
+      background-color: var(--color-gray-1);
       border-radius: 8px;
       min-width: max-content;
 
-        &:hover{
-          cursor: pointer;
-          background-color: var(--color-cb-gray-2);
-        }
+      &:hover{
+        cursor: pointer;
+        background-color: var(--color-cb-gray-2);
+      }
       .more-menu-option{
         svg{
-          fill: var(--color-black);
+          fill: var(--color-white);
         }
       }
     }

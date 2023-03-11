@@ -122,7 +122,7 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filter
           loader={<h4 className='text-color' style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b className='text-color'>Yay! You have seen it all</b>
+              <b className='text-end-of-feed'>Yay! You have seen it all</b>
             </p>
           }
         >

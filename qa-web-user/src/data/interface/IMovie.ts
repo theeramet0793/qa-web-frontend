@@ -1,6 +1,7 @@
 export interface IMovie{
   movieId: number;
   movieName: string;
+  moviePosterPath: string
 }
 
 export interface ISearchMovieTMDB{
@@ -14,6 +15,7 @@ export interface IMovieTMDB{
   id:number;
   original_title:string;
   title:string;
+  poster_path:string;
 }
 
 export interface IReccommendMovie{

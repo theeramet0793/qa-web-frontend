@@ -65,7 +65,7 @@ const SearchingPage: React.FC<HomePageProps> = () =>{
         filterIsOnlyFollow={filterOnlyFollow} 
         onRefreshFeed={()=>{setTriggerOnRefresh(!triggerOnRefresh)}}
       />
-      <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} />
+      <RegisterModal show={isShowRegModal} onClose={()=> setIsShowRegModal(false)} onAutoToLogin={()=>{setIsShowSigModal(true)}}/>
       <SignInModal show={isShowSigModal} onClose={()=> setIsShowSigModal(false)} onSignInSuccess={()=>{setIsSignInComplete(true); navigate('/loading')}}/>
     </>
   )

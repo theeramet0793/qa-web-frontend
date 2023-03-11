@@ -20,23 +20,23 @@
 
     .comment-card{
       border-radius: 10px;
-      background-color: var(--color-cb-gray-2);
+      background-color: var(--color-purple-2);
       padding: 0.5rem 1rem;
       .commenter-user-name{
-        color: var(--color-cb-gray-3);
+        color: var(--color-purple-4);
       }
       .comment-time{
         display: flex-start;
         align-items: center;
-        color: var(--color-cb-gray-3);
+        color: var(--color-purple-4);
       }
       .editable{
-        color: var(--color-black);
+        color: var(--color-white);
         outline: none;
         border-radius: 10px;
       }
       .comment-detail{
-        color: var(--color-black);
+        color: var(--color-white);
         border: none;
         background-color: transparent;
         resize: none;
@@ -44,8 +44,8 @@
       }
       .more-menu-button{
         svg{
-          width: 20px;
-          height: 20px;
+          width: 18px;
+          height: 18px;
         }
       }
 

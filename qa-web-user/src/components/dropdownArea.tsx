@@ -38,10 +38,10 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
         onClick={()=> setIsShowMenu(!isShowMenu)}
       >
         <Row className='content-container'>
-          <Col xs={12} sm={9} className='py-1 d-flex justify-content-start align-items-center'>
-            {'โพสต์'+renderPostType()}
+          <Col className='text-container py-1 d-flex justify-content-start align-items-center'>
+            <span>{'โพสต์'+renderPostType()}</span>
           </Col>
-          <Col xs={12} sm={3} className='d-flex align-items-center justify-content-center'> 
+          <Col xs={2} className='d-flex align-items-center justify-content-center'> 
             <ReactSVG src={ChevronDownIcon}/>
           </Col>
         </Row>
@@ -49,20 +49,20 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
       {isShowMenu &&
         <button className='expand-menu text-color text-normal' onBlur={()=>{delayedCloseMenu()}}>  
           <Row className='ps-3'>
-            <Row className='py-1'>
+            <Row className='py-1' >
               <Col xs='auto' className='ps-0'>
                 <div className='checkbox-container'>
-                  <Checkbox defaultCheck={check1Value} onChange={(isCheck)=>{setCheck1Value(isCheck)}}/>
+                  <Checkbox defaultCheck={check1Value} onChange={(isCheck)=>{setCheck1Value(isCheck)}} />
                 </div>
               </Col>
               <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            
                 {SOLVED}
               </Col>
             </Row>
-            <Row className='py-1'>
+            <Row className='py-1' >
               <Col xs='auto' className='ps-0'>
                 <div className='checkbox-container'>
-                  <Checkbox defaultCheck={check2Value} onChange={(isCheck)=>{setCheck2Value(isCheck)}}/>
+                  <Checkbox defaultCheck={check2Value} onChange={(isCheck)=>{setCheck2Value(isCheck)}} />
                 </div>
               </Col>
               <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            

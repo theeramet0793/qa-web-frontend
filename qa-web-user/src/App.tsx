@@ -16,7 +16,7 @@ const App = () => {
         <Route path='/profile' element={<ProfilePage/>} />
         <Route path='/loading' element={<LoadingPage/>}/>
         <Route path='/searching' element={<SearchingPage/>}/>
-        <Route path='/showonepost' element={<ShowOnePostPage/>}/>
+        <Route path='/showonepost/' element={<ShowOnePostPage/>}/>
       </Routes>
     </BrowserRouter>
   );
