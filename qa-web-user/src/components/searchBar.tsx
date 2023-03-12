@@ -32,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({menuOptions, onSelectOption, place
           type='text' 
           onChange={(e)=>{setValue(e.currentTarget.value);  onInputchange(e.currentTarget.value);}} 
           value={value}
-          className={classNames(`search-box`, value ? `text-normal`:`text-placeholder`)} 
+          className={classNames(`search-box`, value ? `text-normal-responsive`:`text-placeholder`)} 
           placeholder={placeholder? placeholder:t('SEARCH_POST')}
         />
       </div>

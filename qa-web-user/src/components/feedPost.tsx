@@ -119,7 +119,7 @@ const FeedPost: React.FC<FeedPostProps> = ({filterSortBy, filterPostType, filter
           dataLength={posts?.length? posts.length:0} //This is important field to render the next data
           next={fetchData}
           hasMore={hasMore}
-          loader={<h4 className='text-color' style={{ textAlign: 'center' }}>Loading...</h4>}
+          loader={<h4 className='text-loading' style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
               <b className='text-end-of-feed'>Yay! You have seen it all</b>

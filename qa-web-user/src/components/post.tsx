@@ -309,6 +309,9 @@ const Post: React.FC<PostProps> = ({postId}) => {
 
   return(
     <div className={classNames("post-card", isDeletedPost? 'fade-out-post':'')} >
+      <div className='more-menu-container'>
+        <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption} disable={userProfile? false:true}/>
+      </div>
       <Row>
         <Col xs='auto'>
           <div className='profile-container'>
@@ -326,15 +329,12 @@ const Post: React.FC<PostProps> = ({postId}) => {
             { renderTime() }
           </Row>
         </Col>
-        <Col className='d-flex justify-content-end'>
-          <MoreMenu menuOptions={handleMenuOption()} onSelectOption={handleSelectOption} disable={userProfile? false:true}/>
-        </Col>
       </Row>
       {
         foundMovie?
-        <Row className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
+        <div className='found-movie-container-ddf d-flex justify-content-center align-items-center'> 
           <FoundMovieLabel movieName={foundMovie.movieName}/>
-        </Row>:<></>
+        </div>:<></>
       }
       <Row>
         {
@@ -359,7 +359,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
         { ( !posts?.movieId ) &&
           <Reccommendation
             postId={posts?.postId}
-            isReccommending={posts?.isReccommend}
+            isOnFinding={!posts?.isReccommend}
             postOwnerId={posts?.userId}
             refreshPost={()=>setIsDataUpdate(!isDataUpdate)}
           />

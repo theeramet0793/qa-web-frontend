@@ -8,18 +8,26 @@ import { IProfileImage } from '../data/interface/IProfileImage';
 import classNames from 'classnames'
 import { GetUserData } from './userData/userData';
 import DefaultProfile from '../assets/images/default-profile.jpg'
-
+import PersonIcon from '../assets/svg/person-fill-2.svg'
+import PostIcon from '../assets/svg/credit-card-2-front-fill.svg'
+import GearIcon from '../assets/svg/gear-fill.svg'
+import SignOutIcon from '../assets/svg/box-arrow-left.svg'
+import { Col, Row } from 'react-bootstrap';
+import { ReactSVG } from 'react-svg';
+import { useNavigate } from 'react-router-dom';
 
 export interface ProfileProps{
   onSignOut?: ()=> void;
   onProfile?: ()=>void;
+  onMyPost?: ()=>void;
   enableDropdown: boolean;
   disableClick?: boolean;
   newProfileUrl?: string;
 }
 
-const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, disableClick, newProfileUrl}) =>{
+const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, disableClick, newProfileUrl, onMyPost}) =>{
 
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [userProfile] = useState<IUser|undefined>(GetUserData());
   const [isShowDropdown, setIsShowDropdown] = useState<boolean>(false);
@@ -29,8 +37,8 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, 
   useEffect(()=>{
     setTestOptions(
       [
-        {label:userProfile?.username, value:'1'},
-        {label:userProfile?.email, value:'2'},
+        {label:userProfile?.username, value:'editProfile'},
+        {label:'โพสต์ของคุณ', value:'myPost'},
         {label:t('EDIT_PROFILE'), value:'editProfile'},
         {label:t('SIGN_OUT'), value:'signOut'},
       ]
@@ -60,7 +68,16 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, 
       onSignOut && onSignOut();
     }else if(option==='editProfile'){
       onProfile && onProfile();
+    }else if(option==='myPost'){
+      navigate('/searching/?keyword='+userProfile?.username+"?type=USER", {replace: true})
     }
+  }
+
+  const getIcon = (index:number) =>{
+    if(index===0) return PersonIcon;
+    if(index===1) return PostIcon;
+    if(index===2) return GearIcon;
+    else return SignOutIcon;
   }
 
   return(
@@ -78,7 +95,10 @@ const Profile: React.FC<ProfileProps> = ({onSignOut, enableDropdown, onProfile, 
             testOptions?.map((option, index)=>{
               return (
                 <div key={index} className='option-row text-normal' onClick={()=>{handleOnClickOption(option.value); setIsShowDropdown(false)}}>
-                  {option.label}
+                  <Row>
+                      <Col xs='auto'><ReactSVG src={getIcon(index)}/></Col>
+                      <Col>{option.label}</Col>
+                  </Row>
                 </div>
               )
             })

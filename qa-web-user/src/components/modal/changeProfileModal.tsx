@@ -118,12 +118,12 @@ const ChangeProfileModal: React.FC<ChangeProfileModalProps> = ({show, onClose, h
               </div>
             </div>
             <div className="input-image-container">
-                <input type={'file'} multiple={false} className='input-image-file text-color' onChange={(e)=>{setFile(e.currentTarget.files?.item(0))}}/>
+                <input type={'file'} multiple={false} className='input-image-file ' onChange={(e)=>{setFile(e.currentTarget.files?.item(0))}}/>
             </div>
             <div className='button-upload-picture text-normal-bold' onClick={()=>{submitHandler();}}>
                 อัพโหลด
             </div>
-            <div className="d-flex justify-content-center align-items-center text-color">
+            <div className="d-flex justify-content-center align-items-center ">
               {/*Uploaded {uploadProg} %*/}
               {(isUploading) && renderPercent(uploadProg)}
             </div>

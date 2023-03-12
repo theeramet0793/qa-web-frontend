@@ -20,7 +20,7 @@ const FilterPost: React.FC<FilterPostProps> = ({onFilterOnlyFollowChange, onFilt
   const { t } = useTranslation();
   const sortOptions = [
     {value:SortBy.Date,label:'เรียงตามเวลา'},
-    {value:SortBy.Upvote,label:'เรียงตามความนิยม'},
+    {value:SortBy.Upvote,label:'เรียงตามคะแนนโหวต'},
     {value:SortBy.Follow,label:'เรียงตามผู้ติดตาม'},
   ]
 

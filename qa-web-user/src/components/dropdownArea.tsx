@@ -20,7 +20,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
   }
   const SOLVED = "พบชื่อภาพยนตร์แล้ว";
   const UNSOLVED = "ยังไม่พบชื่อภาพยนตร์";
-  const ALL = "ทุกประเภท";
+  const ALL = "ทั้งหมด";
 
   useEffect(()=>{
     ((check1Value && check2Value)||(!check1Value && !check2Value))? onChange(PostType.All): check1Value? onChange(PostType.Solved):onChange(PostType.Unsolved);
@@ -36,6 +36,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
       <button 
         className='dropdown-area-button'
         onClick={()=> setIsShowMenu(!isShowMenu)}
+        onBlur={()=>{delayedCloseMenu()}}
       >
         <Row className='content-container'>
           <Col className='text-container py-1 d-flex justify-content-start align-items-center'>
@@ -47,7 +48,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
         </Row>
       </button>
       {isShowMenu &&
-        <button className='expand-menu text-color text-normal' onBlur={()=>{delayedCloseMenu()}}>  
+        <button className='expand-menu text-color text-normal'>  
           <Row className='ps-3'>
             <Row className='py-1' >
               <Col xs='auto' className='ps-0'>
@@ -55,7 +56,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
                   <Checkbox defaultCheck={check1Value} onChange={(isCheck)=>{setCheck1Value(isCheck)}} />
                 </div>
               </Col>
-              <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            
+              <Col className='px-0 d-flex justify-content-start align-items-center text-normal-responsive'>            
                 {SOLVED}
               </Col>
             </Row>
@@ -65,7 +66,7 @@ const DropdownArea:React.FC<DropDownAreaprops> = ({onChange}) =>{
                   <Checkbox defaultCheck={check2Value} onChange={(isCheck)=>{setCheck2Value(isCheck)}} />
                 </div>
               </Col>
-              <Col className='px-0 d-flex justify-content-start align-items-center text-small'>            
+              <Col className='px-0 d-flex justify-content-start align-items-center text-normal-responsive'>            
                 {UNSOLVED}
               </Col>
             </Row>

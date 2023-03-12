@@ -6,13 +6,13 @@ import { ReactSVG } from 'react-svg';
 import CheckIcon from '../assets/svg/check.svg'
 
 export interface CheckboxProps{
-  defaultCheck: boolean | undefined;
+  defaultCheck: boolean;
   onChange: (isClick:boolean) => void | undefined;
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({defaultCheck, onChange}) =>{
 
-  const [isCheck, setIsCheck] = useState<boolean>(false);
+  const [isCheck, setIsCheck] = useState<boolean>(defaultCheck);
 
   useEffect(()=>{
     if(defaultCheck) setIsCheck(defaultCheck);

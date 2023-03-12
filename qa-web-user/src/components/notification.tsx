@@ -17,7 +17,7 @@ export interface NotificationProps{
 
 }
 
-const Notification: React.FC<NotificationProps> = ( ) =>{
+const Notification: React.FC<NotificationProps> = () =>{
 
   const navigate = useNavigate();
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
@@ -45,6 +45,10 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
     }
   },[menuNoti])
 
+  const delayedCloseMenu = () => {
+    setTimeout(()=>setIsShowMenu(false), 200);
+  }
+
   const renderNotiAction = (notiType:string) =>{
     if(notiType==="Add"){
       return <Row><Col xs='auto' className='action-type-container pe-0'>{"เพิ่ม"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
@@ -59,7 +63,6 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
 
   const markAsRead = (postID:number) =>{
     if(postID){
-      console.log("postId = ",postID)
       Client.post('/marknotiasread',{},{
         params:{
           userId:userProfile?.userId,
@@ -82,7 +85,7 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
           <CountNoti notiUnreadAmount={countUnread}/>
         </div>:<></>
       }
-      <button onClick={()=>setIsShowMenu(!isShowMenu)} className='btn-noti'>
+      <button onClick={()=>setIsShowMenu(!isShowMenu)} className='btn-noti' onBlur={()=>{delayedCloseMenu()}}>
         <ReactSVG src={NotificationIcon} className={classNames('bell-icon')}/>
         { isShowMenu &&
           <div className='expand-menu'>
@@ -92,7 +95,11 @@ const Notification: React.FC<NotificationProps> = ( ) =>{
             { (menuNoti?.length !== 0) && 
               menuNoti?.map((noti,index)=>{
                 return(
-                  <Container key={index} className='option-row text-normal-responsive' onClick={()=>{markAsRead(noti.postId); navigate("/showonepost/?postId="+noti.postId,{ replace: true })}}>
+                  <Container 
+                    key={index} 
+                    className='option-row text-normal-responsive' 
+                    onClick={()=>{ markAsRead(noti.postId); navigate("/showonepost/?postId="+noti.postId,{ replace: true }); }}
+                  >
                     <Row>
                       <Col xs='auto'>
                         {!noti.isRead &&

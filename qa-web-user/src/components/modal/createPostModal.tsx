@@ -16,6 +16,7 @@ import SearchBar from "../searchBar";
 import Tag from "../tag";
 import { GetUserData } from "../userData/userData";
 import debounce from "lodash.debounce";
+import GlobeIcon from '../../assets/svg/globe.svg'
 
 export interface CreatePostModalProps{
   show: boolean;
@@ -123,21 +124,24 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
             </div>
           </div>
           <div className='body-container'>
-            <Row>
+            <Row className="px-1">
               <Col xs='auto' className="d-flex justify-content-center align-items-center">
                 <div className='create-post-profile-container'>
                   <Profile enableDropdown={false}/> 
                 </div>
               </Col>
               <Col>
-                <Row className="text-medium-bold text-color ">{userProfile?.username}</Row>
-                <Row className="text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="text-normal-bold  ">{userProfile?.username}</Row>
+                <Row className="description-container text-normal">
+                  <Col xs='auto' className="px-0"><ReactSVG src={GlobeIcon}/></Col>
+                  <Col className="descript-text text-normal-responsive ">ทุกคนสามารถเห็นได้</Col>
+                </Row>
               </Col>
             </Row>
             <Row>
               <div className="post-detail-container">              
                 <TextareaAutosize
-                  className='post-detail-input text-box text-normal text-color'
+                  className='post-detail-input text-box text-normal-responsive'
                   placeholder='อธิบายภาพยนตร์ที่คุณกำลังตามหา...'
                   onChange={(e)=>{setPostdetail(e.currentTarget.value)}}
                 />

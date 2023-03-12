@@ -3,34 +3,41 @@
   width: 100%;
   min-height: 92vh;
   display: flex;
-  background-color: var(--color-main-bg);
+  background-color: var(--color-purple-6);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 2rem 1rem;
 
   .user-profile-child-container{
     width: 100%;
     max-width: 700px;
     height: 100%;
-    display: flex-start;
+    display: flex;
     justify-content: center;
-    padding: 1.5rem;
-    background-color: var(--color-second-bg);
+    align-items: flex-start;
+    padding: 1rem;
+    background-color: var(--color-purple-1);
     border-radius: 12px;
     .btn-return{
       width: 35px;
       height: 35px;
       border-radius: 999px;
       padding: 0.5rem 1rem;
-      background-color: var(--color-red);
+      border: 2px solid var(--color-gray-2);
       display: flex;
       align-items: center;
       justify-content: center;
       &:hover{
         cursor: pointer;
+        border-color: var(--color-white);
       }
       svg{
         fill: var(--color-white);
+      }
+      div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
     .profile-container{
@@ -52,25 +59,79 @@
       height: 100%;
       padding: 1rem 0rem;
       .btn-edit-picture{
-        background-color: var(--color-green);
+        background-color: var(--color-purple-3);
         border-radius: 999px;
         padding: 0.3rem 1rem ;
+        color: var(--color-white);
         &:hover{
           cursor: pointer;
+          background-color: var(--color-purple-4);
         }
         svg{
           fill: var(--color-white);
         }
       }
     }
+    .alert-message{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--color-yellow-1);
+    }
     .info-container{
-      width: 90%;
+      width: 100%;
+      max-width: 500px;
       height: fit-content;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 999px;
-      background-color: var(--color-third-bg);
-      svg{
-        fill: var(--color-white);
+      background-color: var(--color-purple-2);
+      color: var(--color-white);
+      .input-new-name{
+        width: 100%;
+        background-color: var(--color-purple-2);
+        outline: none;
+        border: none;
+        color: var(--color-yellow-2);
+      }
+      .edit-icon-container{
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background-color: var(--color-yellow-1);
+        padding: 0.5rem;
+        &:hover{
+          cursor: pointer;
+        }
+        div{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        svg{
+          width: 100%;
+          height: 100%;
+          fill: var(--color-white);
+        }
+      }
+      .edit-icon-container-disable{
+        width: 30px;
+        height: 30px;
+        border-radius: 999px;
+        background-color: var(--color-gray-2);
+        padding: 0.5rem;
+        div{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        svg{
+          width: 100%;
+          height: 100%;
+          fill: var(--color-white);
+        }
+      }
+      .editting{
+        background-color: var(--color-purple-3);
       }
     }
   }

@@ -19,8 +19,7 @@
           padding: 2rem;
         }
         border-radius: 12px;
-        background-color: var(--color-second-bg);
-        border: 1px solid var(--color-third-bg);
+        background-color: var(--color-white);
         padding: 1rem;
         width: 100%;
 
@@ -28,31 +27,22 @@
           width: 100%;
 
           .header-container{
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
             position: relative;
   
-            .header-label{
-              width: fit-content;
-              height: fit-content;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0rem 4rem;
-              color: var(--color-text);
-            }
-  
             .x-button-container{
-              width: 43px;
-              height: 43px;
+              width: 38px;
+              height: 38px;
               position: absolute;
               right: 0;
 
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-third-bg);
+                background-color: var(--color-white);
+                border: 2px solid var(--color-gray-4);
                 border-radius: 999px;
                 display: flex;
                 justify-content: center;
@@ -60,21 +50,37 @@
                 
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-red);
+                  border: 2px solid var(--color-gray-1);
                 }
               }
 
 
               svg{
-                fill: var(--color-text)
+                fill: var(--color-black)
               }
+            }
 
-              &:hover{
-                svg{
-                  fill: var(--color-white);
-                }
+            .trash-image-container{
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 1rem 0rem 0rem 0rem;
+              svg{
+                width: 50px;
+                height: 50px;
+                fill: var(--color-yellow-1);
               }
+            }
 
+            .header-label{
+              width: 100%;
+              height: fit-content;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              padding: 1rem 4rem 0rem 4rem;
+              color: var(--color-black);
             }
           }
 
@@ -84,8 +90,8 @@
 
             .button-confirm{
               margin-top: 2rem;
-              background-color: var(--color-primary-button);
-              color: var(--color-text);
+              background-color: var(--color-purple-3);
+              color: var(--color-white);
               display: flex;
               justify-content: center;
               align-items: center;
@@ -103,8 +109,9 @@
 
             .button-cancel{
               margin-top: 2rem;
-              color: var(--color-text);
-              background-color: var(--color-third-bg);
+              color: var(--color-black);
+              background-color: var(--color-white);
+              border: 1px solid var(--color-gray-2);
               display: flex;
               justify-content: center;
               align-items: center;
@@ -113,8 +120,7 @@
 
               &:hover{
                 cursor: pointer;
-                background-color: var(--color-red);
-                color: var(--color-text);
+                border: 1px solid var(--color-black);
               }
 
               &:active{

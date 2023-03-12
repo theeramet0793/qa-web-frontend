@@ -5,6 +5,7 @@ import './deletePostModal.scss'
 import XIcon from '../../assets/svg/x.svg'
 import { ReactSVG } from 'react-svg';
 import { useTranslation } from 'react-i18next';
+import TrashIcon from '../../assets/svg/trash.svg'
 
 export interface deletePostModalProps{
   onClose: () => void;
@@ -26,13 +27,16 @@ const DeletePostModal: React.FC<deletePostModalProps> = ({onClose, onConfirm, sh
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
-            <div className='text-large-bold   header-label'>
-              {t('DELETE_POST')}
-            </div>
             <div className='x-button-container'>
               <div className='x-icon' onClick={()=>{onClose();}} >
                 <ReactSVG src={XIcon}/>
               </div>
+            </div>
+            <div className='text-large-bold   header-label'>
+              {t('DELETE_POST')}
+            </div>
+            <div className='trash-image-container'>
+              <ReactSVG src={TrashIcon}/>
             </div>
           </div>
           <div className='body-container-delete-post-modal'>

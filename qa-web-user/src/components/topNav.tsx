@@ -19,6 +19,7 @@ import TagIcon from '../assets/svg/tag.svg'
 import PersonIcon from '../assets/svg/person-fill.svg'
 import SearchIcon from '../assets/svg/search.svg'
 import { SearchType } from '../data/enum/filterEnum';
+import { GetUserData } from './userData/userData';
 
 export interface TopNavProps{
   onClickReg: () => void;
@@ -36,7 +37,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
   const navigate = useNavigate();
   const { t } = useTranslation();
   const [isShowMenu, setIsShowMenu] = useState<boolean>(false);
-  const [userProfile, setUserProfile] = useState<IUser|undefined>(undefined);
+  const [userProfile, setUserProfile] = useState<IUser|undefined>(GetUserData());
   const [searchMenuOptions, setSearchMenuOptions] = useState<IMainSearchOption[]>([]);
   const [selectedOption , setSelectedOption] = useState<IMainSearchOption|undefined>(undefined);
   const [resultSearch, setResultSearch] = useState<IMainSearch|undefined>(undefined);
@@ -170,7 +171,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
           </div>
         </Col>
         <Col xs={5} sm={3}  className='d-flex justify-content-center align-items-center '>
-          {!userProfile &&
+          {!userProfile ?
               <Row className='register-row'>
                 <Col className='d-flex align-items-center justify-content-center'>
                   <div className='register-btn-container'> 
@@ -190,15 +191,15 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                     </div>
                   </div>
                 </Col>
-              </Row>
+              </Row>:<></>
           }
           {/*In case of small screen*/
-          !userProfile &&
+          !userProfile ?
             <div className='navbar-more-menu-container'>
               <MoreMenu icon='list' menuOptions={signAndRegOptions} onSelectOption={(selected)=>{handleSelectMenu(selected)}}/>
-            </div>
+            </div>:<></>
           }
-          {userProfile &&
+          {userProfile ?
               <Row>
                 <Col className='d-flex align-items-center justify-content-end'>
                   <div className='noti-container'>
@@ -215,7 +216,7 @@ const TopNav: React.FC <TopNavProps> = ({onClickReg, onClickSign, isSignInSucces
                     /> 
                   </div>
                 </Col>
-              </Row>
+              </Row>:<></>
           }
         </Col>
       </Row>

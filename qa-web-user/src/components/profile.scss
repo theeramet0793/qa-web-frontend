@@ -75,11 +75,15 @@
       align-items: center;
       padding: 0.5rem 1rem;
 
-        &:hover{
-          cursor: pointer;
-          background-color: var(--color-cb-gray-2);
-          border-radius: 7px;
-        }
+      &:hover{
+        cursor: pointer;
+        background-color: var(--color-cb-gray-2);
+        border-radius: 7px;
+      }
+
+      svg{
+        fill: var(--color-purple-3);
+      }
     }
   }
 }

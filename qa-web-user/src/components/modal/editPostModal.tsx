@@ -17,6 +17,7 @@ import { convertTagsToOptions } from "../../utils/convert";
 import Tag from "../tag";
 import SearchBar from "../searchBar";
 import debounce from "lodash.debounce";
+import GlobeIcon from '../../assets/svg/globe.svg'
 
 export interface EditPostModalProps{
   show: boolean;
@@ -127,21 +128,24 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
             </div>
           </div>
           <div className='body-container'>
-            <Row>
+            <Row className="px-1">
               <Col xs='auto' className="d-flex justify-content-center align-items-center">
                 <div className='create-post-profile-container'>
                   <Profile enableDropdown={true}/> 
                 </div>
               </Col>
               <Col>
-                <Row className="text-medium-bold text-color">{userProfile?.username}</Row>
-                <Row className="text-normal text-color">เพิ่มอะไรสักอย่างตรงนี้</Row>
+                <Row className="text-normal-bold">{userProfile?.username}</Row>
+                <Row className="description-container text-normal">
+                  <Col xs='auto' className="px-0"><ReactSVG src={GlobeIcon}/></Col>
+                  <Col className="descript-text text-normal-responsive ">ทุกคนสามารถเห็นได้</Col>
+                </Row>
               </Col>
             </Row>
             <Row>
               <div className="post-detail-container">              
                 <TextareaAutosize
-                  className='post-detail-input text-box text-normal text-color'
+                  className='post-detail-input text-box text-normal-responsive '
                   placeholder='อธิบายภาพยนตร์ที่คุณกำลังตามหา...'
                   defaultValue={originalPostDetail}
                   onChange={(e)=>{setPostdetail(e.currentTarget.value)}}
@@ -162,7 +166,7 @@ const EditPostModal: React.FC<EditPostModalProps> = ({show, onClose, originalPos
             <Row>
               <div className="button-create-container">
                 <div className='button-create-post text-normal-bold' onClick={handleSubmit}>
-                  บันทึกโพสต์
+                  บันทึก
                 </div>
               </div>
             </Row>

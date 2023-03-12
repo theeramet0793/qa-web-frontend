@@ -18,8 +18,7 @@
           padding: 2rem;
         }
         border-radius: 12px;
-        background-color: var(--color-second-bg);
-        border: 1px solid var(--color-third-bg);
+        background-color: var(--color-white);
         padding: 1rem;
         width: 100%;
 
@@ -39,19 +38,20 @@
               justify-content: center;
               align-items: center;
               padding: 0rem 4rem;
-              color: var(--color-text);
+              color: var(--color-black);
             }
   
             .x-button-container{
-              width: 43px;
-              height: 43px;
+              width: 38px;
+              height: 38px;
               position: absolute;
               right: 0;
 
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-third-bg);
+                background-color: var(--color-white);
+                border: 2px solid var(--color-gray-4);
                 border-radius: 999px;
                 display: flex;
                 justify-content: center;
@@ -59,21 +59,14 @@
                 
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-primary-button);
+                  border: 2px solid var(--color-gray-1);
                 }
               }
 
 
               svg{
-                fill: var(--color-text)
+                fill: var(--color-black)
               }
-
-              &:hover{
-                svg{
-                  fill: var(--color-white);
-                }
-              }
-
             }
           }
 
@@ -90,19 +83,24 @@
               img{
                 max-width: 300px;
                 max-height: 250px;
+                border-radius: 15px;
               }
             }
             .input-image-container{
               padding: 1rem 0rem;
               input{
                 width: 100%;
-                background-color: var(--color-gray);
+                background-color: var(--color-yellow-2);
+                color: var(--color-white);
                 border-radius: 999px;
                 text-overflow: ellipsis;
                 padding: 0.2rem;
                 &::file-selector-button{
                   border-radius: 999px ;
-                  border: none;
+                  border: 1px solid var(--color-white);
+                  background-color: var(--color-gray-2);
+                  color: var(--color-white);
+                  padding: 0.2rem 1rem;
                   &:hover{
                     cursor: pointer;
                   }
@@ -112,8 +110,8 @@
             .button-upload-picture{
               width: 100%;
               margin-top: 0rem;
-              background-color: var(--color-primary-button);
-              color: var(--color-text);
+              background-color: var(--color-purple-3);
+              color: var(--color-white);
               display: flex;
               justify-content: center;
               align-items: center;
@@ -136,7 +134,8 @@
               .progress{
                 height: 100%;
                 border-radius: 999px;
-                background-color: var(--color-green);
+                background-color: var(--color-green-1);
+                color: var(--color-white);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -144,7 +143,8 @@
               .inprogress{
                 height: 100%;
                 border-radius: 999px;
-                background-color: var(--color-yellow);
+                background-color: var(--color-purple-4);
+                color: var(--color-white);
                 display: flex;
                 justify-content: center;
                 align-items: center;

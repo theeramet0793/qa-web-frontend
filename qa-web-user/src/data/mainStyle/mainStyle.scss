@@ -129,13 +129,16 @@
 .text-small{
   font-family: Lato-Regular, NotoSansThai-Regular;
   font-size: 13px;
-  //font-size: clamp(10px, 2vw, 14px);
+}
+
+.text-small-responsive{
+  font-family: Lato-Regular, NotoSansThai-Regular;
+  font-size: clamp(12px, 1.5vw, 13px);
 }
 
 .text-normal{
   font-family: Lato-Regular, NotoSansThai-Regular;
   font-size: 15px;
-  //font-size: clamp(13px, 2vw, 15px);
 }
 
 .text-normal-responsive{

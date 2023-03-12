@@ -15,8 +15,7 @@
 
       .modal-body{
         border-radius: 12px;
-        background-color: var(--color-second-bg);
-        border: 1px solid var(--color-third-bg);
+        background-color: var(--color-white);
         padding: 1rem;
         width: 100%;
 
@@ -36,29 +35,30 @@
               justify-content: center;
               align-items: center;
               padding: 0rem 4rem;
-              color: var(--color-text);
+              color: var(--color-black);
             }
             .x-button-container{
-              width: 43px;
-              height: 43px;
+              width: 38px;
+              height: 38px;
               position: absolute;
               right: 0;
 
               .x-icon{
                 width: 100%;
                 height: 100%;
-                background-color: var(--color-third-bg);
+                background-color: var(--color-white);
+                border: 2px solid var(--color-gray-4);
                 border-radius: 999px;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 &:hover{
                   cursor: pointer;
-                  background-color: var(--color-red);
+                  border: 2px solid var(--color-gray-1);
                 }
               }
               svg{
-                fill: var(--color-white)
+                fill: var(--color-black)
               }
             }
           }
@@ -68,8 +68,23 @@
             padding-top: 1rem;
 
             .create-post-profile-container{
-              width: 40px;
-              height: 40px;
+              width: 45px;
+              height: 45px;
+            }
+
+            .description-container{
+              .descript-text{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 0rem 0.5rem;
+                color: var(--color-gray-4);
+              }
+              svg{
+                width: 16px;
+                height: 16px;
+                fill: var(--color-gray-4);
+              }
             }
 
             .post-detail-container{
@@ -86,7 +101,7 @@
                 resize: none;
 
                 &:focus{
-                  outline: none;
+                  outline: 2px solid var(--color-purple-4);
                 }
 
               }
@@ -98,13 +113,17 @@
             }
             .tags-container{
               padding: 0rem 1rem;
+              .tag-container{
+                background-color: var(--color-yellow-1);
+                color: var(--color-white);
+              }
             }
             .button-create-container{
               padding: 0rem 1rem;
               .button-create-post{
                 margin-top: 1rem;
-                background-color: var(--color-primary-button);
-                color: var(--color-text);
+                background-color: var(--color-purple-3);
+                color: var(--color-white);
                 display: flex;
                 justify-content: center;
                 align-items: center;

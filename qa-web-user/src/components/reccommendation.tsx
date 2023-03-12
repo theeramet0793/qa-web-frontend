@@ -11,13 +11,13 @@ import { ReactSVG } from 'react-svg';
 import CaretDownIcon from '../assets/svg/caret-down-fill.svg'
 
 export interface ReccomendationProps{
- isReccommending: boolean|undefined;
+ isOnFinding: boolean|undefined;
  postId:number|undefined;
  refreshPost: ()=>void;
  postOwnerId: number|undefined;
 }
 
-const Reccommendation: React.FC<ReccomendationProps> = ({ isReccommending, postId, refreshPost, postOwnerId}) =>{
+const Reccommendation: React.FC<ReccomendationProps> = ({ isOnFinding, postId, refreshPost, postOwnerId}) =>{
   
   const [open, setOpen] = useState<boolean>(false);
   const [recMovie, setRecMovie] = useState<IReccommendMovie|undefined>(undefined);
@@ -76,6 +76,17 @@ const Reccommendation: React.FC<ReccomendationProps> = ({ isReccommending, postI
       })
     }
   }
+
+  const refreshFinding = () =>{
+    Client.patch('/refreshFindingMovie',{
+      postId: postId,
+    }).then( (res) =>{
+      refreshPost()
+    }).catch( (err) => {
+      console.log(err.response);
+    }
+    )
+  }
   
   const isMine = () =>{
     return (postOwnerId !== undefined && userProfile?.userId === postOwnerId);
@@ -127,8 +138,20 @@ const Reccommendation: React.FC<ReccomendationProps> = ({ isReccommending, postI
                 :<></>
               }
             </div>:
-            <div className='no-rec-movie-container'>
-              ยังไม่มีรายชื่อภาพยนตร์ที่แนะนำ
+            <div className='no-rec-movie-container text-normal-responsive'>
+              {isOnFinding? 
+                <div>{'ระบบกำลังประมวลผลเพื่อหาชื่อภาพยนตร์ให้คุณ'}</div>
+                :
+                <Row>
+                  <Col className='d-flex justify-content-start align-items-center'>{'ยังไม่มีรายชื่อภาพยนตร์ที่แนะนำ'}</Col>
+                  {isMine() ? 
+                    <Col xs='auto' className='d-flex justify-content-end align-items-center'>
+                      <div className='refresh-button' onClick={()=>{refreshFinding()}}>
+                        ค้นหาอีกครั้ง
+                      </div>
+                    </Col>:<></>
+                  }
+                </Row>}
             </div>
         }
       </Collapse>

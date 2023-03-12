@@ -21,13 +21,13 @@
   .expand-movie-list-container{
     width: 100%;
     height: fit-content;
-    color: var(--color-black);
+    color: var(--color-white);
     padding: 0rem 1rem 1rem 1rem;
     .one-row{
       padding: 0.25rem 0rem;
       .rec-movie-name{
-        background-color: var(--color-cb-gray-2);
-        border-radius: 5px;
+        background-color: var(--color-purple-2);
+        border-radius: 999px;
         padding: 0.25rem 1rem;
       }
       .btn-confirm{
@@ -35,28 +35,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--color-white);
-        color: var(--color-cb-blue-1);
-        border: 1px solid var(--color-cb-blue-1);
-        border-radius: 10px;
+        background-color: var(--color-yellow-2);
+        color: var(--color-white);
+        border-radius: 999px;
         padding: 0.25rem 0rem;
         &:hover{
           cursor: pointer;
-          background-color: var(--color-cb-blue-2);
-        }
-        svg{
-          fill: var(--color-white);
+          background-color: var(--color-yellow-1);
         }
       }
     }
     .btn-cancel-all{
-      background-color: var(--color-cb-red-1);
+      background-color: var(--color-gray-1);
       color: var(--color-white);
-      border: 1px solid var(--color-cb-red-1);
       width: 100%;
       text-align: center;
       padding: 0.25rem 0rem;
-      border-radius: 10px;
+      border-radius: 999px;
       &:hover{
         cursor: pointer;
         opacity: 0.9;
@@ -64,7 +59,19 @@
     }
   } 
   .no-rec-movie-container{
-    background-color: var(--color-cb-gray-2);
+    background-color: var(--color-purple-2);
+    color: var(--color-white);
+    border-radius: 999px;
+    padding: 0.25rem 0.25rem 0.25rem 1rem;
+    .refresh-button{
+      background-color: var(--color-yellow-1);
+      color: var(--color-white);
+      border-radius: 999px;
+      padding: 0.25rem 1rem;
+      &:hover{
+        cursor: pointer;
+      }
+    }
   }
 
 }

@@ -39,7 +39,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
   useEffect(()=>{
     if(defaultMovieName)
     setMovieName(defaultMovieName);
-  },[defaultMovieName])
+  },[defaultMovieName, isShow])
 
   const searchMovie = debounce((searchStr: string) =>{
     if(searchStr){
@@ -87,7 +87,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
         <div className='content-container'>
           <div className='header-container'>
             <div className='text-large-bold   header-label'>
-              พบชื่อภาพยนตร์แล้ว
+              {movieName? 'แก้ไขชื่อภาพยนตร์ของโพสต์':'เพิ่มชื่อภาพยนตร์ของโพสต์'}
             </div>
             <div className='x-button-container'>
               <div className='x-icon' onClick={()=>{onClose(); setMovieOptions([]); setMovieMenuList(undefined)}}>
@@ -96,6 +96,19 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
             </div>
           </div>
           <div className='body-container'>
+            { 
+              movieName && 
+              <Row>
+                <div className='current-movie-container'>
+                    <div className='movie-name text-color text-normal'>
+                      <div className='delete-movie-button' onClick={()=>{setMovieId(''); setMovieName(''); setMoviePosterPath('');}}>
+                        <ReactSVG src={XIcon}/>
+                      </div>
+                      {"ชื่อภาพยนตร์ : "}{movieName}
+                    </div>
+                </div>
+              </Row>
+            }
             <Row>
               <div className='add-movie-name-container-vvbi'>
                 <SearchBar 
@@ -105,18 +118,6 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
                   onSelectOption={(option)=>{setMovieId(option.value); setMovieName(option.label); setSelectedMoviePosterPath(option.value)}}
                 />
               </div> 
-            </Row>
-            <Row>
-              <div className='current-movie-container'>
-                { movieName && 
-                  <div className='movie-name text-color text-normal'>
-                    <div className='delete-movie-button' onClick={()=>{setMovieId(''); setMovieName(''); setMoviePosterPath('');}}>
-                      <ReactSVG src={XIcon}/>
-                    </div>
-                    {"ชื่อภาพยนตร์ : "}{movieName}
-                  </div>
-                }
-              </div>
             </Row>
             <Row>
               <div className='button-save-container'>

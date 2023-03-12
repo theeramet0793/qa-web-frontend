@@ -6,11 +6,12 @@ import ListIcon from '../assets/svg/list.svg'
 import { useState } from 'react';
 import { IOption } from '../data/interface/IOption';
 import { Col, Row } from 'react-bootstrap';
-import TrashIcon from '../assets/svg/trash.svg';
+import TrashIcon from '../assets/svg/trash-fill.svg';
 import PencilIcon from '../assets/svg/pencil-fill.svg';
 import FlagIcon from '../assets/svg/flag.svg';
 import SignInIcon from '../assets/svg/box-arrow-in-right.svg';
 import RegisterIcon from '../assets/svg/person-plus.svg';
+import CheckIcon from '../assets/svg/check-circle-fill.svg'
 import classNames from 'classnames'
 
 export interface MoreMenuProps{
@@ -34,12 +35,13 @@ const MoreMenu: React.FC<MoreMenuProps> = ({menuOptions, onSelectOption, icon, d
     else if(label.includes('รายงาน')) icon = FlagIcon;
     else if(label.includes('ลงชื่อ')) icon = SignInIcon;
     else if(label.includes('สมัคร')) icon = RegisterIcon;
+    else if(label.includes('ชื่อภาพยนตร์')) icon = CheckIcon;
     return(
       <Row>
         <Col xs='auto' className='more-menu-option pe-0'>
           <ReactSVG src={icon}/>
         </Col>
-        <Col>
+        <Col className='d-flex justify-content-start align-items-center'>
           {label}
         </Col>
       </Row>
