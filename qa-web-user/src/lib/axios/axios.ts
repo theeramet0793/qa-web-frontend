@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const Client = axios.create({
   //baseURL : 'https://qa-website-api.herokuapp.com',
-  baseURL : 'http://127.0.0.1:5000',
+  baseURL : 'https://web-production-e1a7.up.railway.app',
   headers: {
     //  Authorization: `<Your Auth Token>`,
     "Content-Type": "application/json",
