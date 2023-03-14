@@ -41,6 +41,7 @@ const Reccommendation: React.FC<ReccomendationProps> = ({ isOnFinding, postId, r
     Client.patch('/updatemovie',{
       postId: postId,
       movieId: movieId.toString(),
+      posterPath:'',
       movieName: movieName,
       userId: userProfile?.userId,
       date: nowDate(),

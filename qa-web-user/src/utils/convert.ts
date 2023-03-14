@@ -16,7 +16,6 @@ import { ITag } from "../data/interface/ITag";
 
   export const convertMoviesToOptions = ( movies:IMovieTMDB[] ) =>{
     var options: IOption[] = [];
-    console.log(movies);
     if(movies.length > 0){
       movies.forEach((movie)=>{
         var option: IOption = {label:movie.original_title+" ( "+movie.title+" )", value:movie.id.toString()};

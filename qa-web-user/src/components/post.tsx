@@ -239,16 +239,16 @@ const Post: React.FC<PostProps> = ({postId}) => {
     }
   }
 
-  // const refreshMovie = () =>{
-  //   // have same logic as this  2 function  please edit both
-  //   if(posts)
-  //   Client.get<IMovie>('/getmovie/'+posts.postId)
-  //   .then((res)=>{
-  //     (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
-  //   }).catch((err)=>{
-  //     console.log(err);
-  //   })
-  // }
+  const refreshMovie = () =>{
+    // have same logic as this  2 function  please edit both
+    if(posts)
+    Client.get<IMovie>('/getmovie/'+posts.postId)
+    .then((res)=>{
+      (res.data.movieId)? setFoundMovie(res.data):setFoundMovie(undefined);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
 
   const renderTime = () =>{
     if(posts?.createdDate === posts?.lastUpdateDate && posts?.createdTime === posts?.lastUpdateTime){
@@ -497,6 +497,7 @@ const Post: React.FC<PostProps> = ({postId}) => {
           onClose={()=>{setIsShowFoundMovieModal(false)}}
           defaultMovieName={foundMovie?.movieName}
           onSaveSuccess={()=>{setIsDataUpdate(!isDataUpdate);}}
+          refreshMovie={()=>{refreshMovie()}}
         />
       }
       {/* { isShowRecMovieModal &&

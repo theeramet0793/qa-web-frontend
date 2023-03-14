@@ -30,6 +30,13 @@
     .round-button{
       width: 100%;
       height: 100%;
+      svg{
+        width: 100%;
+        height: 100%;
+        border-radius: 999px;
+        background-color: var(--color-gray-2);
+        fill: var(--color-white);
+      }
       img{
         width: 100%;
         height: 100%;

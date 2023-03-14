@@ -20,9 +20,10 @@ export interface FoundMovieModalProps{
   onClose: () => void;
   defaultMovieName: string|undefined;
   onSaveSuccess: () => void;
+  refreshMovie: ()=> void;
 }
 
-const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, defaultMovieName, onSaveSuccess}) =>{
+const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, defaultMovieName, onSaveSuccess, refreshMovie}) =>{
 
   const [isShow, setIsShow] = useState<boolean>(false);
   const [movieOptions, setMovieOptions] = useState<IOption[]>([]);
@@ -38,7 +39,10 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
 
   useEffect(()=>{
     if(defaultMovieName)
-    setMovieName(defaultMovieName);
+      setMovieName(defaultMovieName);
+    else
+      setMovieName('');
+    //console.log('default ',defaultMovieName);
   },[defaultMovieName, isShow])
 
   const searchMovie = debounce((searchStr: string) =>{
@@ -69,6 +73,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
         onClose();
         setMovieOptions([]);
         onSaveSuccess();
+        refreshMovie();
       }).catch( (err) => {
         console.log(err.response);
       })
@@ -81,8 +86,14 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
     }
   }
 
+  const closeModal = () =>{
+    onClose(); 
+    setMovieOptions([]); 
+    setMovieMenuList(undefined);
+  }
+
   return(
-    <Modal show={isShow} centered className='found-movie-modal'  onHide={()=>{onClose(); setMovieOptions([]); setMovieMenuList(undefined)}}>
+    <Modal show={isShow} centered className='found-movie-modal'  onHide={()=>{closeModal()}}>
       <Modal.Body>
         <div className='content-container'>
           <div className='header-container'>
@@ -90,7 +101,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
               {movieName? 'แก้ไขชื่อภาพยนตร์ของโพสต์':'เพิ่มชื่อภาพยนตร์ของโพสต์'}
             </div>
             <div className='x-button-container'>
-              <div className='x-icon' onClick={()=>{onClose(); setMovieOptions([]); setMovieMenuList(undefined)}}>
+              <div className='x-icon' onClick={()=>{closeModal()}}>
                 <ReactSVG src={XIcon}/>
               </div>
             </div>
