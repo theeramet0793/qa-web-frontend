@@ -293,6 +293,7 @@ const RegisterModal: React.FC<RegisterModalProps> = ({show, onClose, onAutoToLog
                 type={'text'} 
                 className={classNames('input-user-name text-box text-normal', (isTooLongUsername || isDuplicateUsername || isEmptyUserName)? 'invalid':'')}
                 placeholder='ชื่อผู้ใช้งาน'
+                maxLength={20}
                 onChange={(e)=>{setUserName(e.currentTarget.value)}}
               />
             </Row>

@@ -56,6 +56,8 @@ const Notification: React.FC<NotificationProps> = () =>{
       return <Row><Col xs='auto' className='action-type-container pe-0'>{"แก้ไข"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
     }else if(notiType==="Remove"){
       return <Row><Col xs='auto' className='action-type-container pe-0'>{"ลบ"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
+    }else if(notiType==="RecMov"){
+      return <Row><Col xs='auto' className='action-type-container pe-0'>{"ได้แนะนำ"}</Col><Col xs='auto' className='ps-0'>{" ชื่อภาพยนตร์"}</Col></Row>
     }else{
       return "-"
     }
@@ -108,7 +110,7 @@ const Notification: React.FC<NotificationProps> = () =>{
                       </Col>
                       <Col>
                         <Row>
-                          <Col xs='auto' className='text-normal-bold'>{noti.username}</Col>
+                          <Col xs='auto' className='text-normal-bold'>{noti.userId === userProfile?.userId? 'ระบบ':noti.username}</Col>
                           <Col className='d-flex justify-content-start align-item-center'>{renderNotiAction(noti.notiType)}</Col>
                         </Row>
                         <Row>

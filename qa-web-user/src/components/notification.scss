@@ -14,17 +14,21 @@
     right: 0;
   }
   .btn-noti{
+    width: 100%;
+    height: 100%;
     background-color: transparent;
     display: flex;
     border: none;
     .bell-icon{
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       svg{
         fill: var(--color-white);
-        width: 70%;
-        height: 70%;
+        width: 21px;
+        height: 21px;
       }
     }
     

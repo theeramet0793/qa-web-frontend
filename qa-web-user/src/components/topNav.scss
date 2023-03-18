@@ -47,7 +47,6 @@
         .menu-main-list{
           background-color: var(--color-purple-2);
           box-shadow: 0px 0px 10px var(--color-black);
-          //color: var(--color-black);
           width: 100%;
           max-width: 600px;
           min-width: 200px;
@@ -56,7 +55,11 @@
           right: 0;
           top: 125%;
           border-radius: 10px;
-          // padding: 0.5rem;
+          @media only screen and (max-width: 400px){
+            width: max-content;
+            max-width: 200px;
+          }
+
           .menu-list{
             background-color: var(--color-purple-2);
             //box-shadow: 0px 0px 10px var(--color-main-bg);

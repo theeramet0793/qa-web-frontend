@@ -3,7 +3,7 @@ import './reccommendation.scss'
 import { useEffect, useState } from 'react';
 import { Col, Collapse, Row } from 'react-bootstrap';
 import { IReccommendMovie } from '../data/interface/IMovie';
-import Client from '../lib/axios/axios';
+import Client, { MLServer } from '../lib/axios/axios';
 import { nowDate, nowTime } from '../utils/dateAndTime';
 import { GetUserData } from './userData/userData';
 import { IUser } from '../data/interface/IUser';
@@ -58,8 +58,18 @@ const Reccommendation: React.FC<ReccomendationProps> = ({ isOnFinding, postId, r
       postId: postId,
     }).then( (res) =>{
       refreshRecMovie();
+      triggerToStartReccommendProcess()
     }).catch( (err) => {
       console.log(err.response);
+    })
+  }
+
+  const triggerToStartReccommendProcess = () => {
+    MLServer.get('/start-one-process')
+    .then((res)=>{
+
+    }).catch((err)=>{
+      console.log(err);
     })
   }
 
@@ -83,6 +93,7 @@ const Reccommendation: React.FC<ReccomendationProps> = ({ isOnFinding, postId, r
       postId: postId,
     }).then( (res) =>{
       refreshPost()
+      triggerToStartReccommendProcess() 
     }).catch( (err) => {
       console.log(err.response);
     }

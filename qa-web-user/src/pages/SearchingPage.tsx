@@ -10,11 +10,11 @@ import { convertPathQueryStringToMainOption, convertStringToSearchType } from ".
 import { IMainSearchOption } from "../data/interface/IOption";
 import FilterSearch from "../components/filterSearch";
 
-export interface HomePageProps{
+export interface SearchingPageProps{
 
 }
 
-const SearchingPage: React.FC<HomePageProps> = () =>{
+const SearchingPage: React.FC<SearchingPageProps> = () =>{
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,10 +34,6 @@ const SearchingPage: React.FC<HomePageProps> = () =>{
     setMainSearch(selectedSearch)
     setDefaultSearch(selectedSearch.label);
   }, [location.search])
-
-  useEffect(()=>{
-    
-  },[searchType])
 
   return(
     <>

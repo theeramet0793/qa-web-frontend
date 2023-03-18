@@ -5,7 +5,7 @@ import XIcon from '../../assets/svg/x.svg'
 import { IUser } from "../../data/interface/IUser";
 import Profile from "../profile";
 import './createPostModal.scss'
-import Client from "../../lib/axios/axios";
+import Client, { MLServer } from "../../lib/axios/axios";
 import { useTranslation } from "react-i18next";
 import TextareaAutosize from 'react-textarea-autosize';
 import { nowDate, nowTime } from "../../utils/dateAndTime";
@@ -48,10 +48,19 @@ const CreatePostModal: React.FC<CreatePostModalProps> = ({show, onClose, onCreat
       onClose();
       setSelectedTags([]);
       onCreateNewPostSuccess && onCreateNewPostSuccess(res.data.postId);
+      triggerToStartReccommendProcess()
     }).catch( (err) => {
       console.log(err.response);
-    }
-    )
+    })
+  }
+
+  const triggerToStartReccommendProcess = () => {
+    MLServer.get('/start-one-process')
+    .then((res)=>{
+
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   const searchTag = debounce((searchStr: string) =>{

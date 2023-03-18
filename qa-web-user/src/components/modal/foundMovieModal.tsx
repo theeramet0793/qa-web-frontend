@@ -49,7 +49,7 @@ const FoundMovieModal:React.FC<FoundMovieModalProps> = ({postId, show, onClose, 
     if(searchStr){
       Client.get<ISearchMovieTMDB>('/searchmovies/'+searchStr)
       .then( (res) =>{
-        setMovieOptions(convertMoviesToOptions(res.data.results).slice(0,4));
+        setMovieOptions(convertMoviesToOptions(res.data.results).slice(0,11));
         setMovieMenuList(res.data);
       }).catch( (err) => {
         console.log(err.response);

@@ -56,8 +56,8 @@
       align-items: center;
       padding: 1rem 0rem;
       .button-save-comment{
-        background-color: var(--color-primary-button);
-        color: var(--color-text);
+        background-color: var(--color-purple-3);
+        color: var(--color-white);
         border-radius: 999px;
         width: fit-content;
         height: fit-content;
@@ -67,7 +67,6 @@
         padding: 0.5rem 1rem;
         &:hover{
           cursor: pointer;
-          background-color: var(--color-blue);
         }
       }
     }
