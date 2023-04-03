@@ -348,7 +348,11 @@ const Post: React.FC<PostProps> = ({postId}) => {
         <Col>
           <div className='post-content-container'>
             <div className='text-normal'>
-              <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
+              {posts === undefined?
+                <TextareaAutosize disabled={true} className='post-was-deleted-alert' value={" ! ขออภัย โพสต์นี้ถูกลบไปแล้ว "} />
+                :
+                <TextareaAutosize disabled={true} className='post-detail' value={posts?.postDetail} />
+              } 
             </div>
             {posts?.tagList && renderShowtags(convertTagsToOptions(posts?.tagList))}
           </div>

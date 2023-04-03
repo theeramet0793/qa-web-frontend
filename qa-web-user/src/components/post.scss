@@ -96,8 +96,18 @@
       border: none;
       resize: none;
       max-height: 250px;
-      //color: var(--color-white);
-      color: #ffffff;
+      color: var(--color-white);
+    }
+    .post-was-deleted-alert{
+      width: 100%;
+      height: max-content;
+      background-color: transparent;
+      border: none;
+      resize: none;
+      max-height: 250px;
+      color: var(--color-yellow-1);
+      font-size: medium;
+      text-align: center;
     }
   }
 

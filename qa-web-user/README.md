@@ -1,3 +1,20 @@
+# Question and Answer Website for Finding Movies
+
+Project Question and Answer Website for Finding Movies has 5 repository
+1. qa-web-frontend: เป็นโค้ดฝั่ง frontend (หลัก) ที่เอาไว้สร้าง web UI สำหรับผู้ใช้ทั่วไป 
+2. qa-web-admin: เป็นโค้ดฝั่ง frontend ที่เอาไว้สร้าง web UI สำหรับผู้ใช้ที่เป็นแอดมิน(ซึ่งหมายถึงผู้พัฒนาโครงงานนี้เอง)สำหรับใช้ในการควบคุม API ของ qa-web-ml
+3. qawebBackend: เป็นโค้ดฝั่ง Backend (หลัก) ที่เอาไว้สร้าง API สำหรับ qa-web-frontend
+4. qa-web-ml: เป็นโค้ดฝั่ง Backend ที่เอาไว้สร้าง API สำหรับ Machine Learning ของระบบตอบชื่อภาพยนตร์อัตโนมัติในเว็บไซต์ 
+5. qa-web-ml-resource: เป็นโค้ดที่เอาไว้จัดการข้อมูลเพื่อป้อนข้อมูลภาพยนตร์ในช่วงเริ่มต้นให้กับระบบแนะนำชื่อภาพยนตร์
+
+## Description for this repository (qawebBackend)
+
+### Install
+npm install
+
+### Running the app
+npm start
+
 # Getting Started with My Project Folder Structure
 
 assets = keeping image, picture, svg, etc.\
@@ -9,22 +26,6 @@ layouts = keeping my base layout.\
 lib = keeping my various different library such as Axios.\
 services = keeping my external APIs.\
 utils = keeping my utility function sach as formatter.
-
-# Deploy via terminal
-ครั้งถัดไปที่ไม่ใช่ครั้งแรก ทำแค่ npm run build กับ firebase deploy
-1.npm install -g firebase-tools
-2.firebase login
-3.firebase init
--are you ready to proceed : Yes
--hosting: configure and deploy firebase hosting site (หรืออันที่คล้ายกับอันนี้ที่สุด)
--use an existing project
--select project
--public directory: พิมพ์ build หรือชื่ออื่นที่ต้องการ
--rewrite all rul to index.html: Yes
--setup auto to gitHub: No
--Overwrite: Yes
-4. npm run build (build is your folder name in 3.)
-5. firebase deploy
 
 # Getting Started with Create React App
 
